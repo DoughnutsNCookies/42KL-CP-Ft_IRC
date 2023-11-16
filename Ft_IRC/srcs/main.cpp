@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:48:21 by plau              #+#    #+#             */
-/*   Updated: 2023/11/14 18:48:21 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/16 13:54:06 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,10 @@ int main(int ac, char **av)
 {
 	int server_fd;
 	serverData data;
+
+	Server server = Server(av[1]);
+	server.run();
+	return 0;
 
 	if (ac != 3)
 	{
