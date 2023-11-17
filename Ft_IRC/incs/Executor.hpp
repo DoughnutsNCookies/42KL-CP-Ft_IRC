@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 18:04:27 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 18:41:37 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <string>
 #include <iostream>
 #include <unordered_map>
+#include "Client.hpp"
+
 
 enum TOKEN {
 	UNKNOWN = -1,
@@ -32,7 +34,7 @@ enum TOKEN {
 class Executor {
 	public:
 		Executor();
-		void		execute(std::vector<std::string> &tokens);
+		void		execute(Client& client, std::vector<std::string> &tokens);
 	private:
 		TOKEN		_getToken(std::string token);
 };

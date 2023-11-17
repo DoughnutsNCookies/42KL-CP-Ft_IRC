@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 17:37:14 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 18:42:38 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	Server::run() {
 				else {
 					if (this->_Receiver.receive(this->_clients, this->_fds, i)) {
 						std::vector<std::string> tokens = this->_Parser.parse(this->_clients[this->_fds[i].fd]._buffer);
-						this->_Executor.execute(tokens);
+						this->_Executor.execute(this->_clients[this->_fds[i].fd], tokens);
 						this->_fds[i].events = POLLIN;
 					}
 				}
