@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:08:10 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 17:10:34 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 18:42:11 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,4 +14,4 @@
 
 Client::Client() {}
 
-Client::Client(int fd): _fd(fd) {}
+Client::Client(int fd): _fd(fd), _verified(false) {}
