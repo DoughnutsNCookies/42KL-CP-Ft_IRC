@@ -6,13 +6,13 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 16:45:55 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 16:54:26 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Server.hpp"
 
-Server::Server(const char *port): _port(atoi(port)) {
+Server::Server(const char *port, const char *password): _port(atoi(port)), _password(password) {
 	this->create_socket();
 	this->bind_socket();
 	this->listen_socket();
@@ -35,7 +35,11 @@ void	Server::run() {
 				if (this->_fds[i].fd == this->_server_fd)
 					this->_Receiver.new_connection(this->_server_fd, this->_fds, this->_clients);
 				else {
-					this->_Receiver.receive(this->_clients, this->_fds, i);
+					if (this->_Receiver.receive(this->_clients, this->_fds, i)) {
+						std::vector<std::string> tokens = this->_Parser.parse(this->_clients[this->_fds[i].fd]._buffer);
+						
+						this->_fds[i].events = POLLIN;
+					}
 				}
 			}
 

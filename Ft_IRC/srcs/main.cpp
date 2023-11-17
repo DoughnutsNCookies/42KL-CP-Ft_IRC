@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:48:21 by plau              #+#    #+#             */
-/*   Updated: 2023/11/17 16:31:23 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 16:53:17 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int main(int ac, char **av) {
 		return (EXIT_FAILURE);
 	}
 
-	Server server = Server(av[1]);
+	Server server = Server(av[1], av[2]);
 	server.run();
 	return (EXIT_SUCCESS);
 }

@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Receiver.hpp                                       :+:      :+:    :+:   */
+/*   Parser.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 16:22:58 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 17:17:06 by schuah           ###   ########.fr       */
+/*   Created: 2023/11/17 16:55:39 by schuah            #+#    #+#             */
+/*   Updated: 2023/11/17 17:21:44 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef Receiver_HPP
-#define Receiver_HPP
+#ifndef PARSER_HPP
+#define PARSER_HPP
 
-#include <vector>
-#include <poll.h>
-#include <sys/socket.h>
-#include <unistd.h>
+#include <string>
 #include <iostream>
-#include <map>
+#include <vector>
 
-#include "color.hpp"
-#include "Client.hpp"
+enum TOKEN {
+	PASS,
+	NICK,
+	USER,
+	JOIN,
+	PRIVMSG,
+	KICK,
+	TOPIC
+};
 
-class Receiver {
+class Parser {
 	public:
-		Receiver();
-		void		new_connection(int server_fd, std::vector<struct pollfd> &fds, std::map<int, Client> &clients);
-		int			receive(std::map<int, Client> &clients, std::vector<struct pollfd> &fds, int i);
-
+		Parser();
+		std::vector<std::string>	parse(std::string &buffer);
 	private:
-		void		perror_exit(const char *error);
+		std::vector<std::string>	_split(std::string str, std::string delim);
 };
 
 #endif

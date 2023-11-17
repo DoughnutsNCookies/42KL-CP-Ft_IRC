@@ -12,8 +12,7 @@
 
 #include "Receiver.hpp"
 
-Receiver::Receiver() {
-}
+Receiver::Receiver() {}
 
 void Receiver::new_connection(int server_fd, std::vector<struct pollfd> &fds, std::map<int, Client> &clients) {
 	int clientSocket = accept(server_fd, NULL, NULL);
@@ -29,7 +28,7 @@ void Receiver::new_connection(int server_fd, std::vector<struct pollfd> &fds, st
 	std::cout << GREEN << "New connection accepted!" << RESET << std::endl;
 }
 
-void Receiver::receive(std::map<int, Client> &clients, std::vector<struct pollfd> &fds, int i) {
+int	Receiver::receive(std::map<int, Client> &clients, std::vector<struct pollfd> &fds, int i) {
 	char buffer[1024];
 	bzero(buffer, 1024);
 
@@ -39,14 +38,13 @@ void Receiver::receive(std::map<int, Client> &clients, std::vector<struct pollfd
 		close(fds[i].fd);
 		fds.erase(fds.begin() + i);
 		clients.erase(fds[i].fd);
-		return;
+		return (0);
 	}
 
 	clients[fds[i].fd]._buffer = buffer;
 	std::cout << CYAN << "Message received:" << std::endl;
 	std::cout << clients[fds[i].fd]._buffer << RESET << std::endl;
-
-	fds[i].events = POLLOUT;
+	return (1);
 }
 
 void Receiver::perror_exit(const char *error) {

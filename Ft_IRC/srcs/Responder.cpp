@@ -6,14 +6,13 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:08:53 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/16 22:49:36 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 17:10:42 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Responder.hpp"
 
-Responder::Responder() {
-}
+Responder::Responder() {}
 
 void	Responder::respond(Client client, struct pollfd& pollfd) {
 	client._response.clear();

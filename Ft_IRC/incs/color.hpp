@@ -6,12 +6,12 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 18:21:39 by plau              #+#    #+#             */
-/*   Updated: 2023/11/16 21:25:49 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 17:33:09 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLOUR_HPP
-# define COLOUR_HPP
+#define COLOUR_HPP
 
 #define GREEN 					"\033[32m"
 #define BLUE  					"\033[34m"

@@ -6,14 +6,12 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:08:10 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/16 22:47:05 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 17:10:34 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Client.hpp"
 
-Client::Client() {
-}
+Client::Client() {}
 
-Client::Client(int fd): _fd(fd) {
-}
+Client::Client(int fd): _fd(fd) {}

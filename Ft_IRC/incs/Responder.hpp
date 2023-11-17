@@ -6,12 +6,12 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:50:09 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/16 22:48:43 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 17:32:58 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RESPONDER_HPP
-# define RESPONDER_HPP
+#define RESPONDER_HPP
 
 #include <sys/socket.h>
 #include <poll.h>
