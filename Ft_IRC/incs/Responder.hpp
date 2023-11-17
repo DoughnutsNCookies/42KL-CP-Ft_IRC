@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Client.hpp                                         :+:      :+:    :+:   */
+/*   Responder.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:46:47 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/16 22:46:49 by schuah           ###   ########.fr       */
+/*   Created: 2023/11/16 21:50:09 by schuah            #+#    #+#             */
+/*   Updated: 2023/11/16 22:48:43 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_HPP
-# define CLIENT_HPP
+#ifndef RESPONDER_HPP
+# define RESPONDER_HPP
 
+#include <sys/socket.h>
 #include <poll.h>
 #include <string>
+#include <iostream>
 
-class Client {
+#include "Client.hpp"
+#include "color.hpp"
+
+class Responder {
 	public:
-		Client();
-		Client(int fd);
-
-		int 				_fd;
-		std::string	_response;
-		std::string	_buffer;
+		Responder();
+		void	respond(Client client, struct pollfd& pollfd);
 };
 
 #endif
