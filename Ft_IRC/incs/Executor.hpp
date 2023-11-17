@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 18:41:37 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 20:40:00 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #include <string>
 #include <iostream>
 #include <unordered_map>
-#include "Client.hpp"
 
+#include "Client.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
