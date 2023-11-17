@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_irc.hpp                                         :+:      :+:    :+:   */
+/*   Responder.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 18:46:22 by plau              #+#    #+#             */
-/*   Updated: 2023/11/16 21:29:08 by schuah           ###   ########.fr       */
+/*   Created: 2023/11/16 21:50:09 by schuah            #+#    #+#             */
+/*   Updated: 2023/11/17 17:32:58 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_IRC_HPP
-#define FT_IRC_HPP
+#ifndef RESPONDER_HPP
+#define RESPONDER_HPP
 
+#include <sys/socket.h>
+#include <poll.h>
+#include <string>
 #include <iostream>
 
+#include "Client.hpp"
 #include "color.hpp"
-#include "Server.hpp"
+
+class Responder {
+	public:
+		Responder();
+		void	respond(Client client, struct pollfd& pollfd);
+};
 
 #endif

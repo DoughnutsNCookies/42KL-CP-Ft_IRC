@@ -1,21 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_irc.hpp                                         :+:      :+:    :+:   */
+/*   Receiver.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 18:46:22 by plau              #+#    #+#             */
-/*   Updated: 2023/11/16 21:29:08 by schuah           ###   ########.fr       */
+/*   Created: 2023/11/17 16:22:58 by schuah            #+#    #+#             */
+/*   Updated: 2023/11/17 17:17:06 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_IRC_HPP
-#define FT_IRC_HPP
+#ifndef Receiver_HPP
+#define Receiver_HPP
 
+#include <vector>
+#include <poll.h>
+#include <sys/socket.h>
+#include <unistd.h>
 #include <iostream>
+#include <map>
 
 #include "color.hpp"
-#include "Server.hpp"
+#include "Client.hpp"
+
+class Receiver {
+	public:
+		Receiver();
+		void		new_connection(int server_fd, std::vector<struct pollfd> &fds, std::map<int, Client> &clients);
+		int			receive(std::map<int, Client> &clients, std::vector<struct pollfd> &fds, int i);
+
+	private:
+		void		perror_exit(const char *error);
+};
 
 #endif

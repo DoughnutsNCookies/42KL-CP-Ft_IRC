@@ -1,21 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_irc.hpp                                         :+:      :+:    :+:   */
+/*   Client.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 18:46:22 by plau              #+#    #+#             */
-/*   Updated: 2023/11/16 21:29:08 by schuah           ###   ########.fr       */
+/*   Created: 2023/11/16 22:08:10 by schuah            #+#    #+#             */
+/*   Updated: 2023/11/17 17:10:34 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_IRC_HPP
-#define FT_IRC_HPP
+#include "Client.hpp"
 
-#include <iostream>
+Client::Client() {}
 
-#include "color.hpp"
-#include "Server.hpp"
-
-#endif
+Client::Client(int fd): _fd(fd) {}

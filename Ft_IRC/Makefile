@@ -3,29 +3,29 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: plau <plau@student.42.kl>                  +#+  +:+       +#+         #
+#    By: schuah <schuah@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 17:36:21 by plau              #+#    #+#              #
-#    Updated: 2023/11/08 19:02:24 by plau             ###   ########.fr        #
+#    Updated: 2023/11/10 13:22:41 by schuah           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	ircserv
-CXX			=	g++
+NAME			=	ircserv
+CXX				=	g++
 CXXFLAGS	=	-Wall -Wextra -Werror -Wshadow -std=c++98 -pedantic
-DNAME		=	d.out
+DNAME			=	d.out
 DFLAGS		=	-fsanitize=thread -g3
 INCLUDES	=	-Iincs
-RM			=	rm -rf
-MKDIR		=	mkdir -p
+RM				=	rm -rf
+MKDIR			=	mkdir -p
 HEADERS		=	${shell find incs -type f -name "*.hpp"}
 SRC_PATH	=	srcs
 OBJ_PATH	=	objs
-MAIN		=	srcs/main.cpp
+MAIN			=	srcs/main.cpp
 SRC_PATHS	=	${shell find ${SRC_PATH} -type d}
 OBJ_PATHS	=	${subst $(SRC_PATH), $(OBJ_PATH), ${SRC_PATHS}}
-SRC			=	${shell find ${SRC_PATH} -type f -name "*.cpp"}
-OBJ			=	${subst $(SRC_PATH), $(OBJ_PATH),  ${SRC:.cpp=.o}}
+SRC				=	${shell find ${SRC_PATH} -type f -name "*.cpp"}
+OBJ				=	${subst $(SRC_PATH), $(OBJ_PATH),  ${SRC:.cpp=.o}}
 
 all: 
 	${MKDIR} ${OBJ_PATHS}
