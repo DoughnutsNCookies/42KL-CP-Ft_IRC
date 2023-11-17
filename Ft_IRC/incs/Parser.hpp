@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:55:39 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 17:21:44 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 17:56:41 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,7 @@
 #define PARSER_HPP
 
 #include <string>
-#include <iostream>
 #include <vector>
-
-enum TOKEN {
-	PASS,
-	NICK,
-	USER,
-	JOIN,
-	PRIVMSG,
-	KICK,
-	TOPIC
-};
 
 class Parser {
 	public:
