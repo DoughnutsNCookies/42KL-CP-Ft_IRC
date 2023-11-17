@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Parser.hpp                                         :+:      :+:    :+:   */
+/*   Executor.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 16:55:39 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 17:56:41 by schuah           ###   ########.fr       */
+/*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
+/*   Updated: 2023/11/17 18:04:27 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_HPP
-#define PARSER_HPP
+#ifndef EXECUTOR_HPP
+#define EXECUTOR_HPP
 
-#include <string>
 #include <vector>
+#include <string>
+#include <iostream>
+#include <unordered_map>
 
-class Parser {
+enum TOKEN {
+	UNKNOWN = -1,
+	PASS = 0,
+	NICK = 1,
+	USER = 2,
+	JOIN = 3,
+	PRIVMSG = 4,
+	KICK = 5,
+	TOPIC = 6
+};
+
+class Executor {
 	public:
-		Parser();
-		std::vector<std::string>	parse(std::string &buffer);
+		Executor();
+		void		execute(std::vector<std::string> &tokens);
 	private:
-		std::vector<std::string>	_split(std::string str, std::string delim);
+		TOKEN		_getToken(std::string token);
 };
 
 #endif

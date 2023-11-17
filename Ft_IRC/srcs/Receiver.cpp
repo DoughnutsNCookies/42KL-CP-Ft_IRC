@@ -41,10 +41,16 @@ int	Receiver::receive(std::map<int, Client> &clients, std::vector<struct pollfd>
 		return (0);
 	}
 
-	clients[fds[i].fd]._buffer = buffer;
+	Client&	thisClient = clients[fds[i].fd];
+	if (thisClient._buffer.find("\r\n") != std::string::npos)
+		thisClient._buffer.clear();
+
+	thisClient._buffer += buffer;
 	std::cout << CYAN << "Message received:" << std::endl;
-	std::cout << clients[fds[i].fd]._buffer << RESET << std::endl;
-	return (1);
+	std::cout << thisClient._buffer << RESET << std::endl;
+	std::cout << thisClient._buffer.size() << std::endl;
+
+	return (thisClient._buffer.find("\r\n") != std::string::npos);
 }
 
 void Receiver::perror_exit(const char *error) {
