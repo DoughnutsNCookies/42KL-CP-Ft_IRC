@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:55:39 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 17:35:33 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 17:56:41 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,6 @@
 
 #include <string>
 #include <vector>
-
-enum TOKEN {
-	PASS,
-	NICK,
-	USER,
-	JOIN,
-	PRIVMSG,
-	KICK,
-	TOPIC
-};
 
 class Parser {
 	public:
