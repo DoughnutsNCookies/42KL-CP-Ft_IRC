@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:42:42 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 16:54:04 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 17:36:23 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include "Receiver.hpp"
 #include "Responder.hpp"
 #include "Parser.hpp"
+#include "Executor.hpp"
 
 class Server {
 	public:
@@ -40,6 +41,7 @@ class Server {
 		Receiver										_Receiver;
 		Responder										_Responder;
 		Parser											_Parser;
+		Executor										_Executor;
 
 		void												perror_exit(const char *error);
 		void												create_socket();
