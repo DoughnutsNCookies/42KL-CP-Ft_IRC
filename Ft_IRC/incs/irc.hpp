@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 21:08:33 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 21:09:28 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/21 20:21:42 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct s_irc {
 	int													_port;
-	int 												_server_fd;
+	int 												_serverFd;
 	std::string									_password;
 	std::map<int, Client>				_clients;
 	std::vector<struct pollfd>	_fds;

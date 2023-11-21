@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:22:58 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 16:16:30 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/21 20:22:04 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class Receiver {
 		int			receive(t_irc& irc, int i);
 
 	private:
-		void		perror_exit(const char *error);
+		void		perrorExit(const char *error);
 };
 
 #endif
