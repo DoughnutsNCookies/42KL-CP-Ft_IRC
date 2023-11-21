@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 20:22:29 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/21 22:17:00 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	Server::run() {
 			}
 
 			if (fds[i].revents & POLLOUT) {
-				this->_Responder.respond(clients[fds[i].fd]);
+				this->_Responder.respond(this->_irc, clients[fds[i].fd]);
 				fds[i].events = POLLIN;
 			}
 		}
