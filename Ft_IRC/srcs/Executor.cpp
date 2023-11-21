@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 21:27:27 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/21 22:13:12 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,25 @@ TOKEN	Executor::_getToken(std::string token) {
 	return (UNKNOWN);
 }
 
-void	Executor::execute(t_irc& irc, Client& client, tokensVector &tokens) {
-	TOKEN	token = this->_getToken(tokens[0]);
-	for (size_t i = 0; i < tokens.size(); i++)
-		std::cout << "tokens[" << i << "] = " << tokens[i] << std::endl;
+tokensVector Executor::_getNextTokens(tokensVector& tokens) {
+    tokensVector::iterator	it = std::find(tokens.begin(), tokens.end(), "\r\n");
+    size_t									tokensToCopy = std::distance(tokens.begin(), it);
+    tokensVector						result(tokens.begin(), tokens.begin() + tokensToCopy);
 
-	if (token == 0)
-		this->_Pass.verifyTokens(irc, client, tokens);
-	if (token == 1)
-		this->_Nick.verifyTokens(irc, client, tokens);
+    tokens.erase(tokens.begin(), it + 1);
+    return result;
+}
+
+void	Executor::execute(t_irc& irc, Client& client, tokensVector &tokens) {
+	while (tokens.size() > 0) {
+		tokensVector	currentTokens = this->_getNextTokens(tokens);
+		TOKEN	token = this->_getToken(currentTokens[0]);
+
+		if (token == 0)
+			this->_Pass.verifyTokens(irc, client, currentTokens);
+		if (token == 1)
+			this->_Nick.verifyTokens(irc, client, currentTokens);
+	}
 }
 
 void	Executor::disconnect(t_irc& irc, int i) {

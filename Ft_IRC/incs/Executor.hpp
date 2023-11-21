@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 20:16:41 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/21 22:08:56 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,15 @@ enum TOKEN {
 class Executor {
 	public:
 		Executor();
-		void	execute(t_irc& irc, Client& client, tokensVector &tokens);
-		void	disconnect(t_irc& irc, int i);
+		void			execute(t_irc& irc, Client& client, tokensVector &tokens);
+		void			disconnect(t_irc& irc, int i);
 
 	private:
-		Pass	_Pass;
-		Nick	_Nick;
+		Pass			_Pass;
+		Nick			_Nick;
 		
-		TOKEN	_getToken(std::string token);
+		TOKEN			_getToken(std::string token);
+		tokensVector	_getNextTokens(tokensVector &tokens);
 };
 
 #endif
