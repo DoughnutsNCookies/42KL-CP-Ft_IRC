@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:08:10 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 17:10:50 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/21 21:06:56 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,4 +14,4 @@
 
 Client::Client() {}
 
-Client::Client(int fd): _fd(fd), _verified(false) {}
+Client::Client(int fd): _fd(fd), _verified(false), _nickname("client" + std::to_string(fd)) {}

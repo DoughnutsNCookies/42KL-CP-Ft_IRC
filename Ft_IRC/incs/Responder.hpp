@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Responder.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:50:09 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 22:05:16 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/21 18:46:02 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 
 #include "Client.hpp"
 #include "color.hpp"
+#include "irc.hpp"
 
 class Responder {
 	public:
 		Responder();
-		void	respond(Client client);
+		void	respond(t_irc& irc, Client& client);
 };
 
 #endif

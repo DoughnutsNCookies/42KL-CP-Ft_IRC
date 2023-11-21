@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Pass.hpp                                           :+:      :+:    :+:   */
+/*   Nick.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 18:45:52 by plau              #+#    #+#             */
-/*   Updated: 2023/11/21 22:17:05 by plau             ###   ########.fr       */
+/*   Created: 2023/11/21 17:49:15 by plau              #+#    #+#             */
+/*   Updated: 2023/11/21 20:19:46 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PASS_HPP
-#define PASS_HPP
+#ifndef NICK_HPP
+# define NICK_HPP
 
 #include "ATokenParser.hpp"
-#include "Client.hpp"
 #include "irc.hpp"
 #include "SendError.hpp"
 
-class Pass : public ATokenParser {
+class Nick : public ATokenParser {
 	public:
-		Pass();
+		Nick();
 		void				verifyTokens(t_irc& irc, Client& client, tokensVector &tokens);
 	
 	private:
-		std::string	_user_password;
+		std::string _nick_name;
+		
 		SendError		_SendError;
 
 		void				_parseTokens(tokensVector &tokens);
 		void				_executeCommand(t_irc& irc, Client& client);
+		bool				_checkValidNickName(std::string nickName);
 };
 
 #endif
