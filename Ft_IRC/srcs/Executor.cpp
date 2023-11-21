@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 17:56:11 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/21 18:00:16 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ TOKEN	Executor::_getToken(std::string token) {
 
 void	Executor::execute(t_irc& irc, Client& client, tokensVector &tokens) {
 	TOKEN	token = this->_getToken(tokens[0]);
-	this->_Pass.verify(irc, client, tokens);
-	(void)token;
+
+	if (token == 0)
+		this->_Pass.verify(irc, client, tokens);
 }
 
 void	Executor::disconnect(t_irc& irc, int i) {
