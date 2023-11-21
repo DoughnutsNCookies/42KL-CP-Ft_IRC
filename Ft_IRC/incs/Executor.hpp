@@ -6,17 +6,23 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 18:04:27 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 22:12:58 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTOR_HPP
 #define EXECUTOR_HPP
 
+#include <map>
 #include <vector>
 #include <string>
+#include <unistd.h>
 #include <iostream>
 #include <unordered_map>
+
+#include "irc.hpp"
+#include "color.hpp"
+#include "Client.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
@@ -32,9 +38,10 @@ enum TOKEN {
 class Executor {
 	public:
 		Executor();
-		void		execute(std::vector<std::string> &tokens);
+		void	execute(Client& client, std::vector<std::string> &tokens);
+		void	disconnect(t_irc& irc, int i);	
 	private:
-		TOKEN		_getToken(std::string token);
+		TOKEN	_getToken(std::string token);
 };
 
 #endif
