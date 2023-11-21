@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   TokenParser.hpp                                    :+:      :+:    :+:   */
+/*   ATokenParser.hpp                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 16:30:22 by plau              #+#    #+#             */
-/*   Updated: 2023/11/21 16:41:18 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/21 20:22:45 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef std::vector<std::string>	tokensVector;
 class ATokenParser {
 	private:
 		virtual void	_parseTokens(tokensVector &tokens) = 0;
-
 };
 
 #endif

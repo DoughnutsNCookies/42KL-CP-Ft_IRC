@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:42:42 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 16:34:55 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/21 20:22:29 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ class Server {
 		Parser		_Parser;
 		Executor	_Executor;
 
-		void			perror_exit(const char *error);
-		void			create_socket();
-		void			bind_socket();
-		void			listen_socket();
+		void			perrorExit(const char *error);
+		void			createSocket();
+		void			bindSocket();
+		void			listenSocket();
 };
 
 #endif

@@ -17,11 +17,11 @@ Receiver::Receiver() {}
 void Receiver::new_connection(t_irc& irc) {
 	std::vector<struct pollfd>&	fds = irc._fds;
 	std::map<int, Client>&			clients = irc._clients;
-	int&												server_fd = irc._server_fd;	
+	int&												server_fd = irc._serverFd;	
 
 	int clientSocket = accept(server_fd, NULL, NULL);
 	if (clientSocket < 0)
-		this->perror_exit("Accept failed");
+		this->perrorExit("Accept failed");
 
 	struct pollfd new_pollfd;
 	new_pollfd.fd = clientSocket;
@@ -54,7 +54,7 @@ int	Receiver::receive(t_irc& irc, int i) {
 	return (thisClient._buffer.find("\r\n") != std::string::npos);
 }
 
-void Receiver::perror_exit(const char *error) {
+void Receiver::perrorExit(const char *error) {
 	perror(error);
 	exit(EXIT_FAILURE);
 }
