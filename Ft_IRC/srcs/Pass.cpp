@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:46:46 by plau              #+#    #+#             */
-/*   Updated: 2023/11/21 17:44:18 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/21 18:21:41 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 Pass::Pass() {}
 
-void	Pass::verify(t_irc& irc, Client& client, tokensVector &tokens) {
+void	Pass::verifyTokens(t_irc& irc, Client& client, tokensVector &tokens) {
 	if (client._verified) {
 		this->_SendError.error462(client);
 		return;
 	}
 	if (irc._password.size() == 0) {
-		client._verified = true;
+		this->_executeCommand(irc, client);
 		return;
 	}
 
@@ -39,12 +39,17 @@ void	Pass::verify(t_irc& irc, Client& client, tokensVector &tokens) {
 		this->_SendError.error464(client);
 		return;
 	}
-	client._verified = true;
-	client._response.clear();
+	this->_executeCommand(irc, client);
 }
 
 void	Pass::_parseTokens(tokensVector &tokens) {
 	this->_user_password = tokens[1];
 	if (this->_user_password[0] == ':')
 		this->_user_password.erase(0, 1);
+}
+
+void	Pass::_executeCommand(t_irc& irc, Client& client) {
+	(void)irc;
+	client._verified = true;
+	client._response.clear();
 }
