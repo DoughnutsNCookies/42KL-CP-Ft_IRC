@@ -6,19 +6,15 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 22:12:58 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/21 16:16:55 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTOR_HPP
 #define EXECUTOR_HPP
 
-#include <map>
-#include <vector>
-#include <string>
 #include <unistd.h>
 #include <iostream>
-#include <unordered_map>
 
 #include "irc.hpp"
 #include "color.hpp"

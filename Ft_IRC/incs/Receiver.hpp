@@ -6,14 +6,13 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:22:58 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 22:18:09 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/21 16:16:30 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef Receiver_HPP
 #define Receiver_HPP
 
-#include <vector>
 #include <poll.h>
 #include <sys/socket.h>
 #include <unistd.h>
