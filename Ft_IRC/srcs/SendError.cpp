@@ -1,17 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Client.cpp                                         :+:      :+:    :+:   */
+/*   SendError.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 22:08:10 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 17:10:50 by plau             ###   ########.fr       */
+/*   Created: 2023/11/21 17:26:43 by plau              #+#    #+#             */
+/*   Updated: 2023/11/21 17:42:53 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Client.hpp"
+#include "SendError.hpp"
 
-Client::Client() {}
+SendError::SendError() {}
 
-Client::Client(int fd): _fd(fd), _verified(false) {}
+void	SendError::error461(Client& client) {
+	client._response = client._nickname + " PASS :Not enough parameters\r\n";
+}
+
+void	SendError::error462(Client& client) {
+	client._response = client._nickname + " :You may not reregister\r\n";
+}
+
+void	SendError::error464(Client& client) {
+	client._response = client._nickname + " :Password incorrect\r\n";
+}

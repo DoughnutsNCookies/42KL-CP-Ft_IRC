@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 16:16:55 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/21 16:44:17 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "irc.hpp"
 #include "color.hpp"
 #include "Client.hpp"
+#include "Pass.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
@@ -34,9 +35,12 @@ enum TOKEN {
 class Executor {
 	public:
 		Executor();
-		void	execute(Client& client, std::vector<std::string> &tokens);
-		void	disconnect(t_irc& irc, int i);	
+		void	execute(t_irc& irc, Client& client, tokensVector &tokens);
+		void	disconnect(t_irc& irc, int i);
+
 	private:
+		Pass	_Pass;
+		
 		TOKEN	_getToken(std::string token);
 };
 

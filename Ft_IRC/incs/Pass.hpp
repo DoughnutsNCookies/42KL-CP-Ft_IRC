@@ -1,17 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Client.cpp                                         :+:      :+:    :+:   */
+/*   Pass.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 22:08:10 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 17:10:50 by plau             ###   ########.fr       */
+/*   Created: 2023/11/17 18:45:52 by plau              #+#    #+#             */
+/*   Updated: 2023/11/21 17:30:50 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PASS_HPP
+#define PASS_HPP
+
+#include "TokenParser.hpp"
 #include "Client.hpp"
+#include "irc.hpp"
+#include "SendError.hpp"
 
-Client::Client() {}
+class Pass : public ATokenParser {
+	public:
+		Pass();
+		void		verify(t_irc& irc, Client& client, tokensVector &tokens);
+	
+	private:
+		std::string	_user_password;
+		SendError	_SendError;
 
-Client::Client(int fd): _fd(fd), _verified(false) {}
+		void		_parseTokens(tokensVector &tokens);
+};
+
+#endif

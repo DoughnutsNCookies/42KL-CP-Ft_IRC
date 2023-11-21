@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:46:47 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 18:42:17 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/21 17:10:34 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ class Client {
 		bool				_verified;
 		std::string	_response;
 		std::string	_buffer;
+		std::string	_nickname;
 };
 
 #endif

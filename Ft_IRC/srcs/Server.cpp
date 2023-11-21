@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 22:52:41 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/21 16:44:40 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	Server::run() {
 					int	recvResult = this->_Receiver.receive(this->_irc, i);
 					if (recvResult > 0) {
 						std::vector<std::string> tokens = this->_Parser.parse(clients[fds[i].fd]._buffer);
-						this->_Executor.execute(clients[fds[i].fd], tokens);
+						this->_Executor.execute(this->_irc, clients[fds[i].fd], tokens);
 						fds[i].events = POLLOUT;
 					} else if (recvResult < 0) {
 						this->_Executor.disconnect(this->_irc, i);

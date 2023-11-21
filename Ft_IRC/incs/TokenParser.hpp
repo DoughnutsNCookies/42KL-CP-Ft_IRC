@@ -1,17 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Client.cpp                                         :+:      :+:    :+:   */
+/*   TokenParser.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 22:08:10 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 17:10:50 by plau             ###   ########.fr       */
+/*   Created: 2023/11/21 16:30:22 by plau              #+#    #+#             */
+/*   Updated: 2023/11/21 16:41:18 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Client.hpp"
+#ifndef TOKENPARSER_HPP
+#define TOKENPARSER_HPP
 
-Client::Client() {}
+#include <vector>
+#include <string>
 
-Client::Client(int fd): _fd(fd), _verified(false) {}
+typedef std::vector<std::string>	tokensVector;
+
+class ATokenParser {
+	private:
+		virtual void	_parseTokens(tokensVector &tokens) = 0;
+
+};
+
+#endif
