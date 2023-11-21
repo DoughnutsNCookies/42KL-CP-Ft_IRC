@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:42:42 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 17:36:23 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 21:01:31 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,31 @@
 #include "Parser.hpp"
 #include "Executor.hpp"
 
+typedef struct s_irc {
+	int													_port;
+	int 												_server_fd;
+	std::string									_password;
+	std::map<int, Client>				_clients;
+	std::vector<struct pollfd>	_fds;
+}	t_irc;
+
 class Server {
 	public:
 		Server(const char *port, const char *password);
-		void												run();
+		void			run();
 	
 	private:
-		int													_port;
-		int 												_server_fd;
-		std::string									_password;
-		std::map<int, Client>				_clients;
-		std::vector<struct pollfd>	_fds;
+		t_irc			_irc;
 
-		Receiver										_Receiver;
-		Responder										_Responder;
-		Parser											_Parser;
-		Executor										_Executor;
+		Receiver	_Receiver;
+		Responder	_Responder;
+		Parser		_Parser;
+		Executor	_Executor;
 
-		void												perror_exit(const char *error);
-		void												create_socket();
-		void												bind_socket();
-		void												listen_socket();
+		void			perror_exit(const char *error);
+		void			create_socket();
+		void			bind_socket();
+		void			listen_socket();
 };
 
 #endif
