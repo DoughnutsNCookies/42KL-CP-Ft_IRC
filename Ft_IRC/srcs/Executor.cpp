@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 17:46:32 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/21 17:56:11 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ TOKEN	Executor::_getToken(std::string token) {
 void	Executor::execute(t_irc& irc, Client& client, tokensVector &tokens) {
 	TOKEN	token = this->_getToken(tokens[0]);
 	this->_Pass.verify(irc, client, tokens);
+	(void)token;
 }
 
 void	Executor::disconnect(t_irc& irc, int i) {
