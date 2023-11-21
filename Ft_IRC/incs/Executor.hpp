@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 16:44:17 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/21 20:16:41 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "color.hpp"
 #include "Client.hpp"
 #include "Pass.hpp"
+#include "Nick.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
@@ -40,6 +41,7 @@ class Executor {
 
 	private:
 		Pass	_Pass;
+		Nick	_Nick;
 		
 		TOKEN	_getToken(std::string token);
 };
