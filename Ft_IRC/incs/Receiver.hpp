@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:22:58 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 17:17:06 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 22:18:09 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <iostream>
-#include <map>
 
 #include "color.hpp"
+#include "irc.hpp"
 #include "Client.hpp"
 
 class Receiver {
 	public:
 		Receiver();
-		void		new_connection(int server_fd, std::vector<struct pollfd> &fds, std::map<int, Client> &clients);
-		int			receive(std::map<int, Client> &clients, std::vector<struct pollfd> &fds, int i);
+		void		new_connection(t_irc& irc);
+		int			receive(t_irc& irc, int i);
 
 	private:
 		void		perror_exit(const char *error);

@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 21:01:31 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 22:52:41 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Server::Server(const char *port, const char *password) {
 
 void	Server::run() {
 	std::vector<struct pollfd>&	fds = this->_irc._fds;
-	std::map<int, Client>				clients = this->_irc._clients;
+	std::map<int, Client>&			clients = this->_irc._clients;
 	int&												server_fd = this->_irc._server_fd;
 	int&												port = this->_irc._port;
 
@@ -41,16 +41,24 @@ void	Server::run() {
 		for (unsigned long i = 0; i < fds.size(); i++) {
 			if (fds[i].revents & POLLIN) {
 				if (fds[i].fd == server_fd)
-					this->_Receiver.new_connection(server_fd, fds, clients);
-				else if (this->_Receiver.receive(clients, fds, i)) {
-					std::vector<std::string> tokens = this->_Parser.parse(clients[fds[i].fd]._buffer);
-					this->_Executor.execute(clients[fds[i].fd], tokens);
-					fds[i].events = POLLIN;
+					this->_Receiver.new_connection(this->_irc);
+				else {
+					int	recvResult = this->_Receiver.receive(this->_irc, i);
+					if (recvResult > 0) {
+						std::vector<std::string> tokens = this->_Parser.parse(clients[fds[i].fd]._buffer);
+						this->_Executor.execute(clients[fds[i].fd], tokens);
+						fds[i].events = POLLOUT;
+					} else if (recvResult < 0) {
+						this->_Executor.disconnect(this->_irc, i);
+						continue;
+					}
 				}
 			}
 
-			if (fds[i].revents & POLLOUT)
-				this->_Responder.respond(clients[fds[i].fd], fds[i]);
+			if (fds[i].revents & POLLOUT) {
+				this->_Responder.respond(clients[fds[i].fd]);
+				fds[i].events = POLLIN;
+			}
 		}
 	}
 }
