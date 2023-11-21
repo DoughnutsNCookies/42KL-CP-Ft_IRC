@@ -14,7 +14,11 @@
 
 Receiver::Receiver() {}
 
-void Receiver::new_connection(int server_fd, std::vector<struct pollfd> &fds, std::map<int, Client> &clients) {
+void Receiver::new_connection(t_irc& irc) {
+	std::vector<struct pollfd>&	fds = irc._fds;
+	std::map<int, Client>&			clients = irc._clients;
+	int&												server_fd = irc._server_fd;	
+
 	int clientSocket = accept(server_fd, NULL, NULL);
 	if (clientSocket < 0)
 		this->perror_exit("Accept failed");
@@ -28,28 +32,25 @@ void Receiver::new_connection(int server_fd, std::vector<struct pollfd> &fds, st
 	std::cout << GREEN << "New connection accepted!" << RESET << std::endl;
 }
 
-int	Receiver::receive(std::map<int, Client> &clients, std::vector<struct pollfd> &fds, int i) {
+int	Receiver::receive(t_irc& irc, int i) {
+	std::vector<struct pollfd>&	fds = irc._fds;
+	std::map<int, Client>&			clients = irc._clients;
+	int&												pollfd = fds[i].fd;
+
 	char buffer[1024];
 	bzero(buffer, 1024);
 
-	recv(fds[i].fd, buffer, 1024, 0);
-	if (buffer[0] == '\0') {
-		std::cout << RED << "Client disconnected" << RESET << std::endl;
-		close(fds[i].fd);
-		fds.erase(fds.begin() + i);
-		clients.erase(fds[i].fd);
-		return (0);
-	}
+	recv(pollfd, buffer, 1024, 0);
+	if (buffer[0] == '\0')
+		return (-1);
 
-	Client&	thisClient = clients[fds[i].fd];
+	Client&	thisClient = clients[pollfd];
 	if (thisClient._buffer.find("\r\n") != std::string::npos)
 		thisClient._buffer.clear();
 
-	thisClient._buffer += buffer;
+	thisClient._buffer += std::string(buffer);
 	std::cout << CYAN << "Message received:" << std::endl;
 	std::cout << thisClient._buffer << RESET << std::endl;
-	std::cout << thisClient._buffer.size() << std::endl;
-
 	return (thisClient._buffer.find("\r\n") != std::string::npos);
 }
 

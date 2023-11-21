@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 20:42:09 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 22:57:02 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,15 @@ void	Executor::execute(Client& client, std::vector<std::string> &tokens) {
 	TOKEN	token = this->_getToken(tokens[0]);
 	std::cout << token << std::endl;
 	(void)client;
+}
+
+void	Executor::disconnect(t_irc& irc, int i) {
+	std::vector<struct pollfd>&	fds = irc._fds;
+	std::map<int, Client>&			clients = irc._clients;
+	int&												pollfd = fds[i].fd;
+
+	std::cout << RED << "Client disconnected" << RESET << std::endl;
+	close(pollfd);
+	fds.erase(fds.begin() + i);
+	clients.erase(pollfd);
 }

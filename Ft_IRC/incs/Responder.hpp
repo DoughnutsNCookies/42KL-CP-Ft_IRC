@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:50:09 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/17 17:32:58 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/17 22:05:16 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 class Responder {
 	public:
 		Responder();
-		void	respond(Client client, struct pollfd& pollfd);
+		void	respond(Client client);
 };
 
 #endif

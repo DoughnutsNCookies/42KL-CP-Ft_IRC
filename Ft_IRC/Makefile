@@ -6,7 +6,7 @@
 #    By: schuah <schuah@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 17:36:21 by plau              #+#    #+#              #
-#    Updated: 2023/11/10 13:22:41 by schuah           ###   ########.fr        #
+#    Updated: 2023/11/17 21:16:56 by schuah           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			=	ircserv
 CXX				=	g++
 CXXFLAGS	=	-Wall -Wextra -Werror -Wshadow -std=c++98 -pedantic
 DNAME			=	d.out
-DFLAGS		=	-fsanitize=thread -g3
+DFLAGS		=	-fsanitize=address -g3
 INCLUDES	=	-Iincs
 RM				=	rm -rf
 MKDIR			=	mkdir -p
