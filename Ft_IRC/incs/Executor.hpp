@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/22 16:44:56 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 19:53:43 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "irc.hpp"
 #include "color.hpp"
 #include "Client.hpp"
+#include "SendError.hpp"
 #include "Pass.hpp"
 #include "Nick.hpp"
 #include "User.hpp"
@@ -37,16 +38,17 @@ enum TOKEN {
 class Executor {
 	public:
 		Executor();
-		void			execute(t_irc& irc, Client& client, tokensVector &tokens);
+		void			execute(t_irc& irc, Client& client, tokensVector& tokens);
 		void			disconnect(t_irc& irc, int i);
 
 	private:
+		SendError	_SendError;
 		Pass			_Pass;
 		Nick			_Nick;
 		User			_User;
 		
 		TOKEN			_getToken(std::string token);
-		tokensVector	_getNextTokens(tokensVector &tokens);
+		tokensVector	_getNextTokens(tokensVector& tokens);
 };
 
 #endif

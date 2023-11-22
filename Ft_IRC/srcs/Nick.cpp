@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Nick.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2023/11/21 21:27:23 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 17:24:29 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Nick::Nick() {}
 
-void	Nick::verifyTokens(t_irc& irc, Client& client, tokensVector &tokens) {
+void	Nick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	if (tokens.size() == 1 || tokens[1].size() == 0) {
 		this->_SendError.error431(client);
 		return;
@@ -44,7 +44,7 @@ bool	Nick::_checkValidNickName(std::string nickName) {
 		|| (nickName[0] == '&' && nickName[1] == '#')));
 }
 
-void	Nick::_parseTokens(tokensVector &tokens) {
+void	Nick::_parseTokens(tokensVector& tokens) {
 	this->_nick_name = tokens[1];
 	if (this->_nick_name[0] == ':')
 		this->_nick_name.erase(0, 1);

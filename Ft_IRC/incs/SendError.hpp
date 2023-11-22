@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:22:31 by plau              #+#    #+#             */
-/*   Updated: 2023/11/22 16:56:25 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 19:54:32 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 class SendError {
 	public:
 		SendError();
+		
+		/* ERR_UNKNOWNCOMMAND */
+		void	error421(Client& client, std::string unknownCommand);
 
 		/* ERR_NONICKNAMEGIVEN */
 		void	error431(Client& client);

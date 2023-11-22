@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Pass.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:46:46 by plau              #+#    #+#             */
-/*   Updated: 2023/11/21 20:39:29 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 17:24:29 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Pass::Pass() {}
 
-void	Pass::verifyTokens(t_irc& irc, Client& client, tokensVector &tokens) {
+void	Pass::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	if (client._verified) {
 		this->_SendError.error462(client);
 		return;
@@ -41,7 +41,7 @@ void	Pass::verifyTokens(t_irc& irc, Client& client, tokensVector &tokens) {
 	this->_executeCommand(irc, client);
 }
 
-void	Pass::_parseTokens(tokensVector &tokens) {
+void	Pass::_parseTokens(tokensVector& tokens) {
 	this->_user_password = tokens[1];
 	if (this->_user_password[0] == ':')
 		this->_user_password.erase(0, 1);

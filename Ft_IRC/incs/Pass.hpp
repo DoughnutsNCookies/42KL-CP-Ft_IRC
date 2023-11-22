@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Pass.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:45:52 by plau              #+#    #+#             */
-/*   Updated: 2023/11/21 22:17:05 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 17:24:14 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 class Pass : public ATokenParser {
 	public:
 		Pass();
-		void				verifyTokens(t_irc& irc, Client& client, tokensVector &tokens);
+		void				verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
 	
 	private:
 		std::string	_user_password;
 		SendError		_SendError;
 
-		void				_parseTokens(tokensVector &tokens);
+		void				_parseTokens(tokensVector& tokens);
 		void				_executeCommand(t_irc& irc, Client& client);
 };
 

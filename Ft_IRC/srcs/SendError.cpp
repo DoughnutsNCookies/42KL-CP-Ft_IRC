@@ -6,13 +6,17 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:26:43 by plau              #+#    #+#             */
-/*   Updated: 2023/11/22 16:55:46 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 19:53:53 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "SendError.hpp"
 
 SendError::SendError() {}
+
+void	SendError::error421(Client& client, std::string unknownCommand) {
+	client._response = "421 " +  client._nickname + " " + unknownCommand + " :Unknown command\r\n";
+}
 
 void	SendError::error431(Client& client) {
 	client._response = "431 " +  client._nickname + " :No nickname given\r\n";
