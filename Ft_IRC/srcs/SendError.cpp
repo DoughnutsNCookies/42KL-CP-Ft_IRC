@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:26:43 by plau              #+#    #+#             */
-/*   Updated: 2023/11/22 19:53:53 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 20:02:33 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	SendError::error432(Client& client) {
 
 void	SendError::error433(Client& client) {
 	client._response = "433 " +  client._nickname + " " + client._nickname + " :Nickname is already in use\r\n";
+}
+
+void	SendError::error451(Client& client) {
+	client._response = "451 " +  client._nickname + " :You have not registered\r\n";
 }
 
 void	SendError::error461(Client& client) {

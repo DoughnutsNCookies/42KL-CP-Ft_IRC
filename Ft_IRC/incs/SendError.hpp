@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:22:31 by plau              #+#    #+#             */
-/*   Updated: 2023/11/22 19:54:32 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 20:02:14 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ class SendError {
 
 		/* ERR_NICKNAMEINUSE */
 		void	error433(Client& client);
+
+		/* ERR_NOTREGISTERED */
+		void	error451(Client& client);
 
 		/* ERR_NEEDMOREPARAMS */
 		void	error461(Client& client);

@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/22 19:53:38 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 20:04:14 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ tokensVector Executor::_getNextTokens(tokensVector& tokens) {
 void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 	const std::pair<TOKEN, ATokenParser *>	verifyTokensPairs[] = {
 		std::pair<TOKEN, ATokenParser *>(PASS, &this->_Pass),
-		std::pair<TOKEN, ATokenParser *>(NICK, &this->_Nick)
+		std::pair<TOKEN, ATokenParser *>(NICK, &this->_Nick),
+		std::pair<TOKEN, ATokenParser *>(USER, &this->_User)
 	};
 
 	while (tokens.size() > 0) {
@@ -52,6 +53,10 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 		TOKEN	token = this->_getToken(currentTokens[0]);
 		if (token == UNKNOWN) {
 			this->_SendError.error421(client, currentTokens[0]);
+			continue;
+		}
+		if (irc._password.length() != 0 && token != PASS && client._verified == false) {
+			this->_SendError.error451(client);
 			continue;
 		}
 		verifyTokensPairs[token].second->verifyTokens(irc, client, currentTokens);
