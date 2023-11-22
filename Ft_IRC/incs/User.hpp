@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Client.hpp                                         :+:      :+:    :+:   */
+/*   User.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 13:46:47 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/22 14:47:56 by plau             ###   ########.fr       */
+/*   Created: 2023/11/22 13:33:31 by plau              #+#    #+#             */
+/*   Updated: 2023/11/22 17:36:15 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_HPP
-#define CLIENT_HPP
+#ifndef USER_HPP
+# define USER_HPP
 
-#include <poll.h>
-#include <string>
+#include "ATokenParser.hpp"
+#include "SendError.hpp"
 
-class Client {
+class User : public ATokenParser {
 	public:
-		Client();
-		Client(int fd);
+		User();
+		void				verifyTokens(t_irc& irc, Client& client, tokensVector &tokens);
 
-		int 				_fd;
-		bool				_verified;
-		std::string	_response;
-		std::string	_buffer;
-		std::string	_nickname;
-		std::string	_username;
-		std::string	_realname;		
+	private:
+		std::string _username;
+		std::string _realname;
+
+		SendError		_SendError;
+
+		void				_parseTokens(tokensVector &tokens);
+		void				_executeCommand(t_irc& irc, Client& client);
 };
 
 #endif

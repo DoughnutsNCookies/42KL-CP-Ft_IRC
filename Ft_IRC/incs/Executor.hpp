@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 22:08:56 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 16:44:56 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "Client.hpp"
 #include "Pass.hpp"
 #include "Nick.hpp"
+#include "User.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
@@ -42,6 +43,7 @@ class Executor {
 	private:
 		Pass			_Pass;
 		Nick			_Nick;
+		User			_User;
 		
 		TOKEN			_getToken(std::string token);
 		tokensVector	_getNextTokens(tokensVector &tokens);

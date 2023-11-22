@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 22:13:12 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 19:52:30 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector &tokens) {
 		tokensVector	currentTokens = this->_getNextTokens(tokens);
 		TOKEN	token = this->_getToken(currentTokens[0]);
 
-		if (token == 0)
+		if (token == PASS)
 			this->_Pass.verifyTokens(irc, client, currentTokens);
-		if (token == 1)
+		if (token == NICK)
 			this->_Nick.verifyTokens(irc, client, currentTokens);
+		if (token == USER)
+			this->_User.verifyTokens(irc, client, currentTokens);
 	}
 }
 
