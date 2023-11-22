@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/22 17:50:04 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/22 19:53:43 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "SendError.hpp"
 #include "Pass.hpp"
 #include "Nick.hpp"
+#include "User.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
@@ -44,6 +45,7 @@ class Executor {
 		SendError	_SendError;
 		Pass			_Pass;
 		Nick			_Nick;
+		User			_User;
 		
 		TOKEN			_getToken(std::string token);
 		tokensVector	_getNextTokens(tokensVector& tokens);

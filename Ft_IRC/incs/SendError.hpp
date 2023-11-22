@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   SendError.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:22:31 by plau              #+#    #+#             */
-/*   Updated: 2023/11/22 17:51:50 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/22 20:02:14 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,26 @@ class SendError {
 		
 		/* ERR_UNKNOWNCOMMAND */
 		void	error421(Client& client, std::string unknownCommand);
+
+		/* ERR_NONICKNAMEGIVEN */
 		void	error431(Client& client);
+
+		/* ERR_ERRONEUSNICKNAME */
 		void	error432(Client& client);
+
+		/* ERR_NICKNAMEINUSE */
 		void	error433(Client& client);
+
+		/* ERR_NOTREGISTERED */
+		void	error451(Client& client);
+
+		/* ERR_NEEDMOREPARAMS */
 		void	error461(Client& client);
+
+		/* ERR_ALREADYREGISTRED */
 		void	error462(Client& client);
+
+		/* ERR_PASSWDMISMATCH */
 		void	error464(Client& client);
 };
 
