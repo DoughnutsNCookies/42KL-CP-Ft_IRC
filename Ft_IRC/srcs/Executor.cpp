@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 22:13:12 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 17:54:46 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 Executor::Executor() {}
 
 TOKEN	Executor::_getToken(std::string token) {
-	static const std::pair<const char*, TOKEN> tokenPairs[] = {
-		std::pair<const char*, TOKEN>("PASS", PASS),
-		std::pair<const char*, TOKEN>("NICK", NICK),
-		std::pair<const char*, TOKEN>("USER", USER),
-		std::pair<const char*, TOKEN>("JOIN", JOIN),
-		std::pair<const char*, TOKEN>("PRIVMSG", PRIVMSG),
-		std::pair<const char*, TOKEN>("KICK", KICK),
-		std::pair<const char*, TOKEN>("TOPIC", TOPIC)
+	const std::pair<std::string, TOKEN> tokenPairs[] = {
+		std::pair<std::string, TOKEN>("PASS", PASS),
+		std::pair<std::string, TOKEN>("NICK", NICK),
+		std::pair<std::string, TOKEN>("USER", USER),
+		std::pair<std::string, TOKEN>("JOIN", JOIN),
+		std::pair<std::string, TOKEN>("PRIVMSG", PRIVMSG),
+		std::pair<std::string, TOKEN>("KICK", KICK),
+		std::pair<std::string, TOKEN>("TOPIC", TOPIC)
 	};
 
 	for (int i = 0; i < 7; i++) {
@@ -41,15 +41,20 @@ tokensVector Executor::_getNextTokens(tokensVector& tokens) {
     return result;
 }
 
-void	Executor::execute(t_irc& irc, Client& client, tokensVector &tokens) {
+void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
+	const std::pair<TOKEN, ATokenParser *>	verifyTokensPairs[] = {
+		std::pair<TOKEN, ATokenParser *>(PASS, &this->_Pass),
+		std::pair<TOKEN, ATokenParser *>(NICK, &this->_Nick)
+	};
+
 	while (tokens.size() > 0) {
 		tokensVector	currentTokens = this->_getNextTokens(tokens);
 		TOKEN	token = this->_getToken(currentTokens[0]);
-
-		if (token == 0)
-			this->_Pass.verifyTokens(irc, client, currentTokens);
-		if (token == 1)
-			this->_Nick.verifyTokens(irc, client, currentTokens);
+		if (token == UNKNOWN) {
+			this->_SendError.error421(client, currentTokens[0]);
+			continue;
+		}
+		verifyTokensPairs[token].second->verifyTokens(irc, client, currentTokens);
 	}
 }
 

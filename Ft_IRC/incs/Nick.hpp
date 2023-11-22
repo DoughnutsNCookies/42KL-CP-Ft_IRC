@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Nick.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:15 by plau              #+#    #+#             */
-/*   Updated: 2023/11/21 20:19:46 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 17:24:29 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 class Nick : public ATokenParser {
 	public:
 		Nick();
-		void				verifyTokens(t_irc& irc, Client& client, tokensVector &tokens);
+		void				verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
 	
 	private:
 		std::string _nick_name;
 		
 		SendError		_SendError;
 
-		void				_parseTokens(tokensVector &tokens);
+		void				_parseTokens(tokensVector& tokens);
 		void				_executeCommand(t_irc& irc, Client& client);
 		bool				_checkValidNickName(std::string nickName);
 };

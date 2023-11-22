@@ -3,16 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   SendError.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:26:43 by plau              #+#    #+#             */
-/*   Updated: 2023/11/21 20:42:56 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/22 17:54:17 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "SendError.hpp"
 
 SendError::SendError() {}
+
+void	SendError::error421(Client& client, std::string unknownCommand) {
+	client._response = "421 " +  client._nickname + " " + unknownCommand + " :Unknown command\r\n";
+}
 
 void	SendError::error431(Client& client) {
 	client._response = "431 " +  client._nickname + " :No nickname given\r\n";
