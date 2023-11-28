@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:22:58 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 17:51:30 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 20:18:16 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <iostream>
+#include <netdb.h>
 
 #include "Utils/color.hpp"
 #include "Utils/irc.hpp"

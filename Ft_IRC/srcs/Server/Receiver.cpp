@@ -11,12 +11,6 @@
 /* ************************************************************************** */
 
 #include "Server/Receiver.hpp"
-#include <iostream>
-#include <cstring>
-#include <cstdlib>
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <unistd.h>
 
 Receiver::Receiver() {}
 
@@ -27,7 +21,7 @@ void Receiver::new_connection(t_irc& irc) {
 
 	int clientSocket = accept(serverFd, NULL, NULL);
 	if (clientSocket < 0) {
-		std::cout << "accept failed" << std::endl;
+		std::cout << RED << "accept failed" << RESET << std::endl;
 		perror("accept");
 	}
 
@@ -41,7 +35,7 @@ void Receiver::new_connection(t_irc& irc) {
 	struct sockaddr_in clientAddr;
 	socklen_t clientAddrSize = sizeof(clientAddr);
 	if (getsockname(clientSocket, (struct sockaddr *)&clientAddr, &clientAddrSize) < 0) {
-		std::cout << "getsockname failed" << std::endl;
+		std::cout << RED << "getsockname failed" << RESET << std::endl;
 		perror("getsockname");
 	}
 
