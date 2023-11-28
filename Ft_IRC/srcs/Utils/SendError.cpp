@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   SendError.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:26:43 by plau              #+#    #+#             */
-/*   Updated: 2023/11/22 20:02:33 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/28 12:25:00 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "SendError.hpp"
+#include "Utils/SendError.hpp"
 
 SendError::SendError() {}
 

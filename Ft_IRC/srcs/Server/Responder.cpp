@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   Responder.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 22:08:53 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 21:23:43 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/28 12:27:09 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Responder.hpp"
+#include "Server/Responder.hpp"
 
 Responder::Responder() {}
 

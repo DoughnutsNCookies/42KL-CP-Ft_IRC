@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ATokenParser.hpp                                   :+:      :+:    :+:   */
+/*   User.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 16:30:22 by plau              #+#    #+#             */
-/*   Updated: 2023/11/22 17:24:29 by schuah           ###   ########.fr       */
+/*   Created: 2023/11/22 13:33:31 by plau              #+#    #+#             */
+/*   Updated: 2023/11/28 12:24:53 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ATOKENPARSER_HPP
-#define ATOKENPARSER_HPP
+#ifndef USER_HPP
+# define USER_HPP
 
-#include <vector>
-#include <string>
-#include "irc.hpp"
-#include "Client.hpp"
+#include "ATokenParser.hpp"
+#include "Utils/SendError.hpp"
 
-typedef std::vector<std::string>	tokensVector;
-
-class ATokenParser {
+class User : public ATokenParser {
 	public:
-		virtual void	verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) = 0;
+		User();
+		void				verifyTokens(t_irc& irc, Client& client, tokensVector &tokens);
+
 	private:
-		virtual void	_parseTokens(tokensVector& tokens) = 0;
-		virtual void	_executeCommand(t_irc& irc, Client& client) = 0;
+		std::string _username;
+		std::string _realname;
+
+		SendError		_SendError;
+
+		void				_parseTokens(tokensVector &tokens);
+		void				_executeCommand(t_irc& irc, Client& client);
 };
 
 #endif

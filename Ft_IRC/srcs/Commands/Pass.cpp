@@ -6,11 +6,11 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:46:46 by plau              #+#    #+#             */
-/*   Updated: 2023/11/22 17:24:29 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 12:21:45 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Pass.hpp"
+#include "Commands/Pass.hpp"
 
 Pass::Pass() {}
 

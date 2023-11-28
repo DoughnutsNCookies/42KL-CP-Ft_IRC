@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   SendError.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:22:31 by plau              #+#    #+#             */
-/*   Updated: 2023/11/22 20:02:14 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/28 12:26:34 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SENDERROR_HPP
 #define SENDERROR_HPP
 
-#include "Client.hpp"
+#include "Server/Client.hpp"
 
 class SendError {
 	public:

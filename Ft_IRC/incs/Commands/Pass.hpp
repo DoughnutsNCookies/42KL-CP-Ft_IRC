@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Nick.hpp                                           :+:      :+:    :+:   */
+/*   Pass.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 17:49:15 by plau              #+#    #+#             */
-/*   Updated: 2023/11/22 17:24:29 by schuah           ###   ########.fr       */
+/*   Created: 2023/11/17 18:45:52 by plau              #+#    #+#             */
+/*   Updated: 2023/11/28 12:26:48 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NICK_HPP
-# define NICK_HPP
+#ifndef PASS_HPP
+#define PASS_HPP
 
-#include "ATokenParser.hpp"
-#include "irc.hpp"
-#include "SendError.hpp"
+#include "Commands/ATokenParser.hpp"
+#include "Server/Client.hpp"
+#include "Utils/irc.hpp"
+#include "Utils/SendError.hpp"
 
-class Nick : public ATokenParser {
+class Pass : public ATokenParser {
 	public:
-		Nick();
+		Pass();
 		void				verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
 	
 	private:
-		std::string _nick_name;
-		
+		std::string	_user_password;
 		SendError		_SendError;
 
 		void				_parseTokens(tokensVector& tokens);
 		void				_executeCommand(t_irc& irc, Client& client);
-		bool				_checkValidNickName(std::string nickName);
 };
 
 #endif

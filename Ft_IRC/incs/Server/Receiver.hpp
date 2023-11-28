@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Responder.hpp                                      :+:      :+:    :+:   */
+/*   Receiver.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 21:50:09 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 18:46:02 by plau             ###   ########.fr       */
+/*   Created: 2023/11/17 16:22:58 by schuah            #+#    #+#             */
+/*   Updated: 2023/11/28 12:23:49 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RESPONDER_HPP
-#define RESPONDER_HPP
+#ifndef Receiver_HPP
+#define Receiver_HPP
 
-#include <sys/socket.h>
 #include <poll.h>
-#include <string>
+#include <sys/socket.h>
+#include <unistd.h>
 #include <iostream>
 
+#include "Utils/color.hpp"
+#include "Utils/irc.hpp"
 #include "Client.hpp"
-#include "color.hpp"
-#include "irc.hpp"
 
-class Responder {
+class Receiver {
 	public:
-		Responder();
-		void	respond(t_irc& irc, Client& client);
+		Receiver();
+		void		new_connection(t_irc& irc);
+		int			receive(t_irc& irc, int i);
+
+	private:
+		void		perrorExit(const char *error);
 };
 
 #endif

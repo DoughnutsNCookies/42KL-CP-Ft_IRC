@@ -6,11 +6,11 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2023/11/22 17:24:29 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 12:22:02 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Nick.hpp"
+#include "Commands/Nick.hpp"
 
 Nick::Nick() {}
 

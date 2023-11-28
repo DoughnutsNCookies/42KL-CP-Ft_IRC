@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/22 19:53:43 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/28 12:24:36 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 #include <unistd.h>
 #include <iostream>
 
-#include "irc.hpp"
-#include "color.hpp"
+#include "Utils/irc.hpp"
+#include "Utils/color.hpp"
+#include "Utils/SendError.hpp"
 #include "Client.hpp"
-#include "SendError.hpp"
-#include "Pass.hpp"
-#include "Nick.hpp"
-#include "User.hpp"
+#include "Commands/Pass.hpp"
+#include "Commands/Nick.hpp"
+#include "Commands/User.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,

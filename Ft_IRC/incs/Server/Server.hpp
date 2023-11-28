@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:42:42 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/21 20:22:29 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 12:24:17 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <string>
 
 #include "ft_irc.hpp"
-#include "irc.hpp"
+#include "Utils/irc.hpp"
 #include "Client.hpp"
 #include "Receiver.hpp"
 #include "Responder.hpp"
