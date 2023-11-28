@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 17:13:27 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 20:28:36 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include "Commands/Nick.hpp"
 #include "Commands/User.hpp"
 #include "Commands/Privmsg.hpp"
+#include "Commands/Join.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
@@ -48,6 +49,7 @@ class Executor {
 		Nick					_Nick;
 		User					_User;
 		Privmsg				_Privmsg;
+		Join					_Join;
 		
 		TOKEN					_getToken(std::string token);
 		tokensVector	_getNextTokens(tokensVector& tokens);

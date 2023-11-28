@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 18:11:02 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 21:33:14 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 		std::pair<TOKEN, ATokenParser *>(PASS, &this->_Pass),
 		std::pair<TOKEN, ATokenParser *>(NICK, &this->_Nick),
 		std::pair<TOKEN, ATokenParser *>(USER, &this->_User),
-		std::pair<TOKEN, ATokenParser *>(PRIVMSG, &this->_Privmsg)
+		std::pair<TOKEN, ATokenParser *>(PRIVMSG, &this->_Privmsg),
+		std::pair<TOKEN, ATokenParser *>(JOIN, &this->_Join)
 	};
 
 	while (tokens.size() > 0) {
@@ -70,6 +71,12 @@ void	Executor::disconnect(t_irc& irc, int i) {
 	int													pollfd = fds[i].fd;
 
 	std::cout << RED << "Client " << clients[pollfd].nickname << " disconnected" << RESET << std::endl;
+	
+	std::vector<std::string>				&channelsJoined = clients[pollfd].channels;
+	std::map<std::string, Channel>	&channels = irc.channels;
+	for (size_t j = 0; j < channelsJoined.size(); j++)
+		channels[channelsJoined[j]].users.erase(clients[pollfd].nickname);
+	
 	close(pollfd);
 	fds.erase(fds.begin() + i);
 	clients.erase(pollfd);

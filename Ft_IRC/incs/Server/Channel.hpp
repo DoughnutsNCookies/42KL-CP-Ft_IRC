@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   irc.hpp                                            :+:      :+:    :+:   */
+/*   Channel.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 21:08:33 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 20:56:28 by schuah           ###   ########.fr       */
+/*   Created: 2023/11/28 20:23:51 by schuah            #+#    #+#             */
+/*   Updated: 2023/11/28 21:07:02 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IRC_HPP
-#define IRC_HPP
+#ifndef CHANNEL_HPP
+#define CHANNEL_HPP
 
-#include <string>
 #include <map>
-#include <vector>
+#include <string>
 
 #include "Server/Client.hpp"
-#include "Server/Channel.hpp"
 
-typedef struct s_irc {
-	int															port;
-	int 														serverFd;
-	std::string											password;
-	std::string											hostname;
-	std::map<int, Client>						clients;
-	std::map<std::string, Channel>	channels;
-	std::vector<struct pollfd>			fds;
-}	t_irc;
+class Channel {
+	public:
+		Channel();
+		Channel(std::string name);
+
+		std::string										name;
+		std::string										topic;
+		std::map<std::string, Client>	users;
+};
 
 #endif
+
+/**
+ * ChannelName -> Channel {
+ * 								ChannelName, -> std::string
+ * 								Topic, -> std::string
+ * 								Users, -> std::set<Client>
+ * 								}
+ */

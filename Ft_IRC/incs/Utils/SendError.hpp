@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:22:31 by plau              #+#    #+#             */
-/*   Updated: 2023/11/28 18:06:33 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 20:50:15 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ class SendError {
 		void				error451(t_irc& irc, Client& client);
 
 		/* ERR_NEEDMOREPARAMS */
-		void				error461(t_irc& irc, Client& client);
+		void				error461(t_irc& irc, Client& client, std::string command);
 
 		/* ERR_ALREADYREGISTRED */
 		void				error462(t_irc& irc, Client& client);

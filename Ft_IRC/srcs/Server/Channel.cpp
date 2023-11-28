@@ -1,33 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   irc.hpp                                            :+:      :+:    :+:   */
+/*   Channel.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 21:08:33 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 20:56:28 by schuah           ###   ########.fr       */
+/*   Created: 2023/11/28 20:24:15 by schuah            #+#    #+#             */
+/*   Updated: 2023/11/28 20:25:08 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef IRC_HPP
-#define IRC_HPP
-
-#include <string>
-#include <map>
-#include <vector>
-
-#include "Server/Client.hpp"
 #include "Server/Channel.hpp"
 
-typedef struct s_irc {
-	int															port;
-	int 														serverFd;
-	std::string											password;
-	std::string											hostname;
-	std::map<int, Client>						clients;
-	std::map<std::string, Channel>	channels;
-	std::vector<struct pollfd>			fds;
-}	t_irc;
+Channel::Channel() {}
 
-#endif
+Channel::Channel(std::string name): name(name) {}

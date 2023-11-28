@@ -6,12 +6,12 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:15 by plau              #+#    #+#             */
-/*   Updated: 2023/11/28 18:09:27 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 20:26:03 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NICK_HPP
-# define NICK_HPP
+#define NICK_HPP
 
 #include "ATokenParser.hpp"
 #include "Utils/irc.hpp"

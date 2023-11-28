@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:26:43 by plau              #+#    #+#             */
-/*   Updated: 2023/11/28 18:10:32 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 20:49:56 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	SendError::error451(t_irc& irc, Client& client) {
 	client.response = this->header(irc, client) + " 451 " +  client.nickname + " :You have not registered\r\n";
 }
 
-void	SendError::error461(t_irc& irc, Client& client) {
-	client.response = this->header(irc, client) + " 461 " +  client.nickname + " PASS :Not enough parameters\r\n";
+void	SendError::error461(t_irc& irc, Client& client, std::string command) {
+	client.response = this->header(irc, client) + " 461 " +  client.nickname + " " + command + " :Not enough parameters\r\n";
 }
 
 void	SendError::error462(t_irc& irc, Client& client) {
