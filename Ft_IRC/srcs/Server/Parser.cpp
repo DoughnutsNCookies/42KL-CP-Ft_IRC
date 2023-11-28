@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:56:32 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 12:27:04 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:22:21 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 
 Parser::Parser() {}
 
-std::vector<std::string>	Parser::parse(std::string &buffer) {
-	std::vector<std::string>	tokens = this->_split(buffer, " \r\n");
-	return tokens;
-}
-
-std::vector<std::string>	Parser::_split(std::string str, std::string delim) {
+std::vector<std::string>	Parser::parse(std::string str, std::string delim) {
 	std::vector<std::string>	result;
 
 	while (!str.empty()) {
