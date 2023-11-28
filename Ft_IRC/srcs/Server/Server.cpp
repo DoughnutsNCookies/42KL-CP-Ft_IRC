@@ -6,15 +6,15 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 12:27:13 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 18:11:15 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Server/Server.hpp"
 
 Server::Server(const char *port, const char *password) {
-	this->_irc._port = atoi(port);
-	this->_irc._password = password;
+	this->_irc.port = atoi(port);
+	this->_irc.password = password;
 	
 	this->createSocket();
 	this->bindSocket();
@@ -22,10 +22,10 @@ Server::Server(const char *port, const char *password) {
 }
 
 void	Server::run() {
-	std::vector<struct pollfd>&	fds = this->_irc._fds;
-	std::map<int, Client>&			clients = this->_irc._clients;
-	int&												server_fd = this->_irc._serverFd;
-	int&												port = this->_irc._port;
+	std::vector<struct pollfd>&	fds = this->_irc.fds;
+	std::map<int, Client>&			clients = this->_irc.clients;
+	int&												serverFd = this->_irc.serverFd;
+	int&												port = this->_irc.port;
 
 	while (true) {
 		std::cout << YELLOW << "(" << port << ") Waiting for connection..." << RESET << std::endl;
@@ -40,12 +40,12 @@ void	Server::run() {
 
 		for (unsigned long i = 0; i < fds.size(); i++) {
 			if (fds[i].revents & POLLIN) {
-				if (fds[i].fd == server_fd)
+				if (fds[i].fd == serverFd)
 					this->_Receiver.new_connection(this->_irc);
 				else {
 					int	recvResult = this->_Receiver.receive(this->_irc, i);
 					if (recvResult > 0) {
-						std::vector<std::string> tokens = this->_Parser.parse(clients[fds[i].fd]._buffer);
+						std::vector<std::string> tokens = this->_Parser.parse(clients[fds[i].fd].buffer, " \r\n");
 						this->_Executor.execute(this->_irc, clients[fds[i].fd], tokens);
 						fds[i].events = POLLOUT;
 					} else if (recvResult < 0) {
@@ -69,21 +69,21 @@ void	Server::perrorExit(const char *error) {
 }
 
 void	Server::createSocket() {
-	int&	server_fd = this->_irc._serverFd;
+	int&	serverFd = this->_irc.serverFd;
 
-	server_fd = socket(AF_INET, SOCK_STREAM, 0);
-	if (server_fd < 0)
+	serverFd = socket(AF_INET, SOCK_STREAM, 0);
+	if (serverFd < 0)
 		this->perrorExit("Cannot create socket");
 
 	int optval = 1;
-	if (setsockopt(server_fd, SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval)) == -1)
+	if (setsockopt(serverFd, SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval)) == -1)
 		this->perrorExit("Setsockopt failed");
 }
 
 void	Server::bindSocket() {
 	addrinfo	hints, *res;
-	int&			port = this->_irc._port;
-	int&			server_fd = this->_irc._serverFd;
+	int&			port = this->_irc.port;
+	int&			serverFd = this->_irc.serverFd;
 
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_family = AF_INET;
@@ -97,19 +97,34 @@ void	Server::bindSocket() {
 	memcpy(&serverAddress, res->ai_addr, res->ai_addrlen);
 	serverAddress.sin_port = htons(port);
 
-	if (bind(server_fd, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) < 0)
+	if (bind(serverFd, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) < 0)
 		this->perrorExit("Bind failed");
+
+
+	struct sockaddr_in clientAddr;
+	socklen_t clientAddrSize = sizeof(clientAddr);
+	if (getsockname(serverFd, (struct sockaddr *)&clientAddr, &clientAddrSize) < 0)
+		this->perrorExit("getsockname failed");
+
+	struct hostent*	host = gethostbyaddr((const char *)&clientAddr.sin_addr.s_addr, sizeof(clientAddr.sin_addr.s_addr), AF_INET);
+	if (host == NULL) {
+		close(serverFd);
+		this->perrorExit("gethostbyaddr failed");
+	}
+	
+	this->_irc.hostname = host->h_name;
+	std::cout << MAGENTA << "Server started on " << host->h_name << ":" << port << RESET << std::endl;
 }
 
 void	Server::listenSocket() {
-	int&												server_fd = this->_irc._serverFd;
-	std::vector<struct pollfd>&	fds = this->_irc._fds;
+	int&												serverFd = this->_irc.serverFd;
+	std::vector<struct pollfd>&	fds = this->_irc.fds;
 	
-	if (listen(server_fd, SOMAXCONN) < 0)
+	if (listen(serverFd, SOMAXCONN) < 0)
 		this->perrorExit("Listen failed");
 
-	struct pollfd new_fd;
-	new_fd.fd = server_fd;
-	new_fd.events = POLLIN;
-	fds.push_back(new_fd);
+	struct pollfd newfd;
+	newfd.fd = serverFd;
+	newfd.events = POLLIN;
+	fds.push_back(newfd);
 }
