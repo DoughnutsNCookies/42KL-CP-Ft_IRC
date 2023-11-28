@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:15 by plau              #+#    #+#             */
-/*   Updated: 2023/11/28 12:24:46 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 18:09:27 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ class Nick : public ATokenParser {
 		void				verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
 	
 	private:
-		std::string _nick_name;
+		std::string _nickname;
 		
 		SendError		_SendError;
 
 		void				_parseTokens(tokensVector& tokens);
 		void				_executeCommand(t_irc& irc, Client& client);
-		bool				_checkValidNickName(std::string nickName);
+		bool				_checkValidNickName(std::string nickname);
 };
 
 #endif
