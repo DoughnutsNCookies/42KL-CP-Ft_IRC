@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2023/11/28 12:22:02 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:48:26 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	Nick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 		return;
 	}
 	for (std::map<int, Client>::iterator it = irc._clients.begin(); it != irc._clients.end(); ++it) {
-		if (it->second._nickname != this->_nick_name)
-			continue;
-		this->_SendError.error433(client);
-		return;
+		if (it->second._nickname == this->_nick_name) {
+			this->_SendError.error433(client);
+			return;
+		}
 	}
 	this->_executeCommand(irc, client);
 }
