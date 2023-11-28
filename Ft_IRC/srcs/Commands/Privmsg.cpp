@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 18:12:55 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 20:41:24 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	Privmsg::_parseTokens(tokensVector& tokens) {
 		nicknames.erase(0, 1);
 	this->_nicknames = this->_Parser.parse(nicknames, ",");
 	this->_nicknames.erase(this->_nicknames.end() - 1);
-	for (size_t i = 0; i < this->_nicknames.size(); i++)
 
 	this->_message = tokens[2];
 	size_t	tokensSize = tokens.size();
