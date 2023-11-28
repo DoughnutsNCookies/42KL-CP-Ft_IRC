@@ -6,12 +6,11 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:33:41 by plau              #+#    #+#             */
-/*   Updated: 2023/11/28 18:12:43 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 20:27:35 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Commands/User.hpp"
-#include <iostream>
 
 User::User() {}
 

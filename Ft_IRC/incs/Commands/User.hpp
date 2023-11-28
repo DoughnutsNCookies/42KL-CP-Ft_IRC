@@ -6,12 +6,12 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:33:31 by plau              #+#    #+#             */
-/*   Updated: 2023/11/28 18:09:46 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 20:26:03 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef USER_HPP
-# define USER_HPP
+#define USER_HPP
 
 #include "ATokenParser.hpp"
 #include "Utils/SendError.hpp"
