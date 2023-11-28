@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 12:24:36 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 17:13:27 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@
 #include "Commands/Pass.hpp"
 #include "Commands/Nick.hpp"
 #include "Commands/User.hpp"
+#include "Commands/Privmsg.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
 	PASS = 0,
 	NICK = 1,
 	USER = 2,
-	JOIN = 3,
-	PRIVMSG = 4,
+	PRIVMSG = 3,
+	JOIN = 4,
 	KICK = 5,
 	TOPIC = 6
 };
@@ -38,16 +39,17 @@ enum TOKEN {
 class Executor {
 	public:
 		Executor();
-		void			execute(t_irc& irc, Client& client, tokensVector& tokens);
-		void			disconnect(t_irc& irc, int i);
+		void					execute(t_irc& irc, Client& client, tokensVector& tokens);
+		void					disconnect(t_irc& irc, int i);
 
 	private:
-		SendError	_SendError;
-		Pass			_Pass;
-		Nick			_Nick;
-		User			_User;
+		SendError			_SendError;
+		Pass					_Pass;
+		Nick					_Nick;
+		User					_User;
+		Privmsg				_Privmsg;
 		
-		TOKEN			_getToken(std::string token);
+		TOKEN					_getToken(std::string token);
 		tokensVector	_getNextTokens(tokensVector& tokens);
 };
 

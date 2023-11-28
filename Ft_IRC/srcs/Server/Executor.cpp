@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 12:26:23 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 18:11:02 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ TOKEN	Executor::_getToken(std::string token) {
 		std::pair<std::string, TOKEN>("PASS", PASS),
 		std::pair<std::string, TOKEN>("NICK", NICK),
 		std::pair<std::string, TOKEN>("USER", USER),
-		std::pair<std::string, TOKEN>("JOIN", JOIN),
 		std::pair<std::string, TOKEN>("PRIVMSG", PRIVMSG),
+		std::pair<std::string, TOKEN>("JOIN", JOIN),
 		std::pair<std::string, TOKEN>("KICK", KICK),
 		std::pair<std::string, TOKEN>("TOPIC", TOPIC)
 	};
@@ -45,30 +45,31 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 	const std::pair<TOKEN, ATokenParser *>	verifyTokensPairs[] = {
 		std::pair<TOKEN, ATokenParser *>(PASS, &this->_Pass),
 		std::pair<TOKEN, ATokenParser *>(NICK, &this->_Nick),
-		std::pair<TOKEN, ATokenParser *>(USER, &this->_User)
+		std::pair<TOKEN, ATokenParser *>(USER, &this->_User),
+		std::pair<TOKEN, ATokenParser *>(PRIVMSG, &this->_Privmsg)
 	};
 
 	while (tokens.size() > 0) {
 		tokensVector	currentTokens = this->_getNextTokens(tokens);
 		TOKEN	token = this->_getToken(currentTokens[0]);
 		if (token == UNKNOWN) {
-			this->_SendError.error421(client, currentTokens[0]);
+			this->_SendError.error421(irc, client, currentTokens[0]);
 			continue;
 		}
-		if (irc._password.length() != 0 && token != PASS && client._verified == false) {
-			this->_SendError.error451(client);
-			continue;
-		}
+		// if (irc.password.length() != 0 && token != PASS && client.verified == false) {
+		// 	this->_SendError.error451(client);
+		// 	continue;
+		// }
 		verifyTokensPairs[token].second->verifyTokens(irc, client, currentTokens);
 	}
 }
 
 void	Executor::disconnect(t_irc& irc, int i) {
-	std::vector<struct pollfd>&	fds = irc._fds;
-	std::map<int, Client>&			clients = irc._clients;
+	std::vector<struct pollfd>&	fds = irc.fds;
+	std::map<int, Client>&			clients = irc.clients;
 	int													pollfd = fds[i].fd;
 
-	std::cout << RED << "Client " << clients[pollfd]._nickname << " disconnected" << RESET << std::endl;
+	std::cout << RED << "Client " << clients[pollfd].nickname << " disconnected" << RESET << std::endl;
 	close(pollfd);
 	fds.erase(fds.begin() + i);
 	clients.erase(pollfd);

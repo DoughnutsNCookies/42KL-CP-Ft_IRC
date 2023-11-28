@@ -6,20 +6,20 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:48:21 by plau              #+#    #+#             */
-/*   Updated: 2023/11/17 16:53:17 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 18:10:32 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_irc.hpp"
 
-int valid_port(char *port) {
+int validport(char *port) {
 	for (int i = 0; port[i]; i++) {
 		if (!isdigit(port[i]))
 			return (EXIT_FAILURE);
 	}
 
-	int	num_port = atoi(port);
-	return (num_port < 1024 || num_port > 65535);
+	int	numport = atoi(port);
+	return (numport < 1024 || numport > 65535);
 }
 
 int main(int ac, char **av) {
@@ -28,7 +28,7 @@ int main(int ac, char **av) {
 		return (EXIT_FAILURE);
 	}
 
-	if (valid_port(av[1]) == EXIT_FAILURE) {
+	if (validport(av[1]) == EXIT_FAILURE) {
 		std::cout << "Invalid port number" << std::endl;
 		return (EXIT_FAILURE);
 	}
