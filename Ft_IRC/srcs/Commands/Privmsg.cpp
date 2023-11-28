@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 20:41:24 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 20:48:47 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	Privmsg::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	}
 
 	this->_parseTokens(tokens);
+	if (this->_nicknames.size() == 0) {
+		this->_SendError.error411(irc, client, tokens[0]);
+		return;
+	}
 	for (size_t i = 0; i < this->_nicknames.size(); i++) {
 		try {
 			this->_getClientByNickname(irc, this->_nicknames[i]);
@@ -41,6 +45,8 @@ void	Privmsg::_parseTokens(tokensVector& tokens) {
 	if (nicknames[0] == ':')
 		nicknames.erase(0, 1);
 	this->_nicknames = this->_Parser.parse(nicknames, ",");
+	if (this->_nicknames.size() == 0)
+		return;
 	this->_nicknames.erase(this->_nicknames.end() - 1);
 
 	this->_message = tokens[2];
