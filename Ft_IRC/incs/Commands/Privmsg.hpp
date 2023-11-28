@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:49:24 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 18:09:39 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 21:01:06 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,12 @@ class Privmsg : public ATokenParser {
 
 		class	NoClientFoundException : public std::exception {
 			public:
-				virtual const char* what() const throw() {
-					return ("No client found with this nickname");
-				}
+				virtual const char* what() const throw();
 		};
 
 		class	NoPollfdFoundException : public std::exception {
 			public:
-				virtual const char* what() const throw() {
-					return ("No pollfd found with this fd");
-				}
+				virtual const char* what() const throw();
 		};
 };
 

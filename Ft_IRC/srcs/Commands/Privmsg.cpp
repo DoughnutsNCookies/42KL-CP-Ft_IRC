@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 20:48:47 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/28 21:07:11 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,12 @@ struct pollfd&	Privmsg::_getPollfdByFd(t_irc& irc, int fd) {
 			return (irc.fds[i]);
 	}
 	throw Privmsg::NoPollfdFoundException();
+}
+
+const char*	Privmsg::NoClientFoundException::what() const throw() {
+	return ("No client found with this nickname");
+}
+
+const char*	Privmsg::NoPollfdFoundException::what() const throw() {
+	return ("No pollfd found with this fd");
 }
