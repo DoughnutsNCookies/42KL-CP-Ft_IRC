@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 20:28:36 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/29 21:19:45 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #include "Utils/irc.hpp"
 #include "Utils/color.hpp"
-#include "Utils/SendError.hpp"
+#include "Utils/SendMsg.hpp"
 #include "Client.hpp"
 #include "Commands/Pass.hpp"
 #include "Commands/Nick.hpp"
@@ -44,7 +44,7 @@ class Executor {
 		void					disconnect(t_irc& irc, int i);
 
 	private:
-		SendError			_SendError;
+		SendMsg				_SendMsg;
 		Pass					_Pass;
 		Nick					_Nick;
 		User					_User;

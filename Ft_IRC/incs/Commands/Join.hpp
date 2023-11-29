@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:40 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 21:23:05 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/29 21:19:28 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "ATokenParser.hpp"
 #include "Server/Parser.hpp"
-#include "Utils/SendError.hpp"
+#include "Utils/SendMsg.hpp"
 
 class Join : public ATokenParser {
 	public:
@@ -26,7 +26,7 @@ class Join : public ATokenParser {
 		tokensVector	_channelNames;
 
 
-		SendError			_SendError;
+		SendMsg				_SendMsg;
 		Parser				_Parser;
 
 		void					_parseTokens(tokensVector& tokens);

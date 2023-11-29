@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 21:33:14 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/29 21:09:47 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 		tokensVector	currentTokens = this->_getNextTokens(tokens);
 		TOKEN	token = this->_getToken(currentTokens[0]);
 		if (token == UNKNOWN) {
-			this->_SendError.error421(irc, client, currentTokens[0]);
+			this->_SendMsg.error421(irc, client, currentTokens[0]);
 			continue;
 		}
 		// if (irc.password.length() != 0 && token != PASS && client.verified == false) {
-		// 	this->_SendError.error451(client);
+		// 	this->_SendMsg.error451(client);
 		// 	continue;
 		// }
 		verifyTokensPairs[token].second->verifyTokens(irc, client, currentTokens);

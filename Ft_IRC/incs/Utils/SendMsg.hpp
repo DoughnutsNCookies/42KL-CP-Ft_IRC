@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   SendError.hpp                                      :+:      :+:    :+:   */
+/*   SendMsg.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,15 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SENDERROR_HPP
-#define SENDERROR_HPP
+#ifndef SendMsg_HPP
+#define SendMsg_HPP
 
 #include "Utils/irc.hpp"
 #include "Server/Client.hpp"
+#include "Server/Channel.hpp"
 
-class SendError {
+class SendMsg {
 	public:
-		SendError();
+		SendMsg();
+
+		/* RPL_TOPIC */
+		void				rpl332(t_irc& irc, Client& client, Channel channel);
+
+		/* RPL_NAMREPLY */
+		void				rpl353(t_irc& irc, Client& client, Channel channel);
+
+		/* RPL_ENDOFNAMES */
+		void				rpl366(t_irc& irc, Client& client, Channel channel);
 
 		/* ERR_NOSUCHNICK */
 		void				error401(t_irc& irc, Client& client, std::string nickname);

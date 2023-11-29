@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 21:33:42 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/29 21:22:16 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ Join::Join() {}
 
 void	Join::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	if (tokens.size() < 2 || tokens[1].empty()) {
-		this->_SendError.error461(irc, client, tokens[0]);
+		this->_SendMsg.error461(irc, client, tokens[0]);
 		return;
 	}
 	this->_parseTokens(tokens);
 	if (this->_channelNames.size() == 0) {
-		this->_SendError.error461(irc, client, tokens[0]);
+		this->_SendMsg.error461(irc, client, tokens[0]);
 		return;
 	}
 	this->_executeCommand(irc, client);
@@ -50,10 +50,20 @@ void	Join::_createChannel(t_irc& irc, Client& client, std::string channelName) {
 	newChannel.users[client.nickname] = client;
 	irc.channels[channelName] = newChannel;
 	client.channels.push_back(channelName);
+
+	client.response += ":" + client.nickname + " JOIN " + channelName + "\r\n";
+	this->_SendMsg.rpl353(irc, client, newChannel);
+	this->_SendMsg.rpl366(irc, client, newChannel);
 }
 
 void	Join::_joinChannel(t_irc& irc, Client& client, std::string channelName) {
 	client.channels.push_back(channelName);	
 	Channel&	channel = irc.channels[channelName];
 	channel.users[client.nickname] = client;
+	
+	client.response += ":" + client.nickname + " JOIN " + channelName + "\r\n";
+	if (channel.topic != "")
+		this->_SendMsg.rpl332(irc, client, channel);
+	this->_SendMsg.rpl353(irc, client, channel);
+	this->_SendMsg.rpl366(irc, client, channel);
 }

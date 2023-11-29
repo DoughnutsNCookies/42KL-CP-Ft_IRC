@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2023/11/28 18:13:06 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/29 21:09:47 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@ Nick::Nick() {}
 
 void	Nick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	if (tokens.size() == 1 || tokens[1].size() == 0) {
-		this->_SendError.error431(irc, client);
+		this->_SendMsg.error431(irc, client);
 		return;
 	}
 	if (tokens.size() > 2) {
-		this->_SendError.error432(irc, client, tokens[1]);
+		this->_SendMsg.error432(irc, client, tokens[1]);
 		return;
 	}
 	this->_parseTokens(tokens);
 	if (this->_checkValidNickName(this->_nickname) == false) {
-		this->_SendError.error432(irc, client, this->_nickname);
+		this->_SendMsg.error432(irc, client, this->_nickname);
 		return;
 	}
 	for (std::map<int, Client>::iterator it = irc.clients.begin(); it != irc.clients.end(); ++it) {
 		if (it->second.nickname == this->_nickname) {
-			this->_SendError.error433(irc, client, this->_nickname);
+			this->_SendMsg.error433(irc, client, this->_nickname);
 			return;
 		}
 	}

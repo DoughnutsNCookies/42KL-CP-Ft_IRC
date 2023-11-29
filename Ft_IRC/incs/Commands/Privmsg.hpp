@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:49:24 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 21:01:06 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/29 21:19:38 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "ATokenParser.hpp"
 #include "Utils/irc.hpp"
-#include "Utils/SendError.hpp"
+#include "Utils/SendMsg.hpp"
 #include "Server/Parser.hpp"
 
 class Privmsg : public ATokenParser {
@@ -28,7 +28,7 @@ class Privmsg : public ATokenParser {
 		std::string			_message;
 
 		Parser					_Parser;
-		SendError				_SendError;
+		SendMsg					_SendMsg;
 
 		void						_parseTokens(tokensVector& tokens);
 		void						_executeCommand(t_irc& irc, Client& client);

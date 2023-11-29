@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 21:07:11 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/29 21:09:47 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@ Privmsg::Privmsg() {}
 
 void	Privmsg::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	if (tokens.size() == 1 || tokens[1].size() == 0) {
-		this->_SendError.error411(irc, client, tokens[0]);
+		this->_SendMsg.error411(irc, client, tokens[0]);
 		return;
 	}
 	if (tokens.size() == 2 || tokens[2].size() == 0) {
-		this->_SendError.error412(irc, client);
+		this->_SendMsg.error412(irc, client);
 		return;
 	}
 
 	this->_parseTokens(tokens);
 	if (this->_nicknames.size() == 0) {
-		this->_SendError.error411(irc, client, tokens[0]);
+		this->_SendMsg.error411(irc, client, tokens[0]);
 		return;
 	}
 	for (size_t i = 0; i < this->_nicknames.size(); i++) {
 		try {
 			this->_getClientByNickname(irc, this->_nicknames[i]);
 		} catch(NoClientFoundException& e) {
-			this->_SendError.error401(irc, client, this->_nicknames[i]);
+			this->_SendMsg.error401(irc, client, this->_nicknames[i]);
 			return;
 		}
 	}
