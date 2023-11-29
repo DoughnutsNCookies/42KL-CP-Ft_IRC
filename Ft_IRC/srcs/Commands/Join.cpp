@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/29 21:22:16 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/29 21:27:40 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	Join::_parseTokens(tokensVector& tokens) {
 	this->_channelNames = this->_Parser.parse(tokens[1], ",");
 	if (this->_channelNames.size() == 0)
 		return;
+	for (size_t i = 0; i < this->_channelNames.size(); i++) {
+		if (this->_channelNames[i][0] != '#')
+			this->_channelNames[i] = "#" + this->_channelNames[i];
+	}
 	this->_channelNames.erase(this->_channelNames.end() - 1);
 }
 
