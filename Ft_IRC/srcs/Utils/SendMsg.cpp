@@ -88,6 +88,11 @@ void	SendMsg::error464(t_irc& irc, Client& client) {
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
+void	SendMsg::customMsg(t_irc& irc, Client& client, std::string message) {
+	client.response += message;
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
 std::string	SendMsg::_header(t_irc& irc, Client& client) {
 	return (":" + irc.hostname + ":" + std::to_string(irc.port) + " " + client.nickname);
 }

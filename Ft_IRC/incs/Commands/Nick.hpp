@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:15 by plau              #+#    #+#             */
-/*   Updated: 2023/11/29 21:19:32 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:25:05 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "ATokenParser.hpp"
 #include "Utils/irc.hpp"
 #include "Utils/SendMsg.hpp"
+#include "Utils/Utils.hpp"
 
 class Nick : public ATokenParser {
 	public:

@@ -63,6 +63,9 @@ class SendMsg {
 
 		/* ERR_PASSWDMISMATCH */
 		void				error464(t_irc& irc, Client& client);
+
+		/* Custom message */
+		void				customMsg(t_irc& irc, Client& client, std::string message);
 	
 	private:
 		Utils				_Utils;

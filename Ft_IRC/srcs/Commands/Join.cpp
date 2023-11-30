@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 20:55:49 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:30:34 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	Join::_createChannel(t_irc& irc, Client& client, std::string channelName) {
 	irc.channels[channelName] = newChannel;
 	client.channels.push_back(channelName);
 
-	client.response += ":" + client.nickname + " JOIN " + channelName + "\r\n";
+	this->_SendMsg.customMsg(irc, client, ":" + client.nickname + " JOIN " + channelName + "\r\n");
 	this->_SendMsg.rpl353(irc, client, newChannel);
 	this->_SendMsg.rpl366(irc, client, newChannel);
 }
@@ -65,7 +65,7 @@ void	Join::_joinChannel(t_irc& irc, Client& client, std::string channelName) {
 	Channel&	channel = irc.channels[channelName];
 	channel.users[client.nickname] = client;
 	
-	client.response += ":" + client.nickname + " JOIN " + channelName + "\r\n";
+	this->_SendMsg.customMsg(irc, client, ":" + client.nickname + " JOIN " + channelName + "\r\n");
 	if (channel.topic != "")
 		this->_SendMsg.rpl332(irc, client, channel);
 	this->_SendMsg.rpl353(irc, client, channel);

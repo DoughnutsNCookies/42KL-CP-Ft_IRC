@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2023/11/30 21:20:17 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:26:25 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ void	Nick::_executeCommand(t_irc& irc, Client& client) {
 		if (channel.opName == oldNickname)
 			channel.opName = this->_nickname;
 	}
+	this->_SendMsg.customMsg(irc, client, ":" + oldNickname + " NICK " + this->_nickname + "\r\n");
 }
