@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: schuah <schuah@student.42.fr>              +#+  +:+       +#+         #
+#    By: plau <plau@student.42.kl>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 17:36:21 by plau              #+#    #+#              #
-#    Updated: 2023/11/17 21:16:56 by schuah           ###   ########.fr        #
+#    Updated: 2023/11/30 14:36:04 by plau             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,9 @@ all:
 	${MKDIR} ${OBJ_PATHS}
 	make ${NAME}
 
-db: $(DNAME)
+db:
+	${RM} ${DNAME}
+	make $(DNAME)
 
 ${NAME}: ${OBJ}
 	${CXX} ${CXXFLAGS} ${INCLUDES} ${OBJ} -o ${NAME}

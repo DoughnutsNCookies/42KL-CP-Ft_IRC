@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Privmsg.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 13:30:58 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:46:48 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,16 @@ void	Privmsg::_sendToUser(t_irc& irc, Client& client, std::string nickname) {
 }
 
 void	Privmsg::_sendToChannel(t_irc& irc, Client& client, std::string channelName) {
-	(void)irc;
-	(void)client;
-	std::cout << "Sending to " << channelName << std::endl;
+	Channel& channel = this->_getChannelByName(irc, channelName);
+	std::map<std::string, Client>&	users = channel.users;
+	for (std::map<std::string, Client>::iterator it = users.begin(); it != users.end(); ++it) {
+		if (it->second.nickname == client.nickname)
+			continue;
+		Client&	currentClient = this->_getClientByNickname(irc, it->second.nickname);
+		currentClient.response += ":" + client.nickname + "!" + client.username + "@" + client.hostname + " PRIVMSG " + channelName + " :" + this->_message + "\r\n";
+		struct pollfd&	pollfd = this->_getPollfdByFd(irc, currentClient.fd);
+		pollfd.events = POLLOUT;
+	}
 }
 
 Client&	Privmsg::_getClientByNickname(t_irc& irc, std::string nickname) {

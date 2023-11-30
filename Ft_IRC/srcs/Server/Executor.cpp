@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/29 21:09:47 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:26:45 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void	Executor::disconnect(t_irc& irc, int i) {
 
 	std::cout << RED << "Client " << clients[pollfd].nickname << " disconnected" << RESET << std::endl;
 	
-	std::vector<std::string>				&channelsJoined = clients[pollfd].channels;
 	std::map<std::string, Channel>	&channels = irc.channels;
+	tokensVector										channelsJoined = clients[pollfd].channels;
 	for (size_t j = 0; j < channelsJoined.size(); j++)
 		channels[channelsJoined[j]].users.erase(clients[pollfd].nickname);
 	

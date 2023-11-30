@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parser.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:55:39 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 14:22:41 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:34:07 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 #include <string>
 #include <vector>
 
+typedef std::vector<std::string>	tokensVector;
+
 class Parser {
 	public:
 		Parser();
-		std::vector<std::string>	parse(std::string str, std::string delim);
+		tokensVector	parse(std::string str, std::string delim);
 };
 
 #endif
