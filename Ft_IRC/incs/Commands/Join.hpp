@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Join.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:40 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/29 21:19:28 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:23:56 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ class Join : public ATokenParser {
 
 	private:
 		tokensVector	_channelNames;
-
 
 		SendMsg				_SendMsg;
 		Parser				_Parser;
