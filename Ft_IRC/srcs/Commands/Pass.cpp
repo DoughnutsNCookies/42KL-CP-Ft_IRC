@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:46:46 by plau              #+#    #+#             */
-/*   Updated: 2023/11/29 21:09:47 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 20:24:32 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,4 @@ void	Pass::_parseTokens(tokensVector& tokens) {
 void	Pass::_executeCommand(t_irc& irc, Client& client) {
 	(void)irc;
 	client.verified = true;
-	client.response.clear();
 }

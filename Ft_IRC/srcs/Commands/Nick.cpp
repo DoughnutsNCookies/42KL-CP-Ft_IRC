@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Nick.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2023/11/30 14:46:42 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/30 20:39:49 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	Nick::_parseTokens(tokensVector& tokens) {
 
 void	Nick::_executeCommand(t_irc& irc, Client& client) {
 	tokensVector&	channelList = client.channels;
-	std::string	oldNickname = client.nickname;
+	std::string		oldNickname = client.nickname;
 	client.nickname = this->_nickname;
 	for (tokensVector::iterator it = channelList.begin(); it != channelList.end(); ++it) {
 		Channel&	channel = irc.channels[*it];

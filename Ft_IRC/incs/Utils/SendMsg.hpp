@@ -14,6 +14,7 @@
 #define SendMsg_HPP
 
 #include "Utils/irc.hpp"
+#include "Utils/Utils.hpp"
 #include "Server/Client.hpp"
 #include "Server/Channel.hpp"
 
@@ -64,7 +65,9 @@ class SendMsg {
 		void				error464(t_irc& irc, Client& client);
 	
 	private:
-		std::string	header(t_irc& irc, Client& client);
+		Utils				_Utils;
+
+		std::string	_header(t_irc& irc, Client& client);
 };
 
 #endif
