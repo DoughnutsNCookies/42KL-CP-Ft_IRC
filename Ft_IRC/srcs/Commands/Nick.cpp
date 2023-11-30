@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2023/11/30 20:39:49 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:20:17 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ void	Nick::_executeCommand(t_irc& irc, Client& client) {
 		Channel&	channel = irc.channels[*it];
 		channel.users.erase(oldNickname);
 		channel.users.insert(std::pair<std::string, Client>(this->_nickname, client));
+		if (channel.opName == oldNickname)
+			channel.opName = this->_nickname;
 	}
 }
