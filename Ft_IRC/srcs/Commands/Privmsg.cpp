@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 14:18:47 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/30 14:46:48 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void	Privmsg::_sendToUser(t_irc& irc, Client& client, std::string nickname) {
 	struct pollfd&	pollfd = this->_getPollfdByFd(irc, currentClient.fd);
 	pollfd.events = POLLOUT;
 }
-
-#include <iostream>
 
 void	Privmsg::_sendToChannel(t_irc& irc, Client& client, std::string channelName) {
 	Channel& channel = this->_getChannelByName(irc, channelName);

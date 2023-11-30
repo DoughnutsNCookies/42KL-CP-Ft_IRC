@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parser.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:56:32 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 14:22:21 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:27:06 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 Parser::Parser() {}
 
-std::vector<std::string>	Parser::parse(std::string str, std::string delim) {
-	std::vector<std::string>	result;
+tokensVector	Parser::parse(std::string str, std::string delim) {
+	tokensVector	result;
 
 	while (!str.empty()) {
 		size_t pos = str.find_first_not_of(delim);
