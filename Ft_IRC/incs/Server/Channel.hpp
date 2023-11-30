@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:23:51 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 21:07:02 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 13:19:42 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,3 @@ class Channel {
 };
 
 #endif
-
-/**
- * ChannelName -> Channel {
- * 								ChannelName, -> std::string
- * 								Topic, -> std::string
- * 								Users, -> std::set<Client>
- * 								}
- */

@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/29 21:09:47 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 13:30:58 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,20 @@ void	Privmsg::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	}
 
 	this->_parseTokens(tokens);
-	if (this->_nicknames.size() == 0) {
+	if (this->_destinations.size() == 0) {
 		this->_SendMsg.error411(irc, client, tokens[0]);
 		return;
 	}
-	for (size_t i = 0; i < this->_nicknames.size(); i++) {
+	for (size_t i = 0; i < this->_destinations.size(); i++) {
 		try {
-			this->_getClientByNickname(irc, this->_nicknames[i]);
+			this->_getClientByNickname(irc, this->_destinations[i]);
 		} catch(NoClientFoundException& e) {
-			this->_SendMsg.error401(irc, client, this->_nicknames[i]);
-			return;
+			try {
+				this->_getChannelByName(irc, this->_destinations[i]);
+			} catch(NoChannelFoundException& e) {
+				this->_SendMsg.error401(irc, client, this->_destinations[i]);
+				return;
+			}
 		}
 	}
 	this->_executeCommand(irc, client);
@@ -44,10 +48,10 @@ void	Privmsg::_parseTokens(tokensVector& tokens) {
 	std::string nicknames = tokens[1];
 	if (nicknames[0] == ':')
 		nicknames.erase(0, 1);
-	this->_nicknames = this->_Parser.parse(nicknames, ",");
-	if (this->_nicknames.size() == 0)
+	this->_destinations = this->_Parser.parse(nicknames, ",");
+	if (this->_destinations.size() == 0)
 		return;
-	this->_nicknames.erase(this->_nicknames.end() - 1);
+	this->_destinations.erase(this->_destinations.end() - 1);
 
 	this->_message = tokens[2];
 	size_t	tokensSize = tokens.size();
@@ -58,12 +62,25 @@ void	Privmsg::_parseTokens(tokensVector& tokens) {
 }
 
 void	Privmsg::_executeCommand(t_irc& irc, Client& client) {
-	for (size_t i = 0; i < this->_nicknames.size(); i++) {
-		Client&	currentClient = this->_getClientByNickname(irc, this->_nicknames[i]);
-		currentClient.response += ":" + client.nickname + "!" + client.username + "@" + client.hostname + " PRIVMSG " + this->_nicknames[i] + " :" + this->_message + "\r\n";
-		struct pollfd&	pollfd = this->_getPollfdByFd(irc, currentClient.fd);
-		pollfd.events = POLLOUT;
+	for (size_t i = 0; i < this->_destinations.size(); i++) {
+		if (this->_destinations[i][0] == '#')
+			this->_sendToChannel(irc, client, this->_destinations[i]);
+		else
+			this->_sendToUser(irc, client, this->_destinations[i]);
 	}
+}
+
+void	Privmsg::_sendToUser(t_irc& irc, Client& client, std::string nickname) {
+	Client&	currentClient = this->_getClientByNickname(irc, nickname);
+	currentClient.response += ":" + client.nickname + "!" + client.username + "@" + client.hostname + " PRIVMSG " + nickname + " :" + this->_message + "\r\n";
+	struct pollfd&	pollfd = this->_getPollfdByFd(irc, currentClient.fd);
+	pollfd.events = POLLOUT;
+}
+
+void	Privmsg::_sendToChannel(t_irc& irc, Client& client, std::string channelName) {
+	(void)irc;
+	(void)client;
+	std::cout << "Sending to " << channelName << std::endl;
 }
 
 Client&	Privmsg::_getClientByNickname(t_irc& irc, std::string nickname) {
@@ -72,6 +89,14 @@ Client&	Privmsg::_getClientByNickname(t_irc& irc, std::string nickname) {
 			return (it->second);
 	}
 	throw Privmsg::NoClientFoundException();
+}
+
+Channel&	Privmsg::_getChannelByName(t_irc& irc, std::string channelName) {
+	for (std::map<std::string, Channel>::iterator it = irc.channels.begin(); it != irc.channels.end(); ++it) {
+		if (it->second.name == channelName)
+			return (it->second);
+	}
+	throw Privmsg::NoChannelFoundException();
 }
 
 struct pollfd&	Privmsg::_getPollfdByFd(t_irc& irc, int fd) {
@@ -84,6 +109,10 @@ struct pollfd&	Privmsg::_getPollfdByFd(t_irc& irc, int fd) {
 
 const char*	Privmsg::NoClientFoundException::what() const throw() {
 	return ("No client found with this nickname");
+}
+
+const char*	Privmsg::NoChannelFoundException::what() const throw() {
+	return ("No channel found with this name");
 }
 
 const char*	Privmsg::NoPollfdFoundException::what() const throw() {
