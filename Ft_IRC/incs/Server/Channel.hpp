@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:23:51 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 13:19:42 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 20:54:54 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@
 class Channel {
 	public:
 		Channel();
-		Channel(std::string name);
+		Channel(std::string channelName, std::string opName);
 
 		std::string										name;
 		std::string										topic;
+		std::string										opName;
 		std::map<std::string, Client>	users;
 };
 

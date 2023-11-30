@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:28:05 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 20:42:28 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:03:35 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ Client&	Utils::getClientByNickname(t_irc& irc, std::string nickname) {
 }
 
 Channel&	Utils::getChannelByName(t_irc& irc, Client& client, std::string channelName) {
+	if (channelName[0] == '@')
+		channelName.erase(0, 1);
 	for (std::map<std::string, Channel>::iterator it = irc.channels.begin(); it != irc.channels.end(); ++it) {
 		if (it->second.name == channelName && it->second.users.find(client.nickname) != it->second.users.end())
 			return (it->second);

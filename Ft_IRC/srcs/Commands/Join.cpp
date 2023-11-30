@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/29 21:27:40 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 20:55:49 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	Join::_executeCommand(t_irc& irc, Client& client) {
 }
 
 void	Join::_createChannel(t_irc& irc, Client& client, std::string channelName) {
-	Channel	newChannel = Channel(channelName);
+	Channel	newChannel = Channel(channelName, client.nickname);
 	newChannel.users[client.nickname] = client;
 	irc.channels[channelName] = newChannel;
 	client.channels.push_back(channelName);

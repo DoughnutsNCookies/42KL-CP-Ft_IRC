@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 20:40:43 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:16:58 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,27 +63,29 @@ void	Privmsg::_parseTokens(tokensVector& tokens) {
 
 void	Privmsg::_executeCommand(t_irc& irc, Client& client) {
 	for (size_t i = 0; i < this->_destinations.size(); i++) {
-		if (this->_destinations[i][0] == '#')
+		if (this->_destinations[i][0] == '#' || this->_destinations[i][0] == '@')
 			this->_sendToChannel(irc, client, this->_destinations[i]);
 		else
-			this->_sendToUser(irc, client, this->_destinations[i]);
+			this->_sendToUser(irc, client, this->_destinations[i], this->_destinations[i]);
 	}
 }
 
-void	Privmsg::_sendToUser(t_irc& irc, Client& client, std::string nickname) {
-	Client&	currentClient = this->_Utils.getClientByNickname(irc, nickname);
-	currentClient.response += ":" + client.nickname + "!" + client.username + "@" + client.hostname + " PRIVMSG " + nickname + " :" + this->_message + "\r\n";
+void	Privmsg::_sendToUser(t_irc& irc, Client& client, std::string receiverNickname, std::string destination) {
+	Client& currentClient = this->_Utils.getClientByNickname(irc, receiverNickname);
+	currentClient.response += ":" + client.nickname + "!" + client.username + "@" + client.hostname + " PRIVMSG " + destination + " :" + this->_message + "\r\n";
 	this->_Utils.setClientToPollOut(irc, currentClient);
 }
 
 void	Privmsg::_sendToChannel(t_irc& irc, Client& client, std::string channelName) {
 	Channel& channel = this->_Utils.getChannelByName(irc, client, channelName);
-	std::map<std::string, Client>&	users = channel.users;
-	for (std::map<std::string, Client>::iterator it = users.begin(); it != users.end(); ++it) {
-		if (it->second.nickname == client.nickname)
-			continue;
-		Client&	currentClient = this->_Utils.getClientByNickname(irc, it->second.nickname);
-		currentClient.response += ":" + client.nickname + "!" + client.username + "@" + client.hostname + " PRIVMSG " + channelName + " :" + this->_message + "\r\n";
-		this->_Utils.setClientToPollOut(irc, currentClient);
+	if (channelName[0] == '@') {
+		this->_sendToUser(irc, client, channel.opName, channelName);
+	} else {
+		std::map<std::string, Client>&	users = channel.users;
+		for (std::map<std::string, Client>::iterator it = users.begin(); it != users.end(); ++it) {
+			if (it->second.nickname == client.nickname)
+				continue;
+			this->_sendToUser(irc, client, it->second.nickname, channelName);
+		}
 	}
 }
