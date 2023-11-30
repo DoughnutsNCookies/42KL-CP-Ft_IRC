@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Privmsg.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 14:46:48 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/30 20:21:31 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	Privmsg::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 			this->_getClientByNickname(irc, this->_destinations[i]);
 		} catch(NoClientFoundException& e) {
 			try {
-				this->_getChannelByName(irc, this->_destinations[i]);
+				this->_getChannelByName(irc, client, this->_destinations[i]);
 			} catch(NoChannelFoundException& e) {
 				this->_SendMsg.error401(irc, client, this->_destinations[i]);
 				return;
@@ -78,7 +78,7 @@ void	Privmsg::_sendToUser(t_irc& irc, Client& client, std::string nickname) {
 }
 
 void	Privmsg::_sendToChannel(t_irc& irc, Client& client, std::string channelName) {
-	Channel& channel = this->_getChannelByName(irc, channelName);
+	Channel& channel = this->_getChannelByName(irc, client, channelName);
 	std::map<std::string, Client>&	users = channel.users;
 	for (std::map<std::string, Client>::iterator it = users.begin(); it != users.end(); ++it) {
 		if (it->second.nickname == client.nickname)
@@ -98,9 +98,9 @@ Client&	Privmsg::_getClientByNickname(t_irc& irc, std::string nickname) {
 	throw Privmsg::NoClientFoundException();
 }
 
-Channel&	Privmsg::_getChannelByName(t_irc& irc, std::string channelName) {
+Channel&	Privmsg::_getChannelByName(t_irc& irc, Client& client, std::string channelName) {
 	for (std::map<std::string, Channel>::iterator it = irc.channels.begin(); it != irc.channels.end(); ++it) {
-		if (it->second.name == channelName)
+		if (it->second.name == channelName && it->second.users.find(client.nickname) != it->second.users.end())
 			return (it->second);
 	}
 	throw Privmsg::NoChannelFoundException();

@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:49:24 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 13:26:52 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 20:19:56 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 class Privmsg : public ATokenParser {
 	public:
 		Privmsg();
-		void					verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
+		void						verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
 	
 	private:
 		tokensVector		_destinations;
@@ -36,7 +36,7 @@ class Privmsg : public ATokenParser {
 		void						_sendToUser(t_irc& irc, Client& client, std::string nickname);
 		void						_sendToChannel(t_irc& irc, Client& client, std::string channelName);
 		Client&					_getClientByNickname(t_irc& irc, std::string nickname);
-		Channel&				_getChannelByName(t_irc& irc, std::string channelName);
+		Channel&				_getChannelByName(t_irc& irc, Client& client, std::string channelName);
 		struct pollfd&	_getPollfdByFd(t_irc& irc, int fd);
 
 		class	NoClientFoundException : public std::exception {
