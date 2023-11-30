@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   Join.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:40 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 14:23:56 by plau             ###   ########.fr       */
+/*   Updated: 2023/11/30 21:52:24 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef JOIN_HPP
 #define JOIN_HPP
 
-#include "ATokenParser.hpp"
+#include "Commands/ATokenParser.hpp"
+#include "Commands/Privmsg.hpp"
 #include "Server/Parser.hpp"
 #include "Utils/SendMsg.hpp"
 
@@ -27,6 +28,7 @@ class Join : public ATokenParser {
 
 		SendMsg				_SendMsg;
 		Parser				_Parser;
+		Privmsg				_Privmsg;
 
 		void					_parseTokens(tokensVector& tokens);
 		void					_executeCommand(t_irc& irc, Client& client);

@@ -6,14 +6,14 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:33:31 by plau              #+#    #+#             */
-/*   Updated: 2023/11/29 21:19:40 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:52:24 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef USER_HPP
 #define USER_HPP
 
-#include "ATokenParser.hpp"
+#include "Commands/ATokenParser.hpp"
 #include "Utils/SendMsg.hpp"
 
 class User : public ATokenParser {

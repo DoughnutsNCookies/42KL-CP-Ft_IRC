@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 21:30:34 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:48:46 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ void	Join::_joinChannel(t_irc& irc, Client& client, std::string channelName) {
 	Channel&	channel = irc.channels[channelName];
 	channel.users[client.nickname] = client;
 	
-	this->_SendMsg.customMsg(irc, client, ":" + client.nickname + " JOIN " + channelName + "\r\n");
+	std::string	message = ":" + client.nickname + " JOIN " + channelName + "\r\n";
+	this->_SendMsg.customMsg(irc, client, message);
 	if (channel.topic != "")
 		this->_SendMsg.rpl332(irc, client, channel);
 	this->_SendMsg.rpl353(irc, client, channel);
 	this->_SendMsg.rpl366(irc, client, channel);
+	this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message);
 }

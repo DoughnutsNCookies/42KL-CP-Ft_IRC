@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2023/11/30 21:26:25 by schuah           ###   ########.fr       */
+/*   Updated: 2023/11/30 21:53:22 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	Nick::_parseTokens(tokensVector& tokens) {
 void	Nick::_executeCommand(t_irc& irc, Client& client) {
 	tokensVector&	channelList = client.channels;
 	std::string		oldNickname = client.nickname;
+	std::string		message = ":" + oldNickname + " NICK " + this->_nickname + "\r\n";
 	client.nickname = this->_nickname;
 	for (tokensVector::iterator it = channelList.begin(); it != channelList.end(); ++it) {
 		Channel&	channel = irc.channels[*it];
@@ -60,6 +61,7 @@ void	Nick::_executeCommand(t_irc& irc, Client& client) {
 		channel.users.insert(std::pair<std::string, Client>(this->_nickname, client));
 		if (channel.opName == oldNickname)
 			channel.opName = this->_nickname;
+		this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message);
 	}
-	this->_SendMsg.customMsg(irc, client, ":" + oldNickname + " NICK " + this->_nickname + "\r\n");
+	this->_SendMsg.customMsg(irc, client, message);
 }
