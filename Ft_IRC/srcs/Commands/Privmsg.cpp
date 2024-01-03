@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 21:50:41 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 20:40:01 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	Privmsg::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 			this->_Utils.getClientByNickname(irc, this->_destinations[i]);
 		} catch(Utils::NoClientFoundException& e) {
 			try {
-				this->_Utils.getChannelByName(irc, client, this->_destinations[i]);
+				Channel& channel = this->_Utils.getChannelByName(irc, this->_destinations[i]);
+				if (channel.users.find(client.nickname) == channel.users.end())
+					throw Utils::NoChannelFoundException();
 			} catch(Utils::NoChannelFoundException& e) {
 				this->_SendMsg.error401(irc, client, this->_destinations[i]);
 				return;
@@ -63,8 +65,7 @@ void	Privmsg::_parseTokens(tokensVector& tokens) {
 	this->_destinations.erase(this->_destinations.end() - 1);
 
 	this->_message = tokens[2];
-	size_t	tokensSize = tokens.size();
-	for (size_t i = 3; i < tokensSize; i++)
+	for (size_t i = 3; i < tokens.size(); i++)
 		this->_message += " " + tokens[i];
 	if (this->_message[0] == ':')
 		this->_message.erase(0, 1);
@@ -85,7 +86,7 @@ void	Privmsg::_sendToUser(t_irc& irc, std::string receiverNickname, std::string 
 }
 
 void	Privmsg::_sendToChannel(t_irc& irc, Client& client, std::string channelName) {
-	Channel&		channel = this->_Utils.getChannelByName(irc, client, channelName);
+	Channel&		channel = this->_Utils.getChannelByName(irc, channelName);
 	std::string	message = ":" + client.nickname + "!" + client.username + "@" + client.hostname + " PRIVMSG " + channelName + " :" + this->_message + "\r\n";
 	if (channelName[0] == '@')
 		this->_sendToUser(irc, channel.opName, message);

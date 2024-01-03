@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 15:00:57 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 20:26:47 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 		std::pair<TOKEN, ATokenParser *>(NICK, &this->_Nick),
 		std::pair<TOKEN, ATokenParser *>(USER, &this->_User),
 		std::pair<TOKEN, ATokenParser *>(PRIVMSG, &this->_Privmsg),
-		std::pair<TOKEN, ATokenParser *>(JOIN, &this->_Join)
+		std::pair<TOKEN, ATokenParser *>(JOIN, &this->_Join),
+		std::pair<TOKEN, ATokenParser *>(KICK, &this->_Kick)
 	};
 
 	while (tokens.size() > 0) {

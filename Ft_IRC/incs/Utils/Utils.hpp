@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:27:10 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 20:38:15 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 20:36:31 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Utils {
 		Utils();
 		void						setClientToPollOut(t_irc& irc, Client& client);
 		Client&					getClientByNickname(t_irc& irc, std::string nickname);
-		Channel&				getChannelByName(t_irc& irc, Client& client, std::string channelName);
+		Channel&				getChannelByName(t_irc& irc, std::string channelName);
 		struct pollfd&	getPollfdByFd(t_irc& irc, int fd);
 	
 		class	NoClientFoundException : public std::exception {
