@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:43:26 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 20:46:13 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 20:58:51 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ void	Kick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 }
 
 void	Kick::_parseTokens(tokensVector& tokens) {
-	this->_channelName = tokens[1];
-	if (this->_channelName[0] == ':')
-		this->_channelName.erase(0, 1);
+	this->_channelName = this->_Utils.extractFromToken(tokens[1]);
 	
 	this->_nicknames = this->_Parser.parse(tokens[2], ",");
 	if (this->_nicknames.size() == 0)
@@ -63,8 +61,7 @@ void	Kick::_parseTokens(tokensVector& tokens) {
 		this->_comment = tokens[3];
 	for (size_t i = 4; i < tokens.size(); i++)
 		this->_comment += " " + tokens[i];
-	if (this->_comment[0] == ':')
-		this->_comment.erase(0, 1);
+	this->_comment = this->_Utils.extractFromToken(this->_comment);
 }
 
 void	Kick::_executeCommand(t_irc& irc, Client& client) {

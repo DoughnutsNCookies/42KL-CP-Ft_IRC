@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 20:40:01 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 21:00:43 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ void	Privmsg::sendToAllUsersInChannel(t_irc& irc, Client& client, Channel& chann
 }
 
 void	Privmsg::_parseTokens(tokensVector& tokens) {
-	std::string nicknames = tokens[1];
-	if (nicknames[0] == ':')
-		nicknames.erase(0, 1);
+	std::string nicknames = this->_Utils.extractFromToken(tokens[1]);
+	
 	this->_destinations = this->_Parser.parse(nicknames, ",");
 	if (this->_destinations.size() == 0)
 		return;
@@ -67,8 +66,7 @@ void	Privmsg::_parseTokens(tokensVector& tokens) {
 	this->_message = tokens[2];
 	for (size_t i = 3; i < tokens.size(); i++)
 		this->_message += " " + tokens[i];
-	if (this->_message[0] == ':')
-		this->_message.erase(0, 1);
+	this->_message = this->_Utils.extractFromToken(this->_message);
 }
 
 void	Privmsg::_executeCommand(t_irc& irc, Client& client) {

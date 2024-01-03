@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:15 by plau              #+#    #+#             */
-/*   Updated: 2023/11/30 21:52:24 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 20:59:21 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class Nick : public ATokenParser {
 		
 		Privmsg			_Privmsg;
 		SendMsg			_SendMsg;
+		Utils				_Utils;
 
 		void				_parseTokens(tokensVector& tokens);
 		void				_executeCommand(t_irc& irc, Client& client);

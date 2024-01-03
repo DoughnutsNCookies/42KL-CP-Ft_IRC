@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:33:41 by plau              #+#    #+#             */
-/*   Updated: 2023/11/29 21:09:47 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 21:01:36 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ void	User::verifyTokens(t_irc& irc, Client& client, tokensVector &tokens) {
 }
 
 void	User::_parseTokens(tokensVector &tokens) {
-	this->_username = tokens[1];
-	if (this->_username[0] == ':')
-		this->_username.erase(0, 1);
+	this->_username = this->_Utils.extractFromToken(tokens[1]);
 	if (this->_username.size() > 15)
 		this->_username = this->_username.substr(0, 15);
 	
@@ -44,8 +42,7 @@ void	User::_parseTokens(tokensVector &tokens) {
 		this->_realname = "";
 	for (size_t i = 5; i < tokensSize; i++)
 		this->_realname += " " + tokens[i];
-	if (this->_realname[0] == ':')
-		this->_realname.erase(0, 1);
+	this->_realname = this->_Utils.extractFromToken(this->_realname);
 }
 
 void::User::_executeCommand(t_irc& irc, Client& client) {

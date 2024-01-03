@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:46:46 by plau              #+#    #+#             */
-/*   Updated: 2023/11/30 20:24:32 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 20:59:58 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ void	Pass::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 }
 
 void	Pass::_parseTokens(tokensVector& tokens) {
-	this->_userPassword = tokens[1];
-	if (this->_userPassword[0] == ':')
-		this->_userPassword.erase(0, 1);
+	this->_userPassword = this->_Utils.extractFromToken(tokens[1]);
 }
 
 void	Pass::_executeCommand(t_irc& irc, Client& client) {

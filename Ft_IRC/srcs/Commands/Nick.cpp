@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2024/01/03 16:53:44 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 20:59:04 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ void	Nick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 }
 
 void	Nick::_parseTokens(tokensVector& tokens) {
-	this->_nickname = tokens[1];
-	if (this->_nickname[0] == ':')
-		this->_nickname.erase(0, 1);
+	this->_nickname = this->_Utils.extractFromToken(tokens[1]);
 }
 
 void	Nick::_executeCommand(t_irc& irc, Client& client) {
