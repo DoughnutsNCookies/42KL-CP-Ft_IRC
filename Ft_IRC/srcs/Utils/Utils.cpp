@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:28:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 20:57:50 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 21:04:37 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ struct pollfd&	Utils::getPollfdByFd(t_irc& irc, int fd) {
 	throw Utils::NoPollfdFoundException();
 }
 
-std::stirng	Utils::extractFromToken(std::string token) {
+std::string	Utils::extractFromToken(std::string token) {
 	if (token[0] == ':')
 		token.erase(0, 1);
 	return (token);
