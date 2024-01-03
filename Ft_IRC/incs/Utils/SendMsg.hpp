@@ -34,6 +34,9 @@ class SendMsg {
 		/* ERR_NOSUCHNICK */
 		void				error401(t_irc& irc, Client& client, std::string nickname);
 		
+		/* ERR_NOSUCHCHANNEL */
+		void				error403(t_irc& irc, Client& client, std::string channelName);
+		
 		/* ERR_NORECIPIENT */
 		void				error411(t_irc& irc, Client& client, std::string command);
 
@@ -52,6 +55,12 @@ class SendMsg {
 		/* ERR_NICKNAMEINUSE */
 		void				error433(t_irc& irc, Client& client, std::string nickname);
 
+		/* ERR_USERNOTINCHANNEL */
+		void				error441(t_irc& irc, Client& client, std::string nickname, std::string channelName);
+
+		/* ERR_NOTONCHANNEL */
+		void				error442(t_irc& irc, Client& client, std::string channelName);
+
 		/* ERR_NOTREGISTERED */
 		void				error451(t_irc& irc, Client& client);
 
@@ -63,6 +72,9 @@ class SendMsg {
 
 		/* ERR_PASSWDMISMATCH */
 		void				error464(t_irc& irc, Client& client);
+
+		/* ERR_CHANOPRIVSNEEDED */
+		void				error482(t_irc& irc, Client& client, std::string channelName);
 
 		/* Custom message */
 		void				customMsg(t_irc& irc, Client& client, std::string message);

@@ -38,6 +38,11 @@ void	SendMsg::error401(t_irc& irc, Client& client, std::string nickname) {
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
+void	SendMsg::error403(t_irc& irc, Client& client, std::string channelName) {
+	client.response += this->_header(irc, client) + " 403 " +  client.nickname + " " + channelName + " :No such channel\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
 void	SendMsg::error411(t_irc& irc, Client& client, std::string command) {
 	client.response += this->_header(irc, client) + " 411 " +  client.nickname + " :No recipient given (" + command + ")\r\n";
 	this->_Utils.setClientToPollOut(irc, client);
@@ -68,6 +73,16 @@ void	SendMsg::error433(t_irc& irc, Client& client, std::string nickname) {
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
+void	SendMsg::error441(t_irc& irc, Client& client, std::string nickname, std::string channelName) {
+	client.response += this->_header(irc, client) + " 441 " +  client.nickname + " " + nickname + " " + channelName + " :They aren't on that channel\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
+void	SendMsg::error442(t_irc& irc, Client& client, std::string channelName) {
+	client.response += this->_header(irc, client) + " 442 " +  client.nickname + " " + channelName + " :You're not on that channel\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
 void	SendMsg::error451(t_irc& irc, Client& client) {
 	client.response += this->_header(irc, client) + " 451 " +  client.nickname + " :You have not registered\r\n";
 	this->_Utils.setClientToPollOut(irc, client);
@@ -85,6 +100,11 @@ void	SendMsg::error462(t_irc& irc, Client& client) {
 
 void	SendMsg::error464(t_irc& irc, Client& client) {
 	client.response += this->_header(irc, client) + " 464 " +  client.nickname + " :Password incorrect\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
+void	SendMsg::error482(t_irc& irc, Client& client, std::string channelName) {
+	client.response += this->_header(irc, client) + " 482 " +  client.nickname + " " + channelName + " :You're not channel operator\r\n";
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
