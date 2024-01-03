@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2023/11/30 21:53:22 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 16:53:44 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@ void	Nick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	this->_executeCommand(irc, client);
 }
 
-bool	Nick::_checkValidNickName(std::string nickname) {
-	std::string	invalid = "#: ";
-
-	return (!(invalid.find(nickname[0]) != std::string::npos
-		|| (nickname[0] == '&' && nickname[1] == '#')));
-}
-
 void	Nick::_parseTokens(tokensVector& tokens) {
 	this->_nickname = tokens[1];
 	if (this->_nickname[0] == ':')
@@ -64,4 +57,11 @@ void	Nick::_executeCommand(t_irc& irc, Client& client) {
 		this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message);
 	}
 	this->_SendMsg.customMsg(irc, client, message);
+}
+
+bool	Nick::_checkValidNickName(std::string nickname) {
+	std::string	invalid = "#: ";
+
+	return (!(invalid.find(nickname[0]) != std::string::npos
+		|| (nickname[0] == '&' && nickname[1] == '#')));
 }
