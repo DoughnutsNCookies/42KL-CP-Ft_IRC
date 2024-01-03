@@ -30,7 +30,7 @@ void Receiver::new_connection(t_irc& irc) {
 	new_pollfd.events = POLLIN;
 	fds.push_back(new_pollfd);
 
-	std::cout << GREEN << "New connection accepted!" << RESET << std::endl;
+	std::cout << GREEN << "New Connection Accepted!" << RESET << std::endl;
 
 	struct sockaddr_in clientAddr;
 	socklen_t clientAddrSize = sizeof(clientAddr);
@@ -60,7 +60,7 @@ int	Receiver::receive(t_irc& irc, int i) {
 		thisClient.buffer.clear();
 
 	thisClient.buffer += std::string(buffer);
-	std::cout << CYAN << "Message received:" << std::endl;
+	std::cout << CYAN << "Message Received:" << std::endl;
 	std::cout << thisClient.buffer << RESET << std::endl;
 	return (thisClient.buffer.find("\r\n") != std::string::npos);
 }

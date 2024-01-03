@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 14:48:49 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 15:00:57 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ void	Executor::disconnect(t_irc& irc, int i) {
 	for (size_t j = 0; j < channelsJoined.size(); j++)
 		channels[channelsJoined[j]].users.erase(clients[pollfd].nickname);
 	
+	std::cout << RED << "Client " << clients[pollfd].nickname << " Disconnected" << RESET << std::endl;
+	
 	close(pollfd);
 	fds.erase(fds.begin() + i);
 	clients.erase(pollfd);
-	std::cout << RED << "Client " << clients[pollfd].nickname << " disconnected" << RESET << std::endl;
 }

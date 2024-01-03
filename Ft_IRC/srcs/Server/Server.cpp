@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 20:51:03 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 15:00:02 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	Server::run() {
 	int&												port = this->_irc.port;
 
 	while (true) {
-		std::cout << YELLOW << "(" << port << ") Waiting for connection..." << RESET << std::endl;
+		std::cout << YELLOW << "(" << port << ") [" << fds.size() - 1 << " Clients Connected] Waiting For Connection..." << RESET << std::endl;
 		struct pollfd*	array_ptr = fds.data();
 
 		int pollResult = poll(array_ptr, fds.size(), 60000);
