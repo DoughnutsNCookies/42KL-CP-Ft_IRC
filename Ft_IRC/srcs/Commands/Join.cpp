@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 21:48:46 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 21:06:31 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	Join::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 		this->_SendMsg.error461(irc, client, tokens[0]);
 		return;
 	}
+
 	this->_parseTokens(tokens);
 	if (this->_channelNames.size() == 0) {
 		this->_SendMsg.error461(irc, client, tokens[0]);
