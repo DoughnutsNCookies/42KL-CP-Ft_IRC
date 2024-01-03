@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:43:26 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 20:58:51 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 21:05:59 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,38 @@ void	Kick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 		this->_SendMsg.error461(irc, client, tokens[0]);
 		return;
 	}
+	
 	this->_parseTokens(tokens);
 	if (this->_nicknames.size() == 0) {
 		this->_SendMsg.error461(irc, client, tokens[0]);
 		return;
 	}
 
+	Channel	channel;
 	try {
-		this->_channel = this->_Utils.getChannelByName(irc, this->_channelName);
+		channel = this->_Utils.getChannelByName(irc, this->_channelName);
 	} catch(Utils::NoChannelFoundException& e) {
 		this->_SendMsg.error403(irc, client, this->_channelName);
 		return;
 	}
-	if (this->_channel.users.find(client.nickname) == this->_channel.users.end()) {
+
+	if (channel.users.find(client.nickname) == channel.users.end()) {
 		this->_SendMsg.error442(irc, client, this->_channelName);
 		return;
 	}
-	if (this->_channel.opName != client.nickname) {
+
+	if (channel.opName != client.nickname) {
 		this->_SendMsg.error482(irc, client, this->_channelName);
 		return;
 	}
+
 	for (size_t i = 0; i < this->_nicknames.size(); i++) {
-		if (this->_channel.users.find(this->_nicknames[i]) == this->_channel.users.end()) {
+		if (channel.users.find(this->_nicknames[i]) == channel.users.end()) {
 			this->_SendMsg.error441(irc, client, this->_nicknames[i], this->_channelName);
 			return;
 		}
 	}
+
 	this->_executeCommand(irc, client);
 }
 
@@ -66,13 +72,13 @@ void	Kick::_parseTokens(tokensVector& tokens) {
 
 void	Kick::_executeCommand(t_irc& irc, Client& client) {
 	(void)client;
+	Channel&	channel = this->_Utils.getChannelByName(irc, this->_channelName);
+
 	for (size_t i = 0; i < this->_nicknames.size(); i++) {
-		if (this->_channel.users.find(this->_nicknames[i]) == this->_channel.users.end())
+		if (channel.users.find(this->_nicknames[i]) == channel.users.end())
 			continue;
-		this->_channel.users.erase(this->_nicknames[i]);
+		channel.users.erase(this->_nicknames[i]);
 		Client& user = this->_Utils.getClientByNickname(irc, this->_nicknames[i]);
 		user.channels.erase(std::find(user.channels.begin(), user.channels.end(), this->_channelName));
 	}
-	Channel&	channel = this->_Utils.getChannelByName(irc, this->_channelName);
-	channel = this->_channel;
 }
