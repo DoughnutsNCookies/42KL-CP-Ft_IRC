@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:46:46 by plau              #+#    #+#             */
-/*   Updated: 2024/01/03 20:59:58 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/03 21:08:52 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	Pass::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 		this->_SendMsg.error462(irc, client);
 		return;
 	}
+
 	if (irc.password.size() == 0) {
 		this->_executeCommand(irc, client);
 		return;
@@ -28,6 +29,7 @@ void	Pass::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 		this->_SendMsg.error461(irc, client, tokens[0]);
 		return;
 	}
+
 	if (tokens.size() > 2) {
 		this->_SendMsg.error464(irc, client);
 		return;
@@ -38,6 +40,7 @@ void	Pass::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 		this->_SendMsg.error464(irc, client);
 		return;
 	}
+	
 	this->_executeCommand(irc, client);
 }
 
