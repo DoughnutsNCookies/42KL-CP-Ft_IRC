@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Privmsg.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 21:09:30 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/04 21:08:25 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	Privmsg::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	this->_executeCommand(irc, client);
 }
 
-void	Privmsg::sendToAllUsersInChannel(t_irc& irc, Client& client, Channel& channel, std::string message) {
+void	Privmsg::sendToAllUsersInChannel(t_irc& irc, Client& client, Channel& channel, std::string message, bool sendToSelf) {
 	std::map<std::string, Client>&	users = channel.users;
 	
 	for (std::map<std::string, Client>::iterator it = users.begin(); it != users.end(); ++it) {
-		if (it->second.nickname == client.nickname)
+		if (sendToSelf == false && it->second.nickname == client.nickname)
 			continue;
 		this->_sendToUser(irc, it->second.nickname, message);
 	}
@@ -94,5 +94,5 @@ void	Privmsg::_sendToChannel(t_irc& irc, Client& client, std::string channelName
 	if (channelName[0] == '@')
 		this->_sendToUser(irc, channel.opName, message);
 	else
-		this->sendToAllUsersInChannel(irc, client, channel, message);
+		this->sendToAllUsersInChannel(irc, client, channel, message, false);
 }

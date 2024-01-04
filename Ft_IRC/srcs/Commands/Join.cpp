@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/04 20:55:57 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/04 21:08:33 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ void	Join::_joinChannel(t_irc& irc, Client& client, std::string channelName) {
 		this->_SendMsg.rpl332(irc, client, channelName, channel.topic);
 	this->_SendMsg.rpl353(irc, client, channel.users, channelName);
 	this->_SendMsg.rpl366(irc, client, channelName);
-	this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message);
+	this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message, false);
 }

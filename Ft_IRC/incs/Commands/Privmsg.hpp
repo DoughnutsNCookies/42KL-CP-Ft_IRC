@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Privmsg.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:49:24 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 21:52:24 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/04 21:07:37 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@
 class Privmsg : public ATokenParser {
 	public:
 		Privmsg();
-		void						verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
-		void						sendToAllUsersInChannel(t_irc& irc, Client& client, Channel& channel, std::string message);
+		void			verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
+		void			sendToAllUsersInChannel(t_irc& irc, Client& client, Channel& channel, std::string message, bool sendToSelf);
 	
 	private:
-		tokensVector		_destinations;
-		std::string			_message;
+		tokensVector	_destinations;
+		std::string		_message;
 
-		Parser					_Parser;
-		Utils						_Utils;
-		SendMsg					_SendMsg;
+		Parser			_Parser;
+		Utils			_Utils;
+		SendMsg			_SendMsg;
 
-		void						_parseTokens(tokensVector& tokens);
-		void						_executeCommand(t_irc& irc, Client& client);
-		void						_sendToUser(t_irc& irc, std::string receiverNickname, std::string destination);
-		void						_sendToChannel(t_irc& irc, Client& client, std::string channelName);
+		void			_parseTokens(tokensVector& tokens);
+		void			_executeCommand(t_irc& irc, Client& client);
+		void			_sendToUser(t_irc& irc, std::string receiverNickname, std::string destination);
+		void			_sendToChannel(t_irc& irc, Client& client, std::string channelName);
 };
 
 #endif
