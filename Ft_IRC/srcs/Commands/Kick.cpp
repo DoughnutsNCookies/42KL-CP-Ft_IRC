@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:43:26 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/04 20:29:29 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/04 20:32:19 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	Kick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	Channel	channel;
 	try {
 		channel = this->_Utils.getChannelByName(irc, this->_channelName);
-	} catch(Utils::NoChannelFoundException& e) {
+	} catch (Utils::NoChannelFoundException& e) {
 		this->_SendMsg.error403(irc, client, this->_channelName);
 		return;
 	}
