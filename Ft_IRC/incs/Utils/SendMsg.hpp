@@ -18,18 +18,25 @@
 #include "Server/Client.hpp"
 #include "Server/Channel.hpp"
 
+#include <ctime>
+
 class SendMsg {
 	public:
 		SendMsg();
+		/*	RPL_NOTOPIC	*/
+		void				rpl331(t_irc& irc, Client& client, std::string channelName);
 
 		/* RPL_TOPIC */
-		void				rpl332(t_irc& irc, Client& client, Channel channel);
+		void				rpl332(t_irc& irc, Client& client, std::string channelName, std::string channelTopic);
+
+		/* RPL_TOPICWHOTIME	*/
+		void				rpl333(t_irc& irc, Client& client, std::string channelName);
 
 		/* RPL_NAMREPLY */
-		void				rpl353(t_irc& irc, Client& client, Channel channel);
+		void				rpl353(t_irc& irc, Client& client, std::map<std::string, Client> users, std::string channelName);
 
 		/* RPL_ENDOFNAMES */
-		void				rpl366(t_irc& irc, Client& client, Channel channel);
+		void				rpl366(t_irc& irc, Client& client, std::string channelName);
 
 		/* ERR_NOSUCHNICK */
 		void				error401(t_irc& irc, Client& client, std::string nickname);
@@ -82,7 +89,8 @@ class SendMsg {
 	private:
 		Utils				_Utils;
 
-		std::string	_header(t_irc& irc, Client& client);
+		std::string			_header(t_irc& irc, Client& client);
+		std::string			_getTime();
 };
 
 #endif

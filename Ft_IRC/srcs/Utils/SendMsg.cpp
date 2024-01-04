@@ -14,22 +14,31 @@
 
 SendMsg::SendMsg() {}
 
-void	SendMsg::rpl332(t_irc& irc, Client& client, Channel channel) {
-	client.response += this->_header(irc, client) + " 332 " +  client.nickname + " " + channel.name + " :" + channel.topic + "\r\n";
+void	SendMsg::rpl331(t_irc& irc, Client& client, std::string channelName) {
+	client.response += this->_header(irc, client) + " 331 " + client.nickname + " " + channelName + " :No topic is set\r\n";
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
-void	SendMsg::rpl353(t_irc& irc, Client& client, Channel channel) {
-	std::string users = "";
-	for (std::map<std::string, Client>::iterator it = channel.users.begin(); it != channel.users.end(); it++) {
-		users += it->second.nickname + " ";
-	}
-	client.response += this->_header(irc, client) + " 353 " +  client.nickname + " = " + channel.name + " :" + users + "\r\n";
+void	SendMsg::rpl332(t_irc& irc, Client& client, std::string channelName, std::string channelTopic) {
+	client.response += this->_header(irc, client) + " 332 " +  client.nickname + " " + channelName + " :" + channelTopic + "\r\n";
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
-void	SendMsg::rpl366(t_irc& irc, Client& client, Channel channel) {
-	client.response += this->_header(irc, client) + " 366 " +  client.nickname + " " + channel.name + " :End of /NAMES list\r\n";
+void	SendMsg::rpl333(t_irc& irc, Client& client, std::string channelName) {
+	client.response += this->_header(irc, client) + " 333 " +  client.nickname + " " + channelName + " " + client.nickname + " " + this->_getTime() + "\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
+void	SendMsg::rpl353(t_irc& irc, Client& client, std::map<std::string, Client> users, std::string channelName) {
+	std::string userList = "";
+	for (std::map<std::string, Client>::iterator it = users.begin(); it != users.end(); it++)
+		userList += it->second.nickname + " ";
+	client.response += this->_header(irc, client) + " 353 " +  client.nickname + " = " + channelName + " :" + userList + "\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
+void	SendMsg::rpl366(t_irc& irc, Client& client, std::string channelName) {
+	client.response += this->_header(irc, client) + " 366 " +  client.nickname + " " + channelName + " :End of /NAMES list\r\n";
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
@@ -115,4 +124,12 @@ void	SendMsg::customMsg(t_irc& irc, Client& client, std::string message) {
 
 std::string	SendMsg::_header(t_irc& irc, Client& client) {
 	return (":" + irc.hostname + ":" + std::to_string(irc.port) + " " + client.nickname);
+}
+
+std::string SendMsg::_getTime() {
+	std::time_t setAt = std::time(nullptr);
+	std::tm* timeInfo = std::gmtime(&setAt);
+	char buffer[100];
+	std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", timeInfo);
+	return (std::string(buffer));
 }
