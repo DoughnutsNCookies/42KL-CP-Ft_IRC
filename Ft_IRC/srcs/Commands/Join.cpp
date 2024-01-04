@@ -6,12 +6,11 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/04 21:08:33 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/04 21:25:14 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Commands/Join.hpp"
-#include <iostream>
 
 Join::Join() {}
 
