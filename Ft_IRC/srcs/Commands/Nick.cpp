@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Nick.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2024/01/03 21:07:30 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/04 21:11:00 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	Nick::_executeCommand(t_irc& irc, Client& client) {
 		
 		if (channel.opName == oldNickname)
 			channel.opName = this->_nickname;
-		this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message);
+		this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message, false);
 	}
 
 	this->_SendMsg.customMsg(irc, client, message);

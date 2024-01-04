@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Kick.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:43:26 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 21:05:59 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/04 20:46:14 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	Kick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	Channel	channel;
 	try {
 		channel = this->_Utils.getChannelByName(irc, this->_channelName);
-	} catch(Utils::NoChannelFoundException& e) {
+	} catch (Utils::NoChannelFoundException& e) {
 		this->_SendMsg.error403(irc, client, this->_channelName);
 		return;
 	}
@@ -64,15 +64,14 @@ void	Kick::_parseTokens(tokensVector& tokens) {
 
 	this->_comment = "No commment given";
 	if (tokens.size() > 3)
-		this->_comment = tokens[3];
+		this->_comment = this->_Utils.extractFromToken(tokens[3]);
 	for (size_t i = 4; i < tokens.size(); i++)
 		this->_comment += " " + tokens[i];
-	this->_comment = this->_Utils.extractFromToken(this->_comment);
 }
 
 void	Kick::_executeCommand(t_irc& irc, Client& client) {
 	(void)client;
-	Channel&	channel = this->_Utils.getChannelByName(irc, this->_channelName);
+	Channel&	channel = irc.channels[this->_channelName];
 
 	for (size_t i = 0; i < this->_nicknames.size(); i++) {
 		if (channel.users.find(this->_nicknames[i]) == channel.users.end())

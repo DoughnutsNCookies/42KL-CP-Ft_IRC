@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 20:27:19 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/04 21:26:07 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #include "Commands/Privmsg.hpp"
 #include "Commands/Join.hpp"
 #include "Commands/Kick.hpp"
+#include "Commands/Topic.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
@@ -41,19 +42,20 @@ enum TOKEN {
 class Executor {
 	public:
 		Executor();
-		void					execute(t_irc& irc, Client& client, tokensVector& tokens);
-		void					disconnect(t_irc& irc, int i);
+		void			execute(t_irc& irc, Client& client, tokensVector& tokens);
+		void			disconnect(t_irc& irc, int i);
 
 	private:
-		SendMsg				_SendMsg;
-		Pass					_Pass;
-		Nick					_Nick;
-		User					_User;
-		Privmsg				_Privmsg;
-		Join					_Join;
-		Kick					_Kick;
+		SendMsg			_SendMsg;
+		Pass			_Pass;
+		Nick			_Nick;
+		User			_User;
+		Privmsg			_Privmsg;
+		Join			_Join;
+		Kick			_Kick;
+		Topic			_Topic;	
 		
-		TOKEN					_getToken(std::string token);
+		TOKEN			_getToken(std::string token);
 		tokensVector	_getNextTokens(tokensVector& tokens);
 };
 
