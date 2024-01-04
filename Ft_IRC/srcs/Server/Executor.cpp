@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 20:26:47 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/04 21:13:59 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 		std::pair<TOKEN, ATokenParser *>(USER, &this->_User),
 		std::pair<TOKEN, ATokenParser *>(PRIVMSG, &this->_Privmsg),
 		std::pair<TOKEN, ATokenParser *>(JOIN, &this->_Join),
-		std::pair<TOKEN, ATokenParser *>(KICK, &this->_Kick)
+		std::pair<TOKEN, ATokenParser *>(KICK, &this->_Kick),
+		std::pair<TOKEN, ATokenParser *>(TOPIC, &this->_Topic)
 	};
 
 	while (tokens.size() > 0) {
