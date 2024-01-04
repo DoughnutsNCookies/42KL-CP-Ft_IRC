@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:43:26 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/04 20:32:19 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/04 20:46:14 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	Kick::_parseTokens(tokensVector& tokens) {
 
 void	Kick::_executeCommand(t_irc& irc, Client& client) {
 	(void)client;
-	Channel&	channel = this->_Utils.getChannelByName(irc, this->_channelName);
+	Channel&	channel = irc.channels[this->_channelName];
 
 	for (size_t i = 0; i < this->_nicknames.size(); i++) {
 		if (channel.users.find(this->_nicknames[i]) == channel.users.end())
