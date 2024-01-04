@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:36:15 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 20:46:26 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/04 21:33:20 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@
 class Kick : public ATokenParser {
 	public:
 		Kick();
-		void					verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
+		void			verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
 	
 	private:
 		std::string		_channelName;
 		std::string		_comment;
 		tokensVector	_nicknames;
-		Channel				_channel;
+		Channel			_channel;
 
-		Parser				_Parser;
-		Utils					_Utils;
-		SendMsg				_SendMsg;
+		Parser			_Parser;
+		Utils			_Utils;
+		SendMsg			_SendMsg;
 		
-		void					_parseTokens(tokensVector& tokens);
-		void					_executeCommand(t_irc& irc, Client& client);
+		void			_parseTokens(tokensVector& tokens);
+		void			_executeCommand(t_irc& irc, Client& client);
 };
 
 #endif
