@@ -23,74 +23,75 @@
 class SendMsg {
 	public:
 		SendMsg();
+
 		/*	RPL_NOTOPIC	*/
-		void				rpl331(t_irc& irc, Client& client, std::string channelName);
+		void		rpl331(t_irc& irc, Client& client, std::string channelName);
 
 		/* RPL_TOPIC */
-		void				rpl332(t_irc& irc, Client& client, std::string channelName, std::string channelTopic);
+		void		rpl332(t_irc& irc, Client& client, std::string channelName, std::string channelTopic);
 
 		/* RPL_TOPICWHOTIME	*/
-		void				rpl333(t_irc& irc, Client& client, std::string channelName);
+		void		rpl333(t_irc& irc, Client& client, std::string channelName);
 
 		/* RPL_NAMREPLY */
-		void				rpl353(t_irc& irc, Client& client, std::map<std::string, Client> users, std::string channelName);
+		void		rpl353(t_irc& irc, Client& client, std::map<std::string, Client> users, std::string channelName);
 
 		/* RPL_ENDOFNAMES */
-		void				rpl366(t_irc& irc, Client& client, std::string channelName);
+		void		rpl366(t_irc& irc, Client& client, std::string channelName);
 
 		/* ERR_NOSUCHNICK */
-		void				error401(t_irc& irc, Client& client, std::string nickname);
+		void		error401(t_irc& irc, Client& client, std::string nickname);
 		
 		/* ERR_NOSUCHCHANNEL */
-		void				error403(t_irc& irc, Client& client, std::string channelName);
+		void		error403(t_irc& irc, Client& client, std::string channelName);
 		
 		/* ERR_NORECIPIENT */
-		void				error411(t_irc& irc, Client& client, std::string command);
+		void		error411(t_irc& irc, Client& client, std::string command);
 
 		/* ERR_NOTEXTTOSEND */
-		void				error412(t_irc& irc, Client& client);
+		void		error412(t_irc& irc, Client& client);
 
 		/* ERR_UNKNOWNCOMMAND */
-		void				error421(t_irc& irc, Client& client, std::string unknownCommand);
+		void		error421(t_irc& irc, Client& client, std::string unknownCommand);
 
 		/* ERR_NONICKNAMEGIVEN */
-		void				error431(t_irc& irc, Client& client);
+		void		error431(t_irc& irc, Client& client);
 
 		/* ERR_ERRONEUSNICKNAME */
-		void				error432(t_irc& irc, Client& client, std::string nickname);
+		void		error432(t_irc& irc, Client& client, std::string nickname);
 
 		/* ERR_NICKNAMEINUSE */
-		void				error433(t_irc& irc, Client& client, std::string nickname);
+		void		error433(t_irc& irc, Client& client, std::string nickname);
 
 		/* ERR_USERNOTINCHANNEL */
-		void				error441(t_irc& irc, Client& client, std::string nickname, std::string channelName);
+		void		error441(t_irc& irc, Client& client, std::string nickname, std::string channelName);
 
 		/* ERR_NOTONCHANNEL */
-		void				error442(t_irc& irc, Client& client, std::string channelName);
+		void		error442(t_irc& irc, Client& client, std::string channelName);
 
 		/* ERR_NOTREGISTERED */
-		void				error451(t_irc& irc, Client& client);
+		void		error451(t_irc& irc, Client& client);
 
 		/* ERR_NEEDMOREPARAMS */
-		void				error461(t_irc& irc, Client& client, std::string command);
+		void		error461(t_irc& irc, Client& client, std::string command);
 
 		/* ERR_ALREADYREGISTRED */
-		void				error462(t_irc& irc, Client& client);
+		void		error462(t_irc& irc, Client& client);
 
 		/* ERR_PASSWDMISMATCH */
-		void				error464(t_irc& irc, Client& client);
+		void		error464(t_irc& irc, Client& client);
 
 		/* ERR_CHANOPRIVSNEEDED */
-		void				error482(t_irc& irc, Client& client, std::string channelName);
+		void		error482(t_irc& irc, Client& client, std::string channelName);
 
 		/* Custom message */
-		void				customMsg(t_irc& irc, Client& client, std::string message);
+		void		customMsg(t_irc& irc, Client& client, std::string message);
 	
 	private:
-		Utils				_Utils;
+		Utils		_Utils;
 
-		std::string			_header(t_irc& irc, Client& client);
-		std::string			_getTime();
+		std::string	_header(t_irc& irc, Client& client);
+		std::string	_getTime();
 };
 
 #endif

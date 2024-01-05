@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:23:51 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 20:54:54 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/05 17:18:19 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ class Channel {
 		Channel();
 		Channel(std::string channelName, std::string opName);
 
-		std::string										name;
-		std::string										topic;
-		std::string										opName;
+		std::string						name;
+		std::string						topic;
+		std::string						opName;
 		std::map<std::string, Client>	users;
 };
 

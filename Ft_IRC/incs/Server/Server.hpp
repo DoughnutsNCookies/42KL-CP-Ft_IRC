@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:42:42 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/28 12:24:17 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/05 17:17:57 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@
 class Server {
 	public:
 		Server(const char *port, const char *password);
-		void			run();
+		void		run();
 	
 	private:
-		t_irc			_irc;
+		t_irc		_irc;
 
 		Receiver	_Receiver;
 		Responder	_Responder;
 		Parser		_Parser;
 		Executor	_Executor;
 
-		void			perrorExit(const char *error);
-		void			createSocket();
-		void			bindSocket();
-		void			listenSocket();
+		void		perrorExit(const char *error);
+		void		createSocket();
+		void		bindSocket();
+		void		listenSocket();
 };
 
 #endif

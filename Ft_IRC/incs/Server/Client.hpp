@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:46:47 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 14:28:27 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/05 17:18:12 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ class Client {
 		Client();
 		Client(int fd, std::string hostname);
 
-		int 					fd;
-		bool					verified;
+		int 			fd;
+		bool			verified;
 		std::string		response;
 		std::string		buffer;
 		std::string		nickname;
