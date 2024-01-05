@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Topic.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:53:57 by plau              #+#    #+#             */
-/*   Updated: 2024/01/04 21:23:54 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/05 21:19:59 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	Topic::_setNewTopic(t_irc& irc, Client& client, Channel& channel) {
 
 void	Topic::_getTopic(t_irc& irc, Client& client, Channel& channel) {
 	channel.topic = this->_topic;
-	std::string message = "TOPIC " + this->_channelName + " :" + this->_topic + "\r\n";
+	std::string message = ":" + client.nickname + " TOPIC " + this->_channelName + " :" + this->_topic + "\r\n";
 	this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message, true);
 }
