@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 21:07:27 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/08 22:18:49 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	Server::_bindSocket() {
 
 	if (bind(serverFd, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) < 0)
 		this->_perrorExit("Bind failed");
-
 
 	struct sockaddr_in clientAddr;
 	socklen_t clientAddrSize = sizeof(clientAddr);
