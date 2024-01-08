@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:46:47 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 14:28:27 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/08 17:08:53 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ class Client {
 		Client();
 		Client(int fd, std::string hostname);
 
-		int 					fd;
-		bool					verified;
+		int 			fd;
+		bool			verified;
+		bool			nickSet;
+		bool			userSet;
 		std::string		response;
 		std::string		buffer;
 		std::string		nickname;

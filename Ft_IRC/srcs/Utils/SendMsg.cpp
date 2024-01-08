@@ -14,6 +14,31 @@
 
 SendMsg::SendMsg() {}
 
+void	SendMsg::rpl001(t_irc& irc, Client& client) {
+	client.response += this->_header(irc, client, 1) + "Welcome to the Internet Relay Network, " + client.nickname + "!" + client.username + "@" + irc.hostname + "\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
+void	SendMsg::rpl002(t_irc& irc, Client& client) {
+	client.response += this->_header(irc, client, 2) + "Your host is " + irc.hostname + ", running version " + irc.version + "\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
+void	SendMsg::rpl003(t_irc& irc, Client& client) {
+	client.response += this->_header(irc, client, 3) + "This server was created " + this->_getFormattedTime() + "\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
+void	SendMsg::rpl004(t_irc& irc, Client& client) {
+	client.response += this->_header(irc, client, 4) + irc.hostname + " " + irc.version + " " + irc.userModes + " " + irc.channelModes + " " + irc.channelModesWithParam + "\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
+void	SendMsg::rpl005(t_irc& irc, Client& client) {
+	client.response += this->_header(irc, client, 5) + irc.supportTokens + " :are supported by this server\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
 void	SendMsg::rpl331(t_irc& irc, Client& client, std::string channelName) {
 	client.response += this->_header(irc, client, 331) + channelName + " :No topic is set\r\n";
 	this->_Utils.setClientToPollOut(irc, client);
@@ -29,11 +54,14 @@ void	SendMsg::rpl333(t_irc& irc, Client& client, std::string channelName) {
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
-void	SendMsg::rpl353(t_irc& irc, Client& client, std::map<std::string, Client> users, std::string channelName) {
+void	SendMsg::rpl353(t_irc& irc, Client& client, Channel& channel) {
 	std::string userList = "";
-	for (std::map<std::string, Client>::iterator it = users.begin(); it != users.end(); it++)
+	for (std::map<std::string, Client>::iterator it = channel.users.begin(); it != channel.users.end(); it++) {
+		if (it->second.nickname == channel.opName)
+			userList += "@";
 		userList += it->second.nickname + " ";
-	client.response += this->_header(irc, client, 353) + "= " + channelName + " :" + userList + "\r\n";
+	}
+	client.response += this->_header(irc, client, 353) + "= " + channel.name + " :" + userList + "\r\n";
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
@@ -122,6 +150,17 @@ void	SendMsg::customMsg(t_irc& irc, Client& client, std::string message) {
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
+
+void	SendMsg::registeredMsg(t_irc& irc, Client& client) {
+	if ((irc.password.size() != 0 && !client.verified) || !client.userSet || !client.nickSet)
+		return;
+	this->rpl001(irc, client);
+	this->rpl002(irc, client);
+	this->rpl003(irc, client);
+	this->rpl004(irc, client);
+	this->rpl005(irc, client);
+}
+
 std::string	SendMsg::_header(t_irc& irc, Client& client, int code) {
 	return (":" + irc.hostname + " " + std::to_string(code) + " " + client.nickname + " ");
 }
@@ -130,4 +169,14 @@ std::string SendMsg::_getEpochTime() {
 	struct timeval	time;
 	gettimeofday(&time, NULL);
 	return (std::to_string(time.tv_sec));
+}
+
+std::string	SendMsg::_getFormattedTime() {
+	time_t currentTime;
+    time(&currentTime);
+    struct tm *localTime = localtime(&currentTime);
+
+    char formattedTime[50]; // Adjust the size based on your needs
+    strftime(formattedTime, sizeof(formattedTime), "%d-%m-%Y %H:%M:%S", localTime);
+	return (std::string(formattedTime));
 }

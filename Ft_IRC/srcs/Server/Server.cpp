@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 16:20:07 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/08 16:52:01 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 Server::Server(const char *port, const char *password) {
 	this->_irc.port = atoi(port);
 	this->_irc.password = password;
+	this->_irc.version = "1.0";
+	this->_irc.userModes = "io";
+	this->_irc.channelModes = "kost";
+	this->_irc.channelModesWithParam = "k";
+	this->_irc.supportTokens = "";
 	
 	this->createSocket();
 	this->bindSocket();

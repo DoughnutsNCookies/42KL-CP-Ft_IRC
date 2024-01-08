@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Nick.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2024/01/04 21:11:00 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/08 17:11:51 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ void	Nick::_executeCommand(t_irc& irc, Client& client) {
 		this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message, false);
 	}
 
+	client.nickSet = true;
 	this->_SendMsg.customMsg(irc, client, message);
+	this->_SendMsg.registeredMsg(irc, client);
 }
 
 bool	Nick::_checkValidNickName(std::string nickname) {
