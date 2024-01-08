@@ -17,6 +17,8 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <poll.h>
+#include <vector>
 
 class BotClient
 {
@@ -27,6 +29,7 @@ class BotClient
 		void	connectToServer(int port);
 		void	sendClientDetails();
 		void	closeSocket();
+
 	private:
 		int		clientSocket;
 		
