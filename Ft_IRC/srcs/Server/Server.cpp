@@ -11,6 +11,12 @@
 /* ************************************************************************** */
 
 #include "Server/Server.hpp"
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <string>
+#include <stdlib.h>
+#include <sstream>
 
 Server::Server(const char *port, const char *password) {
 	this->_irc.port = atoi(port);
@@ -69,7 +75,7 @@ void	Server::run() {
 
 void	Server::_perrorExit(const char *error) {
 	perror(error);
-	exit(EXIT_FAILURE);
+	exit(1);
 }
 
 void	Server::_createSocket() {
@@ -80,7 +86,7 @@ void	Server::_createSocket() {
 		this->_perrorExit("Cannot create socket");
 
 	int optval = 1;
-	if (setsockopt(serverFd, SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval)) == -1)
+	if (setsockopt(serverFd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &optval, sizeof(optval)) == -1)
 		this->_perrorExit("Setsockopt failed");
 }
 
@@ -94,7 +100,10 @@ void	Server::_bindSocket() {
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
 
-	if (getaddrinfo("localhost", std::to_string(port).c_str(), &hints, &res) != 0)
+	std::ostringstream strm;
+	strm << port;
+	std::string numStr = strm.str();
+	if (getaddrinfo("localhost", numStr.c_str(), &hints, &res) != 0)
 		this->_perrorExit("Getaddrinfo failed");
 
 	sockaddr_in serverAddress;

@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "ft_irc.hpp"
+#include <cstdlib>
 
 int validport(char *port) {
 	for (int i = 0; port[i]; i++) {
 		if (!isdigit(port[i]))
-			return (EXIT_FAILURE);
+			return (1);
 	}
 
 	int	numport = atoi(port);
@@ -25,15 +26,15 @@ int validport(char *port) {
 int main(int ac, char **av) {
 	if (ac != 3) {
 		std::cout << "Usage: " << av[0] << " <port> <password>" << std::endl;
-		return (EXIT_FAILURE);
+		return (1);
 	}
 
-	if (validport(av[1]) == EXIT_FAILURE) {
+	if (validport(av[1]) == 1) {
 		std::cout << "Invalid port number" << std::endl;
-		return (EXIT_FAILURE);
+		return (1);
 	}
 
 	Server server = Server(av[1], av[2]);
 	server.run();
-	return (EXIT_SUCCESS);
+	return (0);
 }

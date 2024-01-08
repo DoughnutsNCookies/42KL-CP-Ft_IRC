@@ -12,7 +12,7 @@
 
 NAME			=	ircserv
 CXX				=	g++
-CXXFLAGS	=	-Wall -Wextra -Werror -Wshadow -std=c++98 -pedantic
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98 -pedantic
 DNAME			=	d.out
 DFLAGS		=	-fsanitize=address -g3
 INCLUDES	=	-Iincs

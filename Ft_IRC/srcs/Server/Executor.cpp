@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Server/Executor.hpp"
+#include <algorithm>
 
 Executor::Executor() {}
 

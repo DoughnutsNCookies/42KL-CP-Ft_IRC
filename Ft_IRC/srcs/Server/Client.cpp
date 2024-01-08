@@ -14,4 +14,4 @@
 
 Client::Client() {}
 
-Client::Client(int fd, std::string hostname): fd(fd), verified(false), nickSet(false), userSet(false), nickname("client" + std::to_string(fd)), hostname(hostname) {}
+Client::Client(int fd, std::string hostname): fd(fd), verified(false), nickSet(false), userSet(false), nickname("client"), hostname(hostname) {}
