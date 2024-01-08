@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:27:44 by plau              #+#    #+#             */
-/*   Updated: 2024/01/05 19:03:28 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/05 20:33:13 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int ac, char **av) {
 	BotClient botClient = BotClient();
 	botClient.createSocket();
 	botClient.connectToServer(atoi(av[1]));
+	botClient.sendClientDetails();
 	botClient.closeSocket();
 	return (0);
 }

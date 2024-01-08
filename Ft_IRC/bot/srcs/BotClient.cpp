@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:22:10 by plau              #+#    #+#             */
-/*   Updated: 2024/01/05 18:58:01 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/08 16:17:30 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,25 @@ void	BotClient::connectToServer(int port) {
 
 void	BotClient::closeSocket() {
 	close(this->clientSocket);
+}
+
+void	BotClient::sendClientDetails() {
+	const char*	commands[] = {
+		"PASS 1234\r\n",
+		"NICK Seen\r\n",
+		"USER bot 0 * :bott\r\n",
+		// "JOIN #test",
+		// "PRIVMSG #test :Hello World!",
+		// "QUIT :Bye!"
+	};
+
+	for (int i = 0; i < 3; i++) {
+		ssize_t bytesSent = send(this->clientSocket, commands[i], strlen(commands[i]), 0);
+		if (bytesSent == -1) {
+			std::cerr << "Error: failed to send command" << std::endl;
+		}
+		else {
+			std::cout << "Command sent to server: " << commands[i] << std::endl;
+		}
+	}
 }

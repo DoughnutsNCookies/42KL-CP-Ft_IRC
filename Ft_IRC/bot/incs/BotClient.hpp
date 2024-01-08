@@ -25,6 +25,7 @@ class BotClient
 		~BotClient();
 		int		createSocket();
 		void	connectToServer(int port);
+		void	sendClientDetails();
 		void	closeSocket();
 	private:
 		int		clientSocket;
