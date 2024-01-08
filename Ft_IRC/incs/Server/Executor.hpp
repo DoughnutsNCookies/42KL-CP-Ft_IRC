@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/04 21:26:07 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/08 18:20:09 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #include "Commands/Join.hpp"
 #include "Commands/Kick.hpp"
 #include "Commands/Topic.hpp"
+#include "Commands/Pong.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
@@ -36,7 +37,8 @@ enum TOKEN {
 	PRIVMSG = 3,
 	JOIN = 4,
 	KICK = 5,
-	TOPIC = 6
+	TOPIC = 6,
+	PONG = 7
 };
 
 class Executor {
@@ -53,7 +55,8 @@ class Executor {
 		Privmsg			_Privmsg;
 		Join			_Join;
 		Kick			_Kick;
-		Topic			_Topic;	
+		Topic			_Topic;
+		Pong			_Pong;
 		
 		TOKEN			_getToken(std::string token);
 		tokensVector	_getNextTokens(tokensVector& tokens);

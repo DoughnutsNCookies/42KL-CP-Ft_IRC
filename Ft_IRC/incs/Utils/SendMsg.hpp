@@ -110,7 +110,7 @@ class SendMsg {
 	private:
 		Utils		_Utils;
 
-		std::string	_header(t_irc& irc, Client& client, int code);
+		std::string	_header(t_irc& irc, Client& client, std::string code);
 		std::string	_getEpochTime();
 		std::string	_getFormattedTime();
 };
