@@ -6,15 +6,12 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 18:20:09 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/08 21:01:28 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTOR_HPP
 #define EXECUTOR_HPP
-
-#include <unistd.h>
-#include <iostream>
 
 #include "Utils/irc.hpp"
 #include "Utils/color.hpp"
@@ -28,6 +25,7 @@
 #include "Commands/Kick.hpp"
 #include "Commands/Topic.hpp"
 #include "Commands/Pong.hpp"
+#include "Commands/Quit.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
@@ -38,14 +36,14 @@ enum TOKEN {
 	JOIN = 4,
 	KICK = 5,
 	TOPIC = 6,
-	PONG = 7
+	PONG = 7,
+	QUIT = 8
 };
 
 class Executor {
 	public:
 		Executor();
 		void			execute(t_irc& irc, Client& client, tokensVector& tokens);
-		void			disconnect(t_irc& irc, int i);
 
 	private:
 		SendMsg			_SendMsg;
@@ -57,6 +55,7 @@ class Executor {
 		Kick			_Kick;
 		Topic			_Topic;
 		Pong			_Pong;
+		Quit			_Quit;
 		
 		TOKEN			_getToken(std::string token);
 		tokensVector	_getNextTokens(tokensVector& tokens);

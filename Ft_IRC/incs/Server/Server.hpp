@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:42:42 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 16:40:18 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/08 21:00:10 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 #define SERVER_HPP
 
 #include <netdb.h>
-#include <unistd.h>
 #include <fcntl.h>
 #include <map>
 #include <string>
 
-#include "ft_irc.hpp"
+#include "Commands/Quit.hpp"
 #include "Utils/irc.hpp"
+#include "Utils/Utils.hpp"
+#include "ft_irc.hpp"
 #include "Client.hpp"
 #include "Receiver.hpp"
 #include "Responder.hpp"
@@ -39,11 +40,13 @@ class Server {
 		Responder	_Responder;
 		Parser		_Parser;
 		Executor	_Executor;
+		Utils		_Utils;
+		Quit		_Quit;
 
-		void		perrorExit(const char *error);
-		void		createSocket();
-		void		bindSocket();
-		void		listenSocket();
+		void		_perrorExit(const char *error);
+		void		_createSocket();
+		void		_bindSocket();
+		void		_listenSocket();
 };
 
 #endif
