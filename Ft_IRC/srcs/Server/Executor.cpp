@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/04 21:13:59 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/08 16:20:56 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ TOKEN	Executor::_getToken(std::string token) {
 
 tokensVector Executor::_getNextTokens(tokensVector& tokens) {
     tokensVector::iterator	it = std::find(tokens.begin(), tokens.end(), "\r\n");
-    size_t									tokensToCopy = std::distance(tokens.begin(), it);
-    tokensVector						result(tokens.begin(), tokens.begin() + tokensToCopy);
+    size_t					tokensToCopy = std::distance(tokens.begin(), it);
+    tokensVector			result(tokens.begin(), tokens.begin() + tokensToCopy);
 
     tokens.erase(tokens.begin(), it + 1);
     return result;
@@ -56,6 +56,12 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 		tokensVector	currentTokens = this->_getNextTokens(tokens);
 		TOKEN	token = this->_getToken(currentTokens[0]);
 		if (token == UNKNOWN) {
+			if (tokens[0] == "MODE") {
+				std::cout << "TRYING TO SET MODE" << std::endl;
+				std::string	message = ":" + irc.hostname + " MODE " + tokens[1] + " +s\r\n";
+				this->_SendMsg.customMsg(irc, client, message);
+				continue;
+			}
 			this->_SendMsg.error421(irc, client, currentTokens[0]);
 			continue;
 		}
@@ -69,11 +75,11 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 
 void	Executor::disconnect(t_irc& irc, int i) {
 	std::vector<struct pollfd>&	fds = irc.fds;
-	std::map<int, Client>&			clients = irc.clients;
-	int													pollfd = fds[i].fd;
+	std::map<int, Client>&		clients = irc.clients;
+	int							pollfd = fds[i].fd;
 	
 	std::map<std::string, Channel>	&channels = irc.channels;
-	tokensVector										channelsJoined = clients[pollfd].channels;
+	tokensVector					channelsJoined = clients[pollfd].channels;
 	for (size_t j = 0; j < channelsJoined.size(); j++)
 		channels[channelsJoined[j]].users.erase(clients[pollfd].nickname);
 	

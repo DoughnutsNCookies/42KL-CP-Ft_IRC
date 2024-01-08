@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Privmsg.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/04 21:08:25 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/08 16:21:23 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	Privmsg::_sendToUser(t_irc& irc, std::string receiverNickname, std::string 
 }
 
 void	Privmsg::_sendToChannel(t_irc& irc, Client& client, std::string channelName) {
-	Channel&		channel = this->_Utils.getChannelByName(irc, channelName);
+	Channel&	channel = this->_Utils.getChannelByName(irc, channelName);
 	std::string	message = ":" + client.nickname + "!" + client.username + "@" + client.hostname + " PRIVMSG " + channelName + " :" + this->_message + "\r\n";
 	
 	if (channelName[0] == '@')

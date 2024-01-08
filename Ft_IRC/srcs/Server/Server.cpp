@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 15:00:02 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/08 16:20:07 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ Server::Server(const char *port, const char *password) {
 
 void	Server::run() {
 	std::vector<struct pollfd>&	fds = this->_irc.fds;
-	std::map<int, Client>&			clients = this->_irc.clients;
-	int&												serverFd = this->_irc.serverFd;
-	int&												port = this->_irc.port;
+	std::map<int, Client>&		clients = this->_irc.clients;
+	int&						serverFd = this->_irc.serverFd;
+	int&						port = this->_irc.port;
 
 	while (true) {
 		std::cout << YELLOW << "(" << port << ") [" << fds.size() - 1 << " Clients Connected] Waiting For Connection..." << RESET << std::endl;
@@ -81,8 +81,8 @@ void	Server::createSocket() {
 
 void	Server::bindSocket() {
 	addrinfo	hints, *res;
-	int&			port = this->_irc.port;
-	int&			serverFd = this->_irc.serverFd;
+	int&		port = this->_irc.port;
+	int&		serverFd = this->_irc.serverFd;
 
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_family = AF_INET;
@@ -116,7 +116,7 @@ void	Server::bindSocket() {
 }
 
 void	Server::listenSocket() {
-	int&												serverFd = this->_irc.serverFd;
+	int&						serverFd = this->_irc.serverFd;
 	std::vector<struct pollfd>&	fds = this->_irc.fds;
 	
 	if (listen(serverFd, SOMAXCONN) < 0)
