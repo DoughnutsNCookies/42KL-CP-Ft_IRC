@@ -6,12 +6,12 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:27:44 by plau              #+#    #+#             */
-/*   Updated: 2024/01/09 14:09:01 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 14:29:14 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bot.hpp"
-#include "BotClient.hpp"
+#include "Bot/Bot.hpp"
+#include "Bot/BotClient.hpp"
 
 int	main(int ac, char **av) {
 	if (ac != 3) {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   BotClient.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 18:22:10 by plau              #+#    #+#             */
-/*   Updated: 2024/01/08 16:17:30 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/09 14:28:52 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/BotClient.hpp"
+#include "Bot/BotClient.hpp"
 
 BotClient::BotClient() {
 }
