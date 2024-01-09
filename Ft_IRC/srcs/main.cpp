@@ -6,12 +6,11 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:48:21 by plau              #+#    #+#             */
-/*   Updated: 2023/11/28 18:10:32 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 05:39:52 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_irc.hpp"
-#include <cstdlib>
 
 int validport(char *port) {
 	for (int i = 0; port[i]; i++) {
