@@ -3,17 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   Bot.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:34:17 by plau              #+#    #+#             */
-/*   Updated: 2024/01/05 17:54:16 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/09 14:08:14 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bot.hpp"
 
 Bot::Bot() {
+    while (true)
+	{
+		std::cout << YELLOW << "(" << port << ")" << "[Penguin bot Connected] Waiting for Connection..." << RESET << std::endl;
+		std::vector<struct pollfd>	array_ptr;
+		struct pollfd*	arrayPtr = array_ptr.data();
 
+		int pollResult = poll(arrayPtr, array_ptr.size(), 60000);
+		(void)pollResult;
+
+		BotClient botClient = BotClient();
+		botClient.createSocket();
+		botClient.connectToServer(atoi(av[1]));
+		botClient.sendClientDetails();
+		botClient.closeSocket();
+	}
 }
 
 Bot::~Bot() {
