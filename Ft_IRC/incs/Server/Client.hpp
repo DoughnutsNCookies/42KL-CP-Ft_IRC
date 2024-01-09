@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:46:47 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 05:28:22 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 17:06:45 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ class Client {
 		bool			verified;
 		bool			nickSet;
 		bool			userSet;
+		bool			joined;
 		std::string		response;
 		std::string		buffer;
 		std::string		nickname;
