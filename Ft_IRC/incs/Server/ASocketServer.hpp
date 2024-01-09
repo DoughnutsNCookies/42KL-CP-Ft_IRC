@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_irc.hpp                                         :+:      :+:    :+:   */
+/*   ASocketServer.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 18:46:22 by plau              #+#    #+#             */
-/*   Updated: 2024/01/09 14:02:54 by schuah           ###   ########.fr       */
+/*   Created: 2024/01/09 14:12:18 by schuah            #+#    #+#             */
+/*   Updated: 2024/01/09 14:56:18 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_IRC_HPP
-#define FT_IRC_HPP
+#ifndef ASOCKETSERVER_HPP
+#define ASOCKETSERVER_HPP
 
-#include "Utils/color.hpp"
-#include "Utils/Utils.hpp"
-#include "Server/Server.hpp"
+#include <iostream>
+#include <netdb.h>
+
+#include "Utils/irc.hpp"
+
+class ASocketServer {
+	public:
+		virtual void	run() = 0;
+		
+	protected:
+		t_irc			_irc;
+
+		void			_perrorExit(const char *error);
+		void			_createSocket();
+};
 
 #endif
