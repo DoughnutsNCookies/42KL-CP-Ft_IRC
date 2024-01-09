@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:42:42 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 13:08:47 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 13:08:58 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 class Server {
 	public:
 		Server(const char *port, const char *password);
-		void		run();
 		void		run();
 	
 	private:
