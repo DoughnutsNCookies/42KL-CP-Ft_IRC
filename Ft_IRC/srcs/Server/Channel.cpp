@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:24:15 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 20:55:30 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 05:28:33 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,4 +14,4 @@
 
 Channel::Channel() {}
 
-Channel::Channel(std::string channelName, std::string opName): name(channelName), opName(opName) {}
+Channel::Channel(std::string channelName, std::string operatorName): name(channelName), opName(operatorName) {}

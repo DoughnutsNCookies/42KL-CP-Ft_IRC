@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:23:51 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 16:40:38 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 05:28:20 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 class Channel {
 	public:
 		Channel();
-		Channel(std::string channelName, std::string opName);
+		Channel(std::string channelName, std::string operatorName);
 
 		std::string						name;
 		std::string						topic;
