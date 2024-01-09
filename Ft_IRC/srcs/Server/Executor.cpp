@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 05:32:05 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 20:40:42 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,9 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 		tokensVector	currentTokens = this->_getNextTokens(tokens);
 		TOKEN	token = this->_getToken(currentTokens[0]);
 		if (token == UNKNOWN) {
-			// if (tokens[0] == "MODE") {
-			// 	std::cout << "TRYING TO SET MODE" << std::endl;
-			// 	std::string	message = ":" + irc.hostname + " MODE " + tokens[1] + " +s\r\n";
-			// 	this->_SendMsg.customMsg(irc, client, message);
-			// 	continue;
-			// }
 			this->_SendMsg.error421(irc, client, currentTokens[0]);
 			continue;
 		}
-		// if (irc.password.length() != 0 && token != PASS && client.verified == false) {
-		// 	this->_SendMsg.error451(client);
-		// 	continue;
-		// }
 		verifyTokensPairs[token].second->verifyTokens(irc, client, currentTokens);
 	}
 }
