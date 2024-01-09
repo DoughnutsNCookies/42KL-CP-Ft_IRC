@@ -150,7 +150,6 @@ void	SendMsg::customMsg(t_irc& irc, Client& client, std::string message) {
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
-
 void	SendMsg::registeredMsg(t_irc& irc, Client& client) {
 	if ((irc.password.size() != 0 && !client.verified) || !client.userSet || !client.nickSet)
 		return;
@@ -168,7 +167,8 @@ std::string	SendMsg::_header(t_irc& irc, Client& client, std::string code) {
 std::string SendMsg::_getEpochTime() {
 	struct timeval	time;
 	gettimeofday(&time, NULL);
-	return (std::to_string(time.tv_sec));
+	// return (std::to_string(time.tv_sec));
+	return ("1704724095");
 }
 
 std::string	SendMsg::_getFormattedTime() {
