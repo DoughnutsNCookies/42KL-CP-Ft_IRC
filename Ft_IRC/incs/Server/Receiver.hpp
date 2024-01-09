@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Receiver.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:22:58 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/04 21:26:19 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/09 05:34:12 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 #include <poll.h>
 #include <sys/socket.h>
 #include <unistd.h>
-#include <iostream>
 #include <netdb.h>
+#include <cstring>
+#include <cstdio>
+#include <iostream>
 
 #include "Utils/color.hpp"
 #include "Utils/irc.hpp"

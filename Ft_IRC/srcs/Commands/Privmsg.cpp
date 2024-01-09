@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Privmsg.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 16:21:23 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 05:24:53 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	Privmsg::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	for (size_t i = 0; i < this->_destinations.size(); i++) {
 		try {
 			this->_Utils.getClientByNickname(irc, this->_destinations[i]);
-		} catch(Utils::NoClientFoundException& e) {
+		} catch(Utils::NoClientFoundException& clientError) {
 			try {
 				Channel& channel = this->_Utils.getChannelByName(irc, this->_destinations[i]);
 				if (channel.users.find(client.nickname) == channel.users.end())
 					throw Utils::NoChannelFoundException();
-			} catch(Utils::NoChannelFoundException& e) {
+			} catch(Utils::NoChannelFoundException& channelError) {
 				this->_SendMsg.error401(irc, client, this->_destinations[i]);
 				return;
 			}

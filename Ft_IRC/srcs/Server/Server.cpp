@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 22:18:49 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 13:56:08 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	Server::run() {
 
 void	Server::_perrorExit(const char *error) {
 	perror(error);
-	exit(EXIT_FAILURE);
+	exit(1);
 }
 
 void	Server::_createSocket() {
@@ -80,7 +80,7 @@ void	Server::_createSocket() {
 		this->_perrorExit("Cannot create socket");
 
 	int optval = 1;
-	if (setsockopt(serverFd, SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval)) == -1)
+	if (setsockopt(serverFd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval)) == -1)
 		this->_perrorExit("Setsockopt failed");
 }
 
@@ -94,7 +94,10 @@ void	Server::_bindSocket() {
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
 
-	if (getaddrinfo("localhost", std::to_string(port).c_str(), &hints, &res) != 0)
+	std::ostringstream stream;
+	stream << port;
+	std::string numStr = stream.str();
+	if (getaddrinfo("localhost", numStr.c_str(), &hints, &res) != 0)
 		this->_perrorExit("Getaddrinfo failed");
 
 	sockaddr_in serverAddress;
