@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:28:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 21:04:37 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 14:04:12 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ std::string	Utils::extractFromToken(std::string token) {
 	if (token[0] == ':')
 		token.erase(0, 1);
 	return (token);
+}
+
+bool Utils::checkValidPort(char *port) {
+	for (int i = 0; port[i]; i++) {
+		if (!isdigit(port[i]))
+			return (false);
+	}
+
+	int	numport = atoi(port);
+	return (numport >= 1024 && numport <= 65535);
 }
 
 const char*	Utils::NoClientFoundException::what() const throw() {

@@ -6,26 +6,37 @@
 #    By: schuah <schuah@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 17:36:21 by plau              #+#    #+#              #
-#    Updated: 2024/01/09 13:55:36 by schuah           ###   ########.fr        #
+#    Updated: 2024/01/09 14:05:40 by schuah           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	ircserv
-CXX			=	g++
-CXXFLAGS	=	-Wall -Wextra -Werror -Wshadow -std=c++98 -pedantic
-DNAME		=	d.out
-DFLAGS		=	-fsanitize=address -g3
-INCLUDES	=	-Iincs
-RM			=	rm -rf
-MKDIR		=	mkdir -p
-HEADERS		=	${shell find incs -type f -name "*.hpp"}
-SRC_PATH	=	srcs
-OBJ_PATH	=	objs
-MAIN		=	srcs/main.cpp
-SRC_PATHS	=	${shell find ${SRC_PATH} -type d}
-OBJ_PATHS	=	${subst $(SRC_PATH), $(OBJ_PATH), ${SRC_PATHS}}
-SRC			=	${shell find ${SRC_PATH} -type f -name "*.cpp"}
-OBJ			=	${subst $(SRC_PATH), $(OBJ_PATH),  ${SRC:.cpp=.o}}
+NAME			=	ircserv
+DNAME			=	d.out
+BOTNAME			=	penguinBot
+
+CXX				=	g++
+CXXFLAGS		=	-Wall -Wextra -Werror -Wshadow -std=c++98 -pedantic
+DFLAGS			=	-fsanitize=address -g3
+INCLUDES		=	-Iincs
+BOT_INCLUDES	= 	-Ibot/incs
+RM				=	rm -rf
+MKDIR			=	mkdir -p
+
+HEADERS			=	${shell find incs -type f -name "*.hpp"}
+BOT_HEADERS 	= 	${shell find bot/incs -type f -name "*.hpp"}
+SRC_PATH		=	srcs
+OBJ_PATH		=	objs
+BOT_PATH		=	bot
+BOT_SRC_PATH	=	${BOT_PATH}/${SRC_PATH}
+BOT_OBJ_PATH	=	${BOT_PATH}/${OBJ_PATH}
+SRC_PATHS		=	${shell find ${SRC_PATH} -type d}
+BOT_SRC_PATHS	=	${shell find ${BOT_SRC_PATH} -type d}
+OBJ_PATHS		=	${subst ${SRC_PATH}, ${OBJ_PATH}, ${SRC_PATHS}}
+BOT_OBJ_PATHS	=	${subst ${BOT_SRC_PATH}, ${BOT_OBJ_PATH}, ${BOT_SRC_PATHS}}
+SRC				=	${shell find ${SRC_PATH} -type f -name "*.cpp"}
+BOT_SRC			=	${shell find ${BOT_SRC_PATH} -type f -name "*.cpp"}
+OBJ				=	${subst ${SRC_PATH}, ${OBJ_PATH}, ${SRC:.cpp=.o}}
+BOT_OBJ			=	${subst ${BOT_SRC_PATH}, ${BOT_OBJ_PATH}, ${BOT_SRC:.cpp=.o}}
 
 all: 
 	${MKDIR} ${OBJ_PATHS}
