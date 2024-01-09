@@ -6,13 +6,13 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 13:51:55 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 17:03:02 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Server/Server.hpp"
 
-Server::Server(const char *port, const char *password) {
+Server::Server(const char* port, const char* password) {
 	this->_irc.port = atoi(port);
 	this->_irc.password = password;
 	this->_irc.version = "1.0";
@@ -67,23 +67,6 @@ void	Server::run() {
 	}
 }
 
-void	Server::_perrorExit(const char *error) {
-	perror(error);
-	exit(1);
-}
-
-void	Server::_createSocket() {
-	int&	serverFd = this->_irc.serverFd;
-
-	serverFd = socket(AF_INET, SOCK_STREAM, 0);
-	if (serverFd < 0)
-		this->_perrorExit("Cannot create socket");
-
-	int optval = 1;
-	if (setsockopt(serverFd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval)) == -1)
-		this->_perrorExit("Setsockopt failed");
-}
-
 void	Server::_bindSocket() {
 	addrinfo	hints, *res;
 	int&		port = this->_irc.port;
@@ -124,14 +107,13 @@ void	Server::_bindSocket() {
 }
 
 void	Server::_listenSocket() {
-	int&						serverFd = this->_irc.serverFd;
-	std::vector<struct pollfd>&	fds = this->_irc.fds;
+	int&	serverFd = this->_irc.serverFd;
 	
 	if (listen(serverFd, SOMAXCONN) < 0)
 		this->_perrorExit("Listen failed");
 
-	struct pollfd newfd;
-	newfd.fd = serverFd;
-	newfd.events = POLLIN;
-	fds.push_back(newfd);
+	struct pollfd	newFd;
+	newFd.fd = serverFd;
+	newFd.events = POLLIN;
+	this->_irc.fds.push_back(newFd);
 }

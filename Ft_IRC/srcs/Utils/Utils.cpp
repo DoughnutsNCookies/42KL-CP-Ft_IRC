@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:28:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 14:04:12 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:01:43 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ std::string	Utils::extractFromToken(std::string token) {
 	return (token);
 }
 
-bool Utils::checkValidPort(char *port) {
+bool	Utils::checkValidPort(char *port) {
 	for (int i = 0; port[i]; i++) {
 		if (!isdigit(port[i]))
 			return (false);

@@ -6,7 +6,7 @@
 #    By: schuah <schuah@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 17:36:21 by plau              #+#    #+#              #
-#    Updated: 2024/01/09 14:30:10 by schuah           ###   ########.fr        #
+#    Updated: 2024/01/09 15:38:48 by schuah           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,28 +18,30 @@ CXX				=	g++
 CXXFLAGS		=	-Wall -Wextra -Werror -Wshadow -std=c++98 -pedantic
 DFLAGS			=	-fsanitize=address -g3
 INCLUDES		=	-Iincs
-BOT_INCLUDES	= 	-Ibot/incs
 RM				=	rm -rf
 MKDIR			=	mkdir -p
-
-HEADERS			=	${shell find incs -type f -name "*.hpp" | grep -v "Bot"}
-BOT_HEADERS 	= 	${shell find incs/Bot -type f -name "*.hpp"}
 SRC_PATH		=	srcs
-BOT_SRC_PATH	=	srcs/Bot
 OBJ_PATH		=	objs
-BOT_OBJ_PATH	=	objs/Bot
+
+MAIN			=	${OBJ_PATH}/main.o
+HEADERS			=	${shell find incs -type f -name "*.hpp" | grep -v "Bot"}
 SRC_PATHS		=	${shell find ${SRC_PATH} -type d | grep -v "Bot"}
-BOT_SRC_PATHS	=	${shell find ${SRC_PATH}/Bot -type d}
-OBJ_PATHS		=	${subst ${SRC_PATH}, ${OBJ_PATH}, ${SRC_PATHS}} //
-BOT_OBJ_PATHS	=	${subst ${BOT_SRC_PATH}, ${BOT_OBJ_PATH}, ${BOT_SRC_PATHS}} //
+OBJ_PATHS		=	${subst ${SRC_PATH}, ${OBJ_PATH}, ${SRC_PATHS}}
 SRC				=	${shell find ${SRC_PATH} -type f -name "*.cpp" | grep -v "Bot"}
+OBJ				=	${subst ${SRC_PATH}, ${OBJ_PATH}, ${SRC:.cpp=.o}}
+OBJ_FILTER		=	${filter-out ${MAIN}, ${OBJ}}
+
+BOT_MAIN		=	${OBJ_PATH}/Bot/main.o
+BOT_HEADERS 	= 	${shell find incs/Bot -type f -name "*.hpp"}
+BOT_SRC_PATHS	=	${shell find ${SRC_PATH}/Bot -type d}
+BOT_OBJ_PATHS	=	${subst ${SRC_PATH}/Bot, ${OBJ_PATH}/Bot, ${BOT_SRC_PATHS}}
 BOT_SRC			=	${shell find ${SRC_PATH}/Bot -type f -name "*.cpp"}
-OBJ				=	${subst ${SRC_PATH}, ${OBJ_PATH}, ${SRC:.cpp=.o}} //
-BOT_OBJ			=	${subst ${BOT_SRC_PATH}, ${BOT_OBJ_PATH}, ${BOT_SRC:.cpp=.o}} //
+BOT_OBJ 		=	${subst ${SRC_PATH}/Bot, ${OBJ_PATH}/Bot, ${BOT_SRC:.cpp=.o}}
+BOT_OBJ_FILTER	=	${filter-out ${BOT_MAIN}, ${BOT_OBJ}}
 
 all: 
 	${MKDIR} ${OBJ_PATHS}
-	make ${NAME}
+	make ${NAME} penguin
 
 db:
 	${RM} ${DNAME}
@@ -50,19 +52,19 @@ penguin:
 	make ${BOTNAME}
 
 ${NAME}: ${OBJ}
-	${CXX} ${CXXFLAGS} ${INCLUDES} ${OBJ} -o ${NAME}
+	${CXX} ${CXXFLAGS} ${INCLUDES} ${OBJ_FILTER} ${MAIN} -o ${NAME}
 
 ${DNAME}:
 	${CXX} ${CXXFLAGS} ${DFLAGS} ${SRC} ${INCLUDES} -o ${DNAME}
 
 ${BOTNAME}: ${BOT_OBJ}
-	${CXX} ${CXXFLAGS} ${BOT_INCLUDES} ${BOT_OBJ} -o ${BOTNAME}
+	${CXX} ${CXXFLAGS} ${INCLUDES} ${BOT_OBJ_FILTER} ${OBJ_FILTER} ${BOT_MAIN} -o ${BOTNAME}
 
 ${OBJ_PATH}/%.o: ${SRC_PATH}/%.cpp ${HEADERS}
 	${CXX} ${CXXFLAGS} ${INCLUDES} -c $< -o $@
 
 ${BOT_OBJ_PATHS}/%.o: ${BOT_SRC_PATHS}/%.cpp ${BOT_HEADERS}
-	${CXX} ${CXXFLAGS} ${BOT_INCLUDES} -c $< -o $@
+	${CXX} ${CXXFLAGS} ${INCLUDES} -c $< -o $@
 
 test: fclean all
 	./${NAME}
