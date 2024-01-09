@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:46:47 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 17:08:53 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 05:28:22 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef std::vector<std::string>	tokensVector;
 class Client {
 	public:
 		Client();
-		Client(int fd, std::string hostname);
+		Client(int clientFd, std::string clientHostname);
 
 		int 			fd;
 		bool			verified;

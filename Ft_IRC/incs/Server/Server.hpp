@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:42:42 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 21:00:10 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 05:38:00 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <fcntl.h>
 #include <map>
 #include <string>
+#include <sstream>
 
 #include "Commands/Quit.hpp"
 #include "Utils/irc.hpp"

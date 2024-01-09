@@ -6,12 +6,14 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:36:15 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/04 21:33:20 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 05:28:28 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KICK_HPP
 #define KICK_HPP
+
+#include <algorithm>
 
 #include "Commands/ATokenParser.hpp"
 #include "Utils/irc.hpp"

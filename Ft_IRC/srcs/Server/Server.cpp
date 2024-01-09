@@ -6,17 +6,11 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 21:07:27 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 05:37:55 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Server/Server.hpp"
-#include <cstdio>
-#include <cstring>
-#include <cstdlib>
-#include <string>
-#include <stdlib.h>
-#include <sstream>
 
 Server::Server(const char *port, const char *password) {
 	this->_irc.port = atoi(port);
@@ -100,9 +94,9 @@ void	Server::_bindSocket() {
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_flags = AI_PASSIVE;
 
-	std::ostringstream strm;
-	strm << port;
-	std::string numStr = strm.str();
+	std::ostringstream stream;
+	stream << port;
+	std::string numStr = stream.str();
 	if (getaddrinfo("localhost", numStr.c_str(), &hints, &res) != 0)
 		this->_perrorExit("Getaddrinfo failed");
 

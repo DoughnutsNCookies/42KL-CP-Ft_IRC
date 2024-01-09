@@ -12,7 +12,6 @@
 
 #include "Utils/SendMsg.hpp"
 
-
 SendMsg::SendMsg() {}
 
 void	SendMsg::rpl001(t_irc& irc, Client& client) {
@@ -150,7 +149,6 @@ void	SendMsg::customMsg(t_irc& irc, Client& client, std::string message) {
 	client.response += message;
 	this->_Utils.setClientToPollOut(irc, client);
 }
-
 
 void	SendMsg::registeredMsg(t_irc& irc, Client& client) {
 	if ((irc.password.size() != 0 && !client.verified) || !client.userSet || !client.nickSet)

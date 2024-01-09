@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "Server/Receiver.hpp"
-#include <cstdio>
-#include <cstring>
 
 Receiver::Receiver() {}
 

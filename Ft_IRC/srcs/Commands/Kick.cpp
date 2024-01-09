@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   Kick.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:43:26 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/04 20:46:14 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/09 05:21:51 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Commands/Kick.hpp"
-#include <algorithm>
 
 Kick::Kick() {}
 
