@@ -167,8 +167,7 @@ std::string	SendMsg::_header(t_irc& irc, Client& client, std::string code) {
 std::string SendMsg::_getEpochTime() {
 	struct timeval	time;
 	gettimeofday(&time, NULL);
-	// return (std::to_string(time.tv_sec));
-	return ("1704724095");
+	return (std::to_string(time.tv_sec));
 }
 
 std::string	SendMsg::_getFormattedTime() {
@@ -176,7 +175,7 @@ std::string	SendMsg::_getFormattedTime() {
     time(&currentTime);
     struct tm *localTime = localtime(&currentTime);
 
-    char formattedTime[50]; // Adjust the size based on your needs
+    char formattedTime[50];
     strftime(formattedTime, sizeof(formattedTime), "%d-%m-%Y %H:%M:%S", localTime);
 	return (std::string(formattedTime));
 }
