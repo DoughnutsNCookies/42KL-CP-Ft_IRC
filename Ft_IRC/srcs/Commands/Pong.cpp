@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Channel.hpp                                        :+:      :+:    :+:   */
+/*   Pong.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 20:23:51 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 13:07:44 by schuah           ###   ########.fr       */
+/*   Created: 2024/01/08 18:14:16 by schuah            #+#    #+#             */
+/*   Updated: 2024/01/08 18:18:48 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHANNEL_HPP
-#define CHANNEL_HPP
+#include "Commands/Pong.hpp"
 
-#include <map>
-#include <string>
+Pong::Pong() {}
 
-#include "Server/Client.hpp"
+void	Pong::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
+	(void)irc;
+	(void)client;
+	(void)tokens;
+}
 
-class Channel {
-	public:
-		Channel();
-		Channel(std::string channelName, std::string opName);
+void	Pong::_parseTokens(tokensVector& tokens) {
+	(void)tokens;
+}
 
-		std::string						name;
-		std::string						topic;
-		std::string						opName;
-		std::map<std::string, Client>	users;
-};
-
-#endif
+void	Pong::_executeCommand(t_irc& irc, Client& client) {
+	(void)irc;
+	(void)client;
+}

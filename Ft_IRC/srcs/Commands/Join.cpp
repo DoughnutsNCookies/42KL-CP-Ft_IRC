@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Join.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/04 21:25:14 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/08 16:24:14 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	Join::_createChannel(t_irc& irc, Client& client, std::string channelName) {
 	client.channels.push_back(channelName);
 
 	this->_SendMsg.customMsg(irc, client, ":" + client.nickname + " JOIN " + channelName + "\r\n");
-	this->_SendMsg.rpl353(irc, client, newChannel.users, channelName);
+	this->_SendMsg.rpl353(irc, client, newChannel);
 	this->_SendMsg.rpl366(irc, client, channelName);
 }
 
@@ -69,7 +69,7 @@ void	Join::_joinChannel(t_irc& irc, Client& client, std::string channelName) {
 	this->_SendMsg.customMsg(irc, client, message);
 	if (channel.topic.empty() == false)
 		this->_SendMsg.rpl332(irc, client, channelName, channel.topic);
-	this->_SendMsg.rpl353(irc, client, channel.users, channelName);
+	this->_SendMsg.rpl353(irc, client, channel);
 	this->_SendMsg.rpl366(irc, client, channelName);
 	this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message, false);
 }

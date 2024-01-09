@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:42:42 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/05 17:17:57 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/09 13:08:47 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 #define SERVER_HPP
 
 #include <netdb.h>
-#include <unistd.h>
 #include <fcntl.h>
 #include <map>
 #include <string>
 
-#include "ft_irc.hpp"
+#include "Commands/Quit.hpp"
 #include "Utils/irc.hpp"
+#include "Utils/Utils.hpp"
+#include "ft_irc.hpp"
 #include "Client.hpp"
 #include "Receiver.hpp"
 #include "Responder.hpp"
@@ -31,6 +32,7 @@ class Server {
 	public:
 		Server(const char *port, const char *password);
 		void		run();
+		void		run();
 	
 	private:
 		t_irc		_irc;
@@ -39,11 +41,13 @@ class Server {
 		Responder	_Responder;
 		Parser		_Parser;
 		Executor	_Executor;
+		Utils		_Utils;
+		Quit		_Quit;
 
-		void		perrorExit(const char *error);
-		void		createSocket();
-		void		bindSocket();
-		void		listenSocket();
+		void		_perrorExit(const char *error);
+		void		_createSocket();
+		void		_bindSocket();
+		void		_listenSocket();
 };
 
 #endif

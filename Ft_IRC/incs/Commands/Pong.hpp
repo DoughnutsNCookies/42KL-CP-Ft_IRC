@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   User.hpp                                           :+:      :+:    :+:   */
+/*   Pong.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 13:33:31 by plau              #+#    #+#             */
-/*   Updated: 2024/01/04 21:33:34 by schuah           ###   ########.fr       */
+/*   Created: 2024/01/08 18:14:17 by schuah            #+#    #+#             */
+/*   Updated: 2024/01/08 18:19:41 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef USER_HPP
-#define USER_HPP
+#ifndef PONG_HPP
+#define PONG_HPP
 
 #include "Commands/ATokenParser.hpp"
-#include "Utils/SendMsg.hpp"
-#include "Utils/Utils.hpp"
 
-class User : public ATokenParser {
+class Pong : public ATokenParser {
 	public:
-		User();
-		void		verifyTokens(t_irc& irc, Client& client, tokensVector &tokens);
+		Pong();
+		void	verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
 
 	private:
-		std::string _username;
-		std::string _realname;
-
-		SendMsg		_SendMsg;
-		Utils		_Utils;
-
-		void		_parseTokens(tokensVector &tokens);
-		void		_executeCommand(t_irc& irc, Client& client);
+		void	_parseTokens(tokensVector& tokens);
+		void	_executeCommand(t_irc& irc, Client& client);
 };
 
 #endif

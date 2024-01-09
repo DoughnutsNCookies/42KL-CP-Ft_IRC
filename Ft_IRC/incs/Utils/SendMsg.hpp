@@ -13,16 +13,33 @@
 #ifndef SendMsg_HPP
 #define SendMsg_HPP
 
+#include <sys/time.h>
+#include <ctime>
+
 #include "Utils/irc.hpp"
 #include "Utils/Utils.hpp"
 #include "Server/Client.hpp"
 #include "Server/Channel.hpp"
 
-#include <ctime>
 
 class SendMsg {
 	public:
 		SendMsg();
+		
+		/* RPL_WELCOME */
+		void		rpl001(t_irc& irc, Client& client);
+
+		/* RPL_YOURHOST */
+		void		rpl002(t_irc& irc, Client& client);
+
+		/* RPL_CREATED */
+		void		rpl003(t_irc& irc, Client& client);
+
+		/* RPL_MYINFO */
+		void		rpl004(t_irc& irc, Client& client);
+
+		/* RPL_ISUPPORT */
+		void		rpl005(t_irc& irc, Client& client);
 
 		/*	RPL_NOTOPIC	*/
 		void		rpl331(t_irc& irc, Client& client, std::string channelName);
@@ -34,7 +51,7 @@ class SendMsg {
 		void		rpl333(t_irc& irc, Client& client, std::string channelName);
 
 		/* RPL_NAMREPLY */
-		void		rpl353(t_irc& irc, Client& client, std::map<std::string, Client> users, std::string channelName);
+		void				rpl353(t_irc& irc, Client& client, std::map<std::string, Client> users, std::string channelName);
 
 		/* RPL_ENDOFNAMES */
 		void		rpl366(t_irc& irc, Client& client, std::string channelName);
@@ -86,12 +103,16 @@ class SendMsg {
 
 		/* Custom message */
 		void		customMsg(t_irc& irc, Client& client, std::string message);
+
+		/* Registered message */
+		void		registeredMsg(t_irc& irc, Client& client);
 	
 	private:
 		Utils		_Utils;
 
-		std::string	_header(t_irc& irc, Client& client);
-		std::string	_getTime();
+		std::string	_header(t_irc& irc, Client& client, std::string code);
+		std::string	_getEpochTime();
+		std::string	_getFormattedTime();
 };
 
 #endif

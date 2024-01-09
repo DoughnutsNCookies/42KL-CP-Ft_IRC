@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:33:41 by plau              #+#    #+#             */
-/*   Updated: 2024/01/03 21:15:40 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/08 17:11:41 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,6 @@ void::User::_executeCommand(t_irc& irc, Client& client) {
 	(void)irc;
 	client.username = this->_username;
 	client.realname = this->_realname;
+	client.userSet = true;
+	this->_SendMsg.registeredMsg(irc, client);
 }

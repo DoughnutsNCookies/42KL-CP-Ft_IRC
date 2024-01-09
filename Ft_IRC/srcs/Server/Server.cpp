@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/03 15:00:02 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/08 21:07:27 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,22 @@
 Server::Server(const char *port, const char *password) {
 	this->_irc.port = atoi(port);
 	this->_irc.password = password;
+	this->_irc.version = "1.0";
+	this->_irc.userModes = "io";
+	this->_irc.channelModes = "kost";
+	this->_irc.channelModesWithParam = "k";
+	this->_irc.supportTokens = "";
 	
-	this->createSocket();
-	this->bindSocket();
-	this->listenSocket();
+	this->_createSocket();
+	this->_bindSocket();
+	this->_listenSocket();
 }
 
 void	Server::run() {
 	std::vector<struct pollfd>&	fds = this->_irc.fds;
-	std::map<int, Client>&			clients = this->_irc.clients;
-	int&												serverFd = this->_irc.serverFd;
-	int&												port = this->_irc.port;
+	std::map<int, Client>&		clients = this->_irc.clients;
+	int&						serverFd = this->_irc.serverFd;
+	int&						port = this->_irc.port;
 
 	while (true) {
 		std::cout << YELLOW << "(" << port << ") [" << fds.size() - 1 << " Clients Connected] Waiting For Connection..." << RESET << std::endl;
@@ -33,7 +38,7 @@ void	Server::run() {
 
 		int pollResult = poll(array_ptr, fds.size(), 60000);
 		if (pollResult < 0)
-			this->perrorExit("Poll failed");
+			this->_perrorExit("Poll failed");
 
 		if (pollResult == 0)
 			continue;
@@ -48,7 +53,7 @@ void	Server::run() {
 						tokensVector	tokens = this->_Parser.parse(clients[fds[i].fd].buffer, " \r\n");
 						this->_Executor.execute(this->_irc, clients[fds[i].fd], tokens);
 					} else if (recvResult < 0) {
-						this->_Executor.disconnect(this->_irc, i);
+						this->_Quit.disconnectClient(this->_irc, fds[i].fd);
 						continue;
 					}
 				}
@@ -62,27 +67,27 @@ void	Server::run() {
 	}
 }
 
-void	Server::perrorExit(const char *error) {
+void	Server::_perrorExit(const char *error) {
 	perror(error);
 	exit(EXIT_FAILURE);
 }
 
-void	Server::createSocket() {
+void	Server::_createSocket() {
 	int&	serverFd = this->_irc.serverFd;
 
 	serverFd = socket(AF_INET, SOCK_STREAM, 0);
 	if (serverFd < 0)
-		this->perrorExit("Cannot create socket");
+		this->_perrorExit("Cannot create socket");
 
 	int optval = 1;
 	if (setsockopt(serverFd, SOL_SOCKET, SO_NOSIGPIPE, &optval, sizeof(optval)) == -1)
-		this->perrorExit("Setsockopt failed");
+		this->_perrorExit("Setsockopt failed");
 }
 
-void	Server::bindSocket() {
+void	Server::_bindSocket() {
 	addrinfo	hints, *res;
-	int&			port = this->_irc.port;
-	int&			serverFd = this->_irc.serverFd;
+	int&		port = this->_irc.port;
+	int&		serverFd = this->_irc.serverFd;
 
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_family = AF_INET;
@@ -90,37 +95,37 @@ void	Server::bindSocket() {
 	hints.ai_flags = AI_PASSIVE;
 
 	if (getaddrinfo("localhost", std::to_string(port).c_str(), &hints, &res) != 0)
-		this->perrorExit("Getaddrinfo failed");
+		this->_perrorExit("Getaddrinfo failed");
 
 	sockaddr_in serverAddress;
 	memcpy(&serverAddress, res->ai_addr, res->ai_addrlen);
 	serverAddress.sin_port = htons(port);
 
 	if (bind(serverFd, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) < 0)
-		this->perrorExit("Bind failed");
+		this->_perrorExit("Bind failed");
 
 
 	struct sockaddr_in clientAddr;
 	socklen_t clientAddrSize = sizeof(clientAddr);
 	if (getsockname(serverFd, (struct sockaddr *)&clientAddr, &clientAddrSize) < 0)
-		this->perrorExit("getsockname failed");
+		this->_perrorExit("getsockname failed");
 
 	struct hostent*	host = gethostbyaddr((const char *)&clientAddr.sin_addr.s_addr, sizeof(clientAddr.sin_addr.s_addr), AF_INET);
 	if (host == NULL) {
 		close(serverFd);
-		this->perrorExit("gethostbyaddr failed");
+		this->_perrorExit("gethostbyaddr failed");
 	}
 	
 	this->_irc.hostname = host->h_name;
 	std::cout << MAGENTA << "Server started on " << host->h_name << ":" << port << RESET << std::endl;
 }
 
-void	Server::listenSocket() {
-	int&												serverFd = this->_irc.serverFd;
+void	Server::_listenSocket() {
+	int&						serverFd = this->_irc.serverFd;
 	std::vector<struct pollfd>&	fds = this->_irc.fds;
 	
 	if (listen(serverFd, SOMAXCONN) < 0)
-		this->perrorExit("Listen failed");
+		this->_perrorExit("Listen failed");
 
 	struct pollfd newfd;
 	newfd.fd = serverFd;

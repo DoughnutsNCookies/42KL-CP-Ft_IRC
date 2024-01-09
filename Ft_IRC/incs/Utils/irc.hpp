@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   irc.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 21:08:33 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/05 17:19:07 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/09 13:09:35 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ typedef struct s_irc {
 	int 							serverFd;
 	std::string						password;
 	std::string						hostname;
+	std::string						version;
+	std::string						userModes;
+	std::string						channelModes;
+	std::string						channelModesWithParam;
+	std::string						supportTokens;
 	std::map<int, Client>			clients;
 	std::map<std::string, Channel>	channels;
 	std::vector<struct pollfd>		fds;

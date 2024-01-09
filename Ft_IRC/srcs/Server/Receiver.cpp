@@ -16,8 +16,8 @@ Receiver::Receiver() {}
 
 void Receiver::new_connection(t_irc& irc) {
 	std::vector<struct pollfd>&	fds = irc.fds;
-	std::map<int, Client>&			clients = irc.clients;
-	int&												serverFd = irc.serverFd;	
+	std::map<int, Client>&		clients = irc.clients;
+	int&						serverFd = irc.serverFd;	
 
 	int clientSocket = accept(serverFd, NULL, NULL);
 	if (clientSocket < 0) {
@@ -45,8 +45,8 @@ void Receiver::new_connection(t_irc& irc) {
 
 int	Receiver::receive(t_irc& irc, int i) {
 	std::vector<struct pollfd>&	fds = irc.fds;
-	std::map<int, Client>&			clients = irc.clients;
-	int&												pollfd = fds[i].fd;
+	std::map<int, Client>&		clients = irc.clients;
+	int&						pollfd = fds[i].fd;
 
 	char buffer[1024];
 	bzero(buffer, 1024);
