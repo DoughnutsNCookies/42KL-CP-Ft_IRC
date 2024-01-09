@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:42:42 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 13:54:30 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/09 14:15:01 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "Commands/Quit.hpp"
 #include "Utils/irc.hpp"
 #include "Utils/Utils.hpp"
+#include "ASocketServer.hpp"
 #include "ft_irc.hpp"
 #include "Client.hpp"
 #include "Receiver.hpp"
@@ -29,7 +30,7 @@
 #include "Parser.hpp"
 #include "Executor.hpp"
 
-class Server {
+class Server : public ASocketServer {
 	public:
 		Server(const char *port, const char *password);
 		void		run();
