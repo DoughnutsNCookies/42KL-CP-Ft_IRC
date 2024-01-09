@@ -51,7 +51,7 @@ class SendMsg {
 		void		rpl333(t_irc& irc, Client& client, std::string channelName);
 
 		/* RPL_NAMREPLY */
-		void				rpl353(t_irc& irc, Client& client, std::map<std::string, Client> users, std::string channelName);
+		void		rpl353(t_irc& irc, Client& client, Channel& channelName);
 
 		/* RPL_ENDOFNAMES */
 		void		rpl366(t_irc& irc, Client& client, std::string channelName);
