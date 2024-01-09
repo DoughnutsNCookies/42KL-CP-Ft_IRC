@@ -151,13 +151,14 @@ void	SendMsg::customMsg(t_irc& irc, Client& client, std::string message) {
 }
 
 void	SendMsg::registeredMsg(t_irc& irc, Client& client) {
-	if ((irc.password.size() != 0 && !client.verified) || !client.userSet || !client.nickSet)
+	if ((irc.password.size() != 0 && !client.verified) || !client.userSet || !client.nickSet || client.joined)
 		return;
 	this->rpl001(irc, client);
 	this->rpl002(irc, client);
 	this->rpl003(irc, client);
 	this->rpl004(irc, client);
 	this->rpl005(irc, client);
+	client.joined = true;
 }
 
 std::string	SendMsg::_header(t_irc& irc, Client& client, std::string code) {
