@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:46:46 by plau              #+#    #+#             */
-/*   Updated: 2024/01/08 17:08:12 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 16:33:14 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,6 @@ void	Pass::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 
 	if (tokens.size() == 1) {
 		this->_SendMsg.error461(irc, client, tokens[0]);
-		return;
-	}
-
-	if (tokens.size() > 2) {
-		this->_SendMsg.error464(irc, client);
 		return;
 	}
 	
