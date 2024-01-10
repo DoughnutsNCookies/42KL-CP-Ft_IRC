@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 18:55:50 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/10 22:26:33 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 #include "Commands/Pong.hpp"
 #include "Commands/Quit.hpp"
 #include "Commands/List.hpp"
+#include "Commands/Part.hpp"
+#include "Commands/Names.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
@@ -40,7 +42,8 @@ enum TOKEN {
 	PONG = 7,
 	QUIT = 8,
 	PART = 9,
-	LIST = 10
+	LIST = 10,
+	NAMES = 11
 };
 
 class Executor {
@@ -61,6 +64,7 @@ class Executor {
 		Quit			_Quit;
 		List			_List;
 		Part			_Part;
+		Names			_Names;
 		
 		TOKEN			_getToken(std::string token);
 		tokensVector	_getNextTokens(tokensVector& tokens);
