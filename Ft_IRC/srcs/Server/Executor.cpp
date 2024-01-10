@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 18:23:54 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 18:56:20 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ TOKEN	Executor::_getToken(std::string token) {
 		std::pair<std::string, TOKEN>("PONG", PONG),
 		std::pair<std::string, TOKEN>("QUIT", QUIT),
 		std::pair<std::string, TOKEN>("PART", PART),
-		std::pair<std::string, TOKEN>("UNKNOWN", UNKNOWN)
+		std::pair<std::string, TOKEN>("LIST", LIST),
+		std::pair<std::string, TOKEN>("UNKNOWN", UNKNOWN),
 	};
 
 	for (size_t i = 0; tokenPairs[i].second != UNKNOWN; i++) {
@@ -55,7 +56,8 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 		std::pair<TOKEN, ATokenParser *>(TOPIC, &this->_Topic),
 		std::pair<TOKEN, ATokenParser *>(PONG, &this->_Pong),
 		std::pair<TOKEN, ATokenParser *>(QUIT, &this->_Quit),
-		std::pair<TOKEN, ATokenParser *>(PART, &this->_Part)
+		std::pair<TOKEN, ATokenParser *>(PART, &this->_Part),
+		std::pair<TOKEN, ATokenParser *>(LIST, &this->_List)
 	};
 
 	while (tokens.size() > 0) {
