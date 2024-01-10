@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 17:31:26 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 18:55:50 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #include "Commands/Topic.hpp"
 #include "Commands/Pong.hpp"
 #include "Commands/Quit.hpp"
-#include "Commands/Part.hpp"
+#include "Commands/List.hpp"
 
 enum TOKEN {
 	UNKNOWN = -1,
@@ -39,7 +39,8 @@ enum TOKEN {
 	TOPIC = 6,
 	PONG = 7,
 	QUIT = 8,
-	PART = 9
+	PART = 9,
+	LIST = 10
 };
 
 class Executor {
@@ -58,6 +59,7 @@ class Executor {
 		Topic			_Topic;
 		Pong			_Pong;
 		Quit			_Quit;
+		List			_List;
 		Part			_Part;
 		
 		TOKEN			_getToken(std::string token);

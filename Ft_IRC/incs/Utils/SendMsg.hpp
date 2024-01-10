@@ -41,6 +41,15 @@ class SendMsg {
 		/* RPL_ISUPPORT */
 		void		rpl005(t_irc& irc, Client& client);
 
+		/* RPL_LISTSTART */
+		void		rpl321(t_irc& irc, Client& client);
+
+		/* RPL_LIST */
+		void		rpl322(t_irc& irc, Client& client, Channel& channel);
+
+		/* RPL_LISTEND */
+		void		rpl323(t_irc& irc, Client& client);
+
 		/*	RPL_NOTOPIC	*/
 		void		rpl331(t_irc& irc, Client& client, std::string channelName);
 

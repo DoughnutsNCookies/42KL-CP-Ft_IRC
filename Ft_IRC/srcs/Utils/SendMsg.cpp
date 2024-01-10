@@ -39,6 +39,21 @@ void	SendMsg::rpl005(t_irc& irc, Client& client) {
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
+void	SendMsg::rpl321(t_irc& irc, Client& client) {
+	client.response += this->_header(irc, client, "321") + "Channel :Users Name\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
+void	SendMsg::rpl322(t_irc& irc, Client& client, Channel& channel) {
+	client.response += this->_header(irc, client, "322") + channel.name + " " + std::to_string(channel.users.size()) + " :" + channel.topic + " \r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
+void	SendMsg::rpl323(t_irc& irc, Client& client) {
+	client.response += this->_header(irc, client, "323") + ":End of /LIST\r\n";
+	this->_Utils.setClientToPollOut(irc, client);	
+}
+
 void	SendMsg::rpl331(t_irc& irc, Client& client, std::string channelName) {
 	client.response += this->_header(irc, client, "331") + channelName + " :No topic is set\r\n";
 	this->_Utils.setClientToPollOut(irc, client);
