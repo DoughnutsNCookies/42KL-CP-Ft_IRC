@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 17:32:32 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 18:23:54 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ TOKEN	Executor::_getToken(std::string token) {
 	}
 	return (UNKNOWN);
 }
-
 tokensVector Executor::_getNextTokens(tokensVector& tokens) {
     tokensVector::iterator	it = std::find(tokens.begin(), tokens.end(), "\r\n");
     size_t					tokensToCopy = std::distance(tokens.begin(), it);

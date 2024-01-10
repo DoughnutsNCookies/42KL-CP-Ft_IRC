@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parser.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:56:32 by schuah            #+#    #+#             */
-/*   Updated: 2023/11/30 14:27:06 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/10 18:46:10 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Parser::Parser() {}
 
-tokensVector	Parser::parse(std::string str, std::string delim) {
+tokensVector	Parser::parse(std::string str, std::string delim, bool includeEnd) {
 	tokensVector	result;
 
 	while (!str.empty()) {
@@ -29,7 +29,7 @@ tokensVector	Parser::parse(std::string str, std::string delim) {
 			result.push_back(str.substr(nextPos, 2));
 		str.erase(0, nextPos + 1);
 	}
-	if (result.size() > 0 && result[result.size() - 1] != "\r\n")
+	if (includeEnd && result.size() > 0 && result[result.size() - 1] != "\r\n")
 		result.push_back("\r\n");
 	return (result);
 }

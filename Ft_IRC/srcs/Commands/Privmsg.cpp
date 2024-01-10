@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 17:27:54 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:58:28 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,9 @@ void	Privmsg::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 void	Privmsg::_parseTokens(tokensVector& tokens) {
 	std::string nicknames = this->_Utils.extractFromToken(tokens[1]);
 	
-	this->_destinations = this->_Parser.parse(nicknames, ",");
+	this->_destinations = this->_Parser.parse(nicknames, ",", false);
 	if (this->_destinations.size() == 0)
 		return;
-	this->_destinations.erase(this->_destinations.end() - 1);
 
 	this->_message = this->_Utils.extractFromToken(tokens[2]);
 	for (size_t i = 3; i < tokens.size(); i++)

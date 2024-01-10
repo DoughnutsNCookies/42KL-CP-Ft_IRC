@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 17:27:16 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 18:53:01 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,31 @@ void	Join::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 }
 
 void	Join::_parseTokens(tokensVector& tokens) {
-	this->_channelNames = this->_Parser.parse(tokens[1], ",");
+	this->_channelNames = this->_Parser.parse(tokens[1], ",", false);
 	if (this->_channelNames.size() == 0)
 		return;
+	this->_leaveAll = false;
 	for (size_t i = 0; i < this->_channelNames.size(); i++) {
+		if (i == 0 && this->_channelNames[i] == "0") {
+			this->_leaveAll = true;
+			return;
+		}
 		if (this->_channelNames[i][0] != '#')
 			this->_channelNames[i] = "#" + this->_channelNames[i];
 	}
-	this->_channelNames.erase(this->_channelNames.end() - 1);
 }
 
 void	Join::_executeCommand(t_irc& irc, Client& client) {
+	if (this->_leaveAll) {
+		tokensVector	tokens(2, "PART");
+
+		for (size_t i = 0; i < client.channels.size(); i++) {
+			tokens[1] = client.channels[i];
+			this->_Part.verifyTokens(irc, client, tokens);
+		}
+		return ;
+	}
+
 	for (size_t i = 0; i < this->_channelNames.size(); i++) {
 		std::map<std::string, Channel>::iterator	it = irc.channels.find(this->_channelNames[i]);
 		if (it == irc.channels.end())

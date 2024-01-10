@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:13:48 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 17:47:53 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:58:23 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,13 @@ void	Part::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 }
 
 void	Part::_parseTokens(tokensVector& tokens) {
-	tokensVector	parsedChannelNames = this->_Parser.parse(tokens[1], ",");
+	tokensVector	parsedChannelNames = this->_Parser.parse(tokens[1], ",", false);
 	if (parsedChannelNames.size() == 0)
 		return;
 	for (size_t i = 0; i < parsedChannelNames.size(); i++) {
 		if (parsedChannelNames[i][0] != '#')
 			parsedChannelNames[i] = "#" + parsedChannelNames[i];
 	}
-	parsedChannelNames.erase(parsedChannelNames.end() - 1);
 	this->_channelNames = std::set<std::string>(parsedChannelNames.begin(), parsedChannelNames.end());
 
 	if (tokens.size() > 2)

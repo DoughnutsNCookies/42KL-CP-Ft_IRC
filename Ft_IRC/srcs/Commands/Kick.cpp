@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Kick.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:43:26 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 05:21:51 by codespace        ###   ########.fr       */
+/*   Updated: 2024/01/10 17:58:15 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,9 @@ void	Kick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 void	Kick::_parseTokens(tokensVector& tokens) {
 	this->_channelName = this->_Utils.extractFromToken(tokens[1]);
 	
-	this->_nicknames = this->_Parser.parse(tokens[2], ",");
+	this->_nicknames = this->_Parser.parse(tokens[2], ",", false);
 	if (this->_nicknames.size() == 0)
 		return;
-	this->_nicknames.erase(this->_nicknames.end() - 1);
 
 	this->_comment = "No commment given";
 	if (tokens.size() > 3)

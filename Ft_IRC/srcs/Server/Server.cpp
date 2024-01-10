@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 17:08:53 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:57:52 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	Server::run() {
 				else {
 					int	recvResult = this->_Receiver.receive(this->_irc, i);
 					if (recvResult > 0) {
-						tokensVector	tokens = this->_Parser.parse(clients[fds[i].fd].buffer, " \r\n");
+						tokensVector	tokens = this->_Parser.parse(clients[fds[i].fd].buffer, " \r\n", true);
 						this->_Executor.execute(this->_irc, clients[fds[i].fd], tokens);
 					} else if (recvResult < 0) {
 						this->_Quit.disconnectClient(this->_irc, fds[i].fd);

@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:55:39 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 05:33:19 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:56:41 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef std::vector<std::string>	tokensVector;
 class Parser {
 	public:
 		Parser();
-		tokensVector	parse(std::string str, std::string delim);
+		tokensVector	parse(std::string str, std::string delim, bool includeEnd);
 };
 
 #endif
