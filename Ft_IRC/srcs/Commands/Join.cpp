@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 16:24:14 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:27:16 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	Join::_parseTokens(tokensVector& tokens) {
 
 void	Join::_executeCommand(t_irc& irc, Client& client) {
 	for (size_t i = 0; i < this->_channelNames.size(); i++) {
-		std::map<std::string, Channel>::iterator it = irc.channels.find(this->_channelNames[i]);
+		std::map<std::string, Channel>::iterator	it = irc.channels.find(this->_channelNames[i]);
 		if (it == irc.channels.end())
 			this->_createChannel(irc, client, this->_channelNames[i]);
 		else if (it->second.users.find(client.nickname) == it->second.users.end())
@@ -71,5 +71,5 @@ void	Join::_joinChannel(t_irc& irc, Client& client, std::string channelName) {
 		this->_SendMsg.rpl332(irc, client, channelName, channel.topic);
 	this->_SendMsg.rpl353(irc, client, channel);
 	this->_SendMsg.rpl366(irc, client, channelName);
-	this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message, false);
+	this->_SendMsg.sendToAllUsersInChannel(irc, client, channel, message, false);
 }

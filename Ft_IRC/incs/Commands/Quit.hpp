@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:38:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 21:06:18 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:26:59 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 #include "Utils/color.hpp"
 #include "ATokenParser.hpp"
-#include "Commands/Privmsg.hpp"
 #include "Utils/Utils.hpp"
 #include "Utils/SendMsg.hpp"
 
@@ -33,7 +32,6 @@ class Quit : public ATokenParser {
 
 		Utils		_Utils;
 		SendMsg		_SendMsg;
-		Privmsg		_Privmsg;
 
 		void		_parseTokens(tokensVector& tokens);
 		void		_executeCommand(t_irc& irc, Client& client);

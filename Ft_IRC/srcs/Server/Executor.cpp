@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 20:40:42 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:32:32 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ TOKEN	Executor::_getToken(std::string token) {
 		std::pair<std::string, TOKEN>("KICK", KICK),
 		std::pair<std::string, TOKEN>("TOPIC", TOPIC),
 		std::pair<std::string, TOKEN>("PONG", PONG),
-		std::pair<std::string, TOKEN>("QUIT", QUIT)
+		std::pair<std::string, TOKEN>("QUIT", QUIT),
+		std::pair<std::string, TOKEN>("PART", PART),
+		std::pair<std::string, TOKEN>("UNKNOWN", UNKNOWN)
 	};
 
-	for (int i = 0; i < 9; i++) {
+	for (size_t i = 0; tokenPairs[i].second != UNKNOWN; i++) {
 		if (tokenPairs[i].first == token)
 			return (tokenPairs[i].second);
 	}
@@ -53,7 +55,8 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 		std::pair<TOKEN, ATokenParser *>(KICK, &this->_Kick),
 		std::pair<TOKEN, ATokenParser *>(TOPIC, &this->_Topic),
 		std::pair<TOKEN, ATokenParser *>(PONG, &this->_Pong),
-		std::pair<TOKEN, ATokenParser *>(QUIT, &this->_Quit)
+		std::pair<TOKEN, ATokenParser *>(QUIT, &this->_Quit),
+		std::pair<TOKEN, ATokenParser *>(PART, &this->_Part)
 	};
 
 	while (tokens.size() > 0) {

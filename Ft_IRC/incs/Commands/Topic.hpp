@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:44:42 by plau              #+#    #+#             */
-/*   Updated: 2024/01/10 16:12:13 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:13:11 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #define TOPIC_HPP
 
 #include "ATokenParser.hpp"
-#include "Commands/Privmsg.hpp"
 #include "Utils/irc.hpp"
 #include "Utils/SendMsg.hpp"
 #include "Utils/Utils.hpp"
@@ -29,7 +28,6 @@ class Topic : public ATokenParser {
 		std::string	_channelName;
 		bool		_setTopic;
 
-		Privmsg		_Privmsg;
 		SendMsg		_SendMsg;
 		Utils		_Utils;
 

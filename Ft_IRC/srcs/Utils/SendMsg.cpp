@@ -145,6 +145,21 @@ void	SendMsg::error482(t_irc& irc, Client& client, std::string channelName) {
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
+void	SendMsg::sendToUser(t_irc& irc, std::string receiverNickname, std::string message) {
+	Client&	receiverClient = this->_Utils.getClientByNickname(irc, receiverNickname);
+	this->customMsg(irc, receiverClient, message);
+}
+
+void	SendMsg::sendToAllUsersInChannel(t_irc& irc, Client& client, Channel& channel, std::string message, bool sendToSelf) {
+	std::map<std::string, Client>&	users = channel.users;
+	
+	for (std::map<std::string, Client>::iterator it = users.begin(); it != users.end(); ++it) {
+		if (sendToSelf == false && it->second.nickname == client.nickname)
+			continue;
+		this->sendToUser(irc, it->second.nickname, message);
+	}
+}
+
 void	SendMsg::customMsg(t_irc& irc, Client& client, std::string message) {
 	client.response += message;
 	this->_Utils.setClientToPollOut(irc, client);

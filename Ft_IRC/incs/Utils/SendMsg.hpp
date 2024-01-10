@@ -101,6 +101,12 @@ class SendMsg {
 		/* ERR_CHANOPRIVSNEEDED */
 		void		error482(t_irc& irc, Client& client, std::string channelName);
 
+		/* Send custom message to a user */
+		void		sendToUser(t_irc& irc, std::string receiverNickname, std::string message);
+
+		/* Send custom message to all users in the channel */
+		void		sendToAllUsersInChannel(t_irc& irc, Client& client, Channel& channel, std::string message, bool sendToSelf);
+
 		/* Custom message */
 		void		customMsg(t_irc& irc, Client& client, std::string message);
 

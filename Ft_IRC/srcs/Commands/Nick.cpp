@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2024/01/08 17:11:51 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:28:07 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	Nick::_executeCommand(t_irc& irc, Client& client) {
 		
 		if (channel.opName == oldNickname)
 			channel.opName = this->_nickname;
-		this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message, false);
+		this->_SendMsg.sendToAllUsersInChannel(irc, client, channel, message, false);
 	}
 
 	client.nickSet = true;

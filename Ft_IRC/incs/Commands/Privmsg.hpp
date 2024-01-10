@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:49:24 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 16:12:13 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:06:14 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ class Privmsg : public ATokenParser {
 	public:
 		Privmsg();
 		void			verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
-		void			sendToAllUsersInChannel(t_irc& irc, Client& client, Channel& channel, std::string message, bool sendToSelf);
 	
 	private:
 		tokensVector	_destinations;
@@ -36,7 +35,6 @@ class Privmsg : public ATokenParser {
 
 		void			_parseTokens(tokensVector& tokens);
 		void			_executeCommand(t_irc& irc, Client& client);
-		void			_sendToUser(t_irc& irc, std::string receiverNickname, std::string destination);
 		void			_sendToChannel(t_irc& irc, Client& client, std::string channelName);
 };
 

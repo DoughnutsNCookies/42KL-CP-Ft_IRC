@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Nick.hpp                                           :+:      :+:    :+:   */
+/*   Part.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 17:49:15 by plau              #+#    #+#             */
-/*   Updated: 2024/01/10 17:28:09 by schuah           ###   ########.fr       */
+/*   Created: 2024/01/10 16:11:17 by schuah            #+#    #+#             */
+/*   Updated: 2024/01/10 17:44:17 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NICK_HPP
-#define NICK_HPP
+#ifndef PART_HPP
+#define PART_HPP
+
+#include <set>
 
 #include "ATokenParser.hpp"
-#include "Utils/irc.hpp"
+#include "Server/Parser.hpp"
 #include "Utils/SendMsg.hpp"
 #include "Utils/Utils.hpp"
 
-class Nick : public ATokenParser {
+class Part : public ATokenParser {
 	public:
-		Nick();
-		void		verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
-	
-	private:
-		std::string	_nickname;
-		
-		SendMsg		_SendMsg;
-		Utils		_Utils;
+		Part();
+		void			verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
 
-		void		_parseTokens(tokensVector& tokens);
-		void		_executeCommand(t_irc& irc, Client& client);
-		bool		_checkValidNickName(std::string nickname);
+	private:
+		std::set<std::string>	_channelNames;
+		std::string				_reason;
+
+		Parser					_Parser;
+		Utils					_Utils;
+		SendMsg					_SendMsg;
+
+		void					_parseTokens(tokensVector& tokens);
+		void					_executeCommand(t_irc& irc, Client& client);
+		void					_leaveChannel(t_irc& irc, Client& client, Channel& channel);
 };
 
 #endif

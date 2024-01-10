@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:39:00 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/08 21:08:45 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:26:49 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ void	Quit::_sendAllClientQuitMessage(t_irc& irc, Client& client) {
 	for (size_t i = 0; i < channels.size(); i++) {
 		Channel&	channel = irc.channels[channels[i]];
 		std::string	message = ":" + client.nickname + " QUIT :" + this->_quitMessage + "\r\n";
-		this->_Privmsg.sendToAllUsersInChannel(irc, client, channel, message, false);
+		this->_SendMsg.sendToAllUsersInChannel(irc, client, channel, message, false);
 	}
 }

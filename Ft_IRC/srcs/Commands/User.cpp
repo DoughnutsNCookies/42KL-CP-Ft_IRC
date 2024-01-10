@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:33:41 by plau              #+#    #+#             */
-/*   Updated: 2024/01/08 17:11:41 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 17:18:36 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,9 @@ void	User::_parseTokens(tokensVector &tokens) {
 	if (this->_username.size() > 15)
 		this->_username = this->_username.substr(0, 15);
 	
-	this->_realname = tokens[4];
+	this->_realname = this->_Utils.extractFromToken(tokens[4]);
 	for (size_t i = 5; i < tokens.size(); i++)
 		this->_realname += " " + tokens[i];
-	this->_realname = this->_Utils.extractFromToken(this->_realname);
 }
 
 void::User::_executeCommand(t_irc& irc, Client& client) {
