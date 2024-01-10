@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:36:15 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 05:28:28 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 16:12:13 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <algorithm>
 
-#include "Commands/ATokenParser.hpp"
+#include "ATokenParser.hpp"
 #include "Utils/irc.hpp"
 #include "Utils/SendMsg.hpp"
 #include "Utils/Utils.hpp"

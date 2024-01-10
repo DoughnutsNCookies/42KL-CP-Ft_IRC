@@ -6,14 +6,14 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:15 by plau              #+#    #+#             */
-/*   Updated: 2024/01/04 21:32:26 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/10 16:12:13 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NICK_HPP
 #define NICK_HPP
 
-#include "Commands/ATokenParser.hpp"
+#include "ATokenParser.hpp"
 #include "Commands/Privmsg.hpp"
 #include "Utils/irc.hpp"
 #include "Utils/SendMsg.hpp"

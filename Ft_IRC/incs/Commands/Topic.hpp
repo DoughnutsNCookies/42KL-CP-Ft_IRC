@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Topic.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:44:42 by plau              #+#    #+#             */
-/*   Updated: 2024/01/04 21:04:07 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/10 16:12:13 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOPIC_HPP
 #define TOPIC_HPP
 
-#include "Commands/ATokenParser.hpp"
+#include "ATokenParser.hpp"
 #include "Commands/Privmsg.hpp"
 #include "Utils/irc.hpp"
 #include "Utils/SendMsg.hpp"
