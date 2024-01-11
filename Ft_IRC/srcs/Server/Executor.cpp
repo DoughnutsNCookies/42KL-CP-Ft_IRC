@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 22:31:33 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/11 15:18:21 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ TOKEN	Executor::_getToken(std::string token) {
 		std::pair<std::string, TOKEN>("QUIT", QUIT),
 		std::pair<std::string, TOKEN>("PART", PART),
 		std::pair<std::string, TOKEN>("LIST", LIST),
+		// std::pair<std::string, TOKEN>("NOTICE", NOTICE),
 		std::pair<std::string, TOKEN>("NAMES", NAMES),
 		std::pair<std::string, TOKEN>("UNKNOWN", UNKNOWN)
 	};
@@ -59,6 +60,7 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 		std::pair<TOKEN, ATokenParser *>(QUIT, &this->_Quit),
 		std::pair<TOKEN, ATokenParser *>(PART, &this->_Part),
 		std::pair<TOKEN, ATokenParser *>(LIST, &this->_List),
+		// std::pair<TOKEN, ATokenParser *>(NOTICE, &this->_Notice),
 		std::pair<TOKEN, ATokenParser *>(NAMES, &this->_Names)
 	};
 

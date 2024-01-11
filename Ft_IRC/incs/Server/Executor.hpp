@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 15:15:36 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/11 15:18:33 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #include "Commands/List.hpp"
 #include "Commands/Part.hpp"
 #include "Commands/Names.hpp"
+// #include "Commands/Notice.hpp"
 
 enum TOKEN {
 	PASS,
@@ -42,7 +43,7 @@ enum TOKEN {
 	QUIT,
 	PART,
 	LIST,
-	NOITCE,
+	// NOITCE,
 	NAMES,
 	UNKNOWN
 };
@@ -65,6 +66,7 @@ class Executor {
 		Quit			_Quit;
 		List			_List;
 		Part			_Part;
+		// Notice			_Notice;
 		Names			_Names;
 		
 		TOKEN			_getToken(std::string token);
