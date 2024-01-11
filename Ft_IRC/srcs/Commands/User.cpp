@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 13:33:41 by plau              #+#    #+#             */
-/*   Updated: 2024/01/10 17:18:36 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/11 21:45:15 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,8 @@
 User::User() {}
 
 void	User::verifyTokens(t_irc& irc, Client& client, tokensVector &tokens) {
-	if (client.username.size() != 0) {
+	if (client.userSet) {
 		this->_SendMsg.error462(irc, client);
-		return;
-	}
-
-	if (tokens[2] != "0" || tokens[3] != "*") {
-		this->_SendMsg.error461(irc, client, tokens[0]);
 		return;
 	}
 
@@ -45,7 +40,6 @@ void	User::_parseTokens(tokensVector &tokens) {
 }
 
 void::User::_executeCommand(t_irc& irc, Client& client) {
-	(void)irc;
 	client.username = this->_username;
 	client.realname = this->_realname;
 	client.userSet = true;
