@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 18:55:50 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/11 13:31:46 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,19 @@
 #include "Commands/List.hpp"
 
 enum TOKEN {
-	UNKNOWN = -1,
-	PASS = 0,
-	NICK = 1,
-	USER = 2,
-	PRIVMSG = 3,
-	JOIN = 4,
-	KICK = 5,
-	TOPIC = 6,
-	PONG = 7,
-	QUIT = 8,
-	PART = 9,
-	LIST = 10
+	UNKNOWN,
+	PASS,
+	NICK,
+	USER,
+	PRIVMSG,
+	JOIN,
+	KICK,
+	TOPIC,
+	PONG,
+	QUIT,
+	PART,
+	LIST,
+	NOITCE
 };
 
 class Executor {
