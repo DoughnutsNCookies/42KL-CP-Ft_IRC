@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 22:13:56 by plau              #+#    #+#             */
-/*   Updated: 2024/01/11 21:58:02 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/11 22:00:17 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ void	Names::_parseTokens(tokensVector& tokens) {
 
 void	Names::_executeCommand(t_irc& irc, Client& client) {
 	if (this->_nameAll)
-		this->_displayAll(irc, client);
+		this->_displayAllNames(irc, client);
 	else
-		this->_displayNames(irc, client);
+		this->_displaySpecifiedNames(irc, client);
 }
 
-void	Names::_displayAll(t_irc& irc, Client& client) {
+void	Names::_displayAllNames(t_irc& irc, Client& client) {
 	for (std::map<std::string, Channel>::iterator it = irc.channels.begin(); it != irc.channels.end(); it++) {
 		this->_SendMsg.rpl353(irc, client, it->second);
 		this->_SendMsg.rpl366(irc, client, it->second.name);
 	}
 }
 
-void	Names::_displayNames(t_irc& irc, Client& client) {
+void	Names::_displaySpecifiedNames(t_irc& irc, Client& client) {
 	for (size_t i = 0; i < this->_nameList.size(); i++) {
 		if (irc.channels.find(this->_nameList[i]) != irc.channels.end())
 			this->_SendMsg.rpl353(irc, client, irc.channels[this->_nameList[i]]);
