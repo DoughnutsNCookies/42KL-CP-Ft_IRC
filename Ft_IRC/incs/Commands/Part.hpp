@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:11:17 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 14:38:54 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/11 14:44:53 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class Part : public ATokenParser {
 	public:
 		Part();
 		void			verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
+		void			leaveChannel(t_irc& irc, Client& client, Channel& channel);
 
 	private:
 		tokensVector	_channelNames;
@@ -35,7 +36,6 @@ class Part : public ATokenParser {
 
 		void			_parseTokens(tokensVector& tokens);
 		void			_executeCommand(t_irc& irc, Client& client);
-		void			_leaveChannel(t_irc& irc, Client& client, Channel& channel);
 };
 
 #endif

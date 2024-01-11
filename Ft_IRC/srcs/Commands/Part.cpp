@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:13:48 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 14:40:08 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/11 14:50:16 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,22 @@ void	Part::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	}
 	
 	this->_executeCommand(irc, client);
+}
+
+void	Part::leaveChannel(t_irc& irc, Client& client, Channel& channel) {
+	channel.users.erase(client.nickname);
+	if (channel.opName == client.nickname && channel.users.size() > 0)
+		channel.opName = channel.users.begin()->second.nickname;
+
+	for (size_t i = 0; i < client.channels.size(); i++) {
+		if (client.channels[i] != channel.name)
+			continue;
+		client.channels.erase(client.channels.begin() + i);
+		break;
+	}
+
+	if (channel.users.size() == 0)
+		irc.channels.erase(channel.name);
 }
 
 void	Part::_parseTokens(tokensVector& tokens) {
@@ -54,27 +70,12 @@ void	Part::_executeCommand(t_irc& irc, Client& client) {
 				this->_SendMsg.error442(irc, client, this->_channelNames[i]);
 				continue;
 			}
-			this->_leaveChannel(irc, client, channel);
+			std::string	message = ":" + client.nickname + " PART " + channel.name + " :" + this->_reason + "\r\n";
+			this->_SendMsg.sendToAllUsersInChannel(irc, client, channel, message, true);
+			this->leaveChannel(irc, client, channel);
 		} catch (Utils::NoChannelFoundException& e) {
 			this->_SendMsg.error403(irc, client, this->_channelNames[i]);
 			continue;
 		}
 	}
-}
-
-void	Part::_leaveChannel(t_irc& irc, Client& client, Channel& channel) {
-	std::string	message = ":" + client.nickname + " PART " + channel.name + " :" + this->_reason + "\r\n";
-	this->_SendMsg.sendToAllUsersInChannel(irc, client, channel, message, true);
-
-	channel.users.erase(client.nickname);
-
-	for (size_t i = 0; i < client.channels.size(); i++) {
-		if (client.channels[i] != channel.name)
-			continue;
-		client.channels.erase(client.channels.begin() + i);
-		break;
-	}
-
-	if (channel.users.size() == 0)
-		irc.channels.erase(channel.name);
 }

@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:39:00 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 14:16:45 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/11 14:47:36 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ void	Quit::disconnectClient(t_irc& irc, int fd) {
 	
 	std::map<std::string, Channel>	&channels = irc.channels;
 	tokensVector					channelsJoined = clients[fd].channels;
-	for (size_t i = 0; i < channelsJoined.size(); i++) {
-		channels[channelsJoined[i]].users.erase(clients[fd].nickname);
-		if (channels[channelsJoined[i]].users.size() == 0)
-			channels.erase(channelsJoined[i]);
-	}
+	for (size_t i = 0; i < channelsJoined.size(); i++)
+		this->_Part.leaveChannel(irc, clients[fd], channels[channelsJoined[i]]);
 	
 	std::cout << RED << "Client " << clients[fd].nickname << " Disconnected" << RESET << std::endl;
 	
