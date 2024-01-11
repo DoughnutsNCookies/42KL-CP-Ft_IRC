@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Privmsg.hpp                                        :+:      :+:    :+:   */
+/*   Notice.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 13:49:24 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 15:07:16 by schuah           ###   ########.fr       */
+/*   Created: 2024/01/11 13:29:41 by schuah            #+#    #+#             */
+/*   Updated: 2024/01/11 19:55:35 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRIVMSG_HPP
-#define PRIVMSG_HPP
+#ifndef NOTICE_HPP
+#define NOTICE_HPP
 
 #include "ATokenParser.hpp"
 #include "Utils/irc.hpp"
@@ -20,11 +20,11 @@
 #include "Server/Parser.hpp"
 #include "Server/Channel.hpp"
 
-class Privmsg : public ATokenParser {
+class Notice : public ATokenParser {
 	public:
-		Privmsg();
-		void			verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
-	
+		Notice();
+		void	verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
+
 	private:
 		tokensVector	_destinations;
 		std::string		_message;
@@ -33,9 +33,9 @@ class Privmsg : public ATokenParser {
 		Utils			_Utils;
 		SendMsg			_SendMsg;
 
-		void			_parseTokens(tokensVector& tokens);
-		void			_executeCommand(t_irc& irc, Client& client);
-		void			_sendToChannel(t_irc& irc, Client& client, std::string channelName);
+		void	_parseTokens(tokensVector& tokens);
+		void	_executeCommand(t_irc& irc, Client& client);
+		void	_sendToChannel(t_irc& irc, Client& client, std::string channelName);
 };
 
 #endif
