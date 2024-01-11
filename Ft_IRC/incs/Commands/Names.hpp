@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 22:14:07 by plau              #+#    #+#             */
-/*   Updated: 2024/01/11 20:25:12 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/11 21:57:16 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ class Names : public ATokenParser {
 		void	verifyTokens(t_irc& irc, Client& client, tokensVector& tokens);
 
 	private:
+		bool			_nameAll;
 		tokensVector	_nameList;
 		SendMsg			_SendMsg;
 		Parser			_Parser;
 
-		void			_displayAll(t_irc& irc, Client& client);
 		void			_parseTokens(tokensVector& tokens);
 		void			_executeCommand(t_irc& irc, Client& client);
+		void			_displayAll(t_irc& irc, Client& client);
+		void			_displayNames(t_irc& irc, Client& client);
 };
 
 #endif
