@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 14:00:17 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/11 21:22:34 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@
 #include "Commands/Topic.hpp"
 #include "Commands/Pong.hpp"
 #include "Commands/Quit.hpp"
+#include "Commands/Part.hpp"
 #include "Commands/List.hpp"
+#include "Commands/Notice.hpp"
+#include "Commands/Invite.hpp"
 
 enum TOKEN {
 	PASS,
@@ -40,7 +43,8 @@ enum TOKEN {
 	QUIT,
 	PART,
 	LIST,
-	NOITCE,
+	NOTICE,
+	INVITE,
 	UNKNOWN
 };
 
@@ -60,8 +64,10 @@ class Executor {
 		Topic			_Topic;
 		Pong			_Pong;
 		Quit			_Quit;
-		List			_List;
 		Part			_Part;
+		List			_List;
+		Notice			_Notice;
+		Invite			_Invite;
 		
 		TOKEN			_getToken(std::string token);
 		tokensVector	_getNextTokens(tokensVector& tokens);

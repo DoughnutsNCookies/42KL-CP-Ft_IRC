@@ -69,6 +69,11 @@ void	SendMsg::rpl333(t_irc& irc, Client& client, std::string channelName) {
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
+void	SendMsg::rpl341(t_irc& irc, Client& client, std::string nickname, std::string channelName) {
+	client.response += this->_header(irc, client, "341") + nickname + " " + channelName + "\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
 void	SendMsg::rpl353(t_irc& irc, Client& client, Channel& channel) {
 	std::string userList = "";
 	for (std::map<std::string, Client>::iterator it = channel.users.begin(); it != channel.users.end(); it++) {
@@ -132,6 +137,11 @@ void	SendMsg::error441(t_irc& irc, Client& client, std::string nickname, std::st
 
 void	SendMsg::error442(t_irc& irc, Client& client, std::string channelName) {
 	client.response += this->_header(irc, client, "442") + channelName + " :You're not on that channel\r\n";
+	this->_Utils.setClientToPollOut(irc, client);
+}
+
+void	SendMsg::error443(t_irc& irc, Client& client, std::string invitee, std::string channelName) {
+	client.response += this->_header(irc, client, "443") + invitee + " " + channelName + " :is already on channel\r\n";
 	this->_Utils.setClientToPollOut(irc, client);
 }
 

@@ -59,6 +59,9 @@ class SendMsg {
 		/* RPL_TOPICWHOTIME	*/
 		void		rpl333(t_irc& irc, Client& client, std::string channelName);
 
+		/* RPL_INVITING */
+		void		rpl341(t_irc& irc, Client& client, std::string nickname, std::string channelName);
+
 		/* RPL_NAMREPLY */
 		void		rpl353(t_irc& irc, Client& client, Channel& channelName);
 
@@ -94,6 +97,9 @@ class SendMsg {
 
 		/* ERR_NOTONCHANNEL */
 		void		error442(t_irc& irc, Client& client, std::string channelName);
+
+		/* ERR_USERONCHANNEL */
+		void		error443(t_irc& irc, Client& client, std::string invitee, std::string channelName);
 
 		/* ERR_NOTREGISTERED */
 		void		error451(t_irc& irc, Client& client);

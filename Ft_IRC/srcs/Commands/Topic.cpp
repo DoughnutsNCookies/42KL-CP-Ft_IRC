@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:53:57 by plau              #+#    #+#             */
-/*   Updated: 2024/01/10 17:13:57 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/11 21:02:08 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void	Topic::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 
 	if (channel.users.find(client.nickname) == channel.users.end()) {
 		this->_SendMsg.error442(irc, client, this->_channelName);
+		return ;
+	}
+
+	if (channel.opName != client.nickname) {
+		this->_SendMsg.error482(irc, client, this->_channelName);
 		return ;
 	}
 
