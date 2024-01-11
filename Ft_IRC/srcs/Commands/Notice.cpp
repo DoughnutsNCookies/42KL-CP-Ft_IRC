@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Privmsg.cpp                                        :+:      :+:    :+:   */
+/*   Notice.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 13:50:29 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 19:53:16 by schuah           ###   ########.fr       */
+/*   Created: 2024/01/11 13:29:40 by schuah            #+#    #+#             */
+/*   Updated: 2024/01/11 19:56:11 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Commands/Privmsg.hpp"
+#include "Commands/Notice.hpp"
 
-Privmsg::Privmsg() {}
+Notice::Notice() {}
 
-void	Privmsg::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
-	if (tokens.size() == 1 || tokens[1].size() == 0) {
-		this->_SendMsg.error411(irc, client, tokens[0]);
+void	Notice::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
+	if (tokens.size() == 1 || tokens[1].size() == 0)
 		return;
-	}
 
-	if (tokens.size() == 2 || tokens[2].size() == 0) {
-		this->_SendMsg.error412(irc, client);
+	if (tokens.size() == 2 || tokens[2].size() == 0)
 		return;
-	}
 
 	this->_parseTokens(tokens);
-	if (this->_destinations.size() == 0) {
-		this->_SendMsg.error411(irc, client, tokens[0]);
+	if (this->_destinations.size() == 0)
 		return;
-	}
 
 	for (size_t i = 0; i < this->_destinations.size(); i++) {
 		try {
@@ -40,7 +34,6 @@ void	Privmsg::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 				if (channel.users.find(client.nickname) == channel.users.end())
 					throw Utils::NoChannelFoundException();
 			} catch(Utils::NoChannelFoundException& channelError) {
-				this->_SendMsg.error401(irc, client, this->_destinations[i]);
 				return;
 			}
 		}
@@ -49,7 +42,7 @@ void	Privmsg::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	this->_executeCommand(irc, client);
 }
 
-void	Privmsg::_parseTokens(tokensVector& tokens) {
+void	Notice::_parseTokens(tokensVector& tokens) {
 	std::string nicknames = this->_Utils.extractFromToken(tokens[1]);
 	
 	this->_destinations = this->_Parser.parse(nicknames, ",", false);
@@ -61,20 +54,20 @@ void	Privmsg::_parseTokens(tokensVector& tokens) {
 		this->_message += " " + tokens[i];
 }
 
-void	Privmsg::_executeCommand(t_irc& irc, Client& client) {
+void	Notice::_executeCommand(t_irc& irc, Client& client) {
 	for (size_t i = 0; i < this->_destinations.size(); i++) {
 		if (this->_destinations[i][0] == '#' || this->_destinations[i][0] == '@')
 			this->_sendToChannel(irc, client, this->_destinations[i]);
 		else {
-			std::string	message = ":" + client.nickname + " PRIVMSG " + this->_destinations[i] + " :" + this->_message + "\r\n";
+			std::string	message = ":" + client.nickname + " NOTICE " + this->_destinations[i] + " :" + this->_message + "\r\n";
 			this->_SendMsg.sendToUser(irc, this->_destinations[i], message);
 		}
 	}
 }
 
-void	Privmsg::_sendToChannel(t_irc& irc, Client& client, std::string channelName) {
+void	Notice::_sendToChannel(t_irc& irc, Client& client, std::string channelName) {
 	Channel&	channel = this->_Utils.getChannelByName(irc, channelName);
-	std::string	message = ":" + client.nickname + " PRIVMSG " + channelName + " :" + this->_message + "\r\n";
+	std::string	message = ":" + client.nickname + " NOTICE " + channelName + " :" + this->_message + "\r\n";
 	
 	if (channelName[0] == '@')
 		this->_SendMsg.sendToUser(irc, channel.opName, message);
