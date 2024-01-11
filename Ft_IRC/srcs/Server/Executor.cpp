@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:45 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 21:25:06 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/11 21:48:17 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ TOKEN	Executor::_getToken(std::string token) {
 		std::pair<std::string, TOKEN>("LIST", LIST),
 		std::pair<std::string, TOKEN>("NOTICE", NOTICE),
 		std::pair<std::string, TOKEN>("INVITE", INVITE),
+		std::pair<std::string, TOKEN>("NAMES", NAMES),
 		std::pair<std::string, TOKEN>("UNKNOWN", UNKNOWN)
 	};
 
@@ -61,7 +62,8 @@ void	Executor::execute(t_irc& irc, Client& client, tokensVector& tokens) {
 		std::pair<TOKEN, ATokenParser *>(PART, &this->_Part),
 		std::pair<TOKEN, ATokenParser *>(LIST, &this->_List),
 		std::pair<TOKEN, ATokenParser *>(NOTICE, &this->_Notice),
-		std::pair<TOKEN, ATokenParser *>(INVITE, &this->_Invite)
+		std::pair<TOKEN, ATokenParser *>(INVITE, &this->_Invite),
+		std::pair<TOKEN, ATokenParser *>(NAMES, &this->_Names),
 	};
 
 	while (tokens.size() > 0) {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Executor.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 21:22:34 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/11 21:46:52 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 #include "Commands/List.hpp"
 #include "Commands/Notice.hpp"
 #include "Commands/Invite.hpp"
+#include "Commands/Part.hpp"
+#include "Commands/Names.hpp"
 
 enum TOKEN {
 	PASS,
@@ -45,6 +47,7 @@ enum TOKEN {
 	LIST,
 	NOTICE,
 	INVITE,
+	NAMES,
 	UNKNOWN
 };
 
@@ -68,6 +71,7 @@ class Executor {
 		List			_List;
 		Notice			_Notice;
 		Invite			_Invite;
+		Names			_Names;
 		
 		TOKEN			_getToken(std::string token);
 		tokensVector	_getNextTokens(tokensVector& tokens);

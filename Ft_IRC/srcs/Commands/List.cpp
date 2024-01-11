@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:24:13 by plau              #+#    #+#             */
-/*   Updated: 2024/01/10 19:57:05 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/11 22:03:34 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	List::_parseTokens(tokensVector& tokens) {
 	}
 	
 	this->_channelList = this->_Parser.parse(tokens[1], ",", false);
-	if (this->_channelList.size() == 0)
-		return;
 	for (size_t i = 0; i < this->_channelList.size(); i++) {
 		if (this->_channelList[i][0] != '#')
 			this->_channelList[i] = "#" + this->_channelList[i];
@@ -37,17 +35,22 @@ void	List::_parseTokens(tokensVector& tokens) {
 
 void	List::_executeCommand(t_irc& irc, Client& client) {
 	this->_SendMsg.rpl321(irc, client);
-	if (this->_listAll) {
-		for (std::map<std::string, Channel>::iterator it = irc.channels.begin(); it != irc.channels.end(); it++) {
-			this->_SendMsg.rpl322(irc, client, it->second);
-		}
-		this->_SendMsg.rpl323(irc, client);
-		return;
-	}
+	if (this->_listAll)
+		this->_displayAllLists(irc, client);
+	else
+		this->_displaySpecifiedLists(irc, client);
+	this->_SendMsg.rpl323(irc, client);
+}
 
+void	List::_displayAllLists(t_irc& irc, Client& client) {
+	for (std::map<std::string, Channel>::iterator it = irc.channels.begin(); it != irc.channels.end(); it++) {
+		this->_SendMsg.rpl322(irc, client, it->second);
+	}
+}
+
+void	List::_displaySpecifiedLists(t_irc& irc, Client& client) {
 	for (size_t i = 0; i < this->_channelList.size(); i++) {
 		Channel&	channel = this->_Utils.getChannelByName(irc, this->_channelList[i]);
 		this->_SendMsg.rpl322(irc, client, channel);
 	}
-	this->_SendMsg.rpl323(irc, client);
 }
