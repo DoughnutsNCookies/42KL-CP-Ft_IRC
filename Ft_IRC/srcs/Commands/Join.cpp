@@ -6,12 +6,11 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 14:10:25 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/11 14:33:22 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Commands/Join.hpp"
-#include <iostream>
 
 Join::Join() {}
 
@@ -55,13 +54,8 @@ void	Join::_executeCommand(t_irc& irc, Client& client) {
 		return ;
 	}
 
-	std::cout << this->_channelNames.size() << std::endl;
 	for (size_t i = 0; i < this->_channelNames.size(); i++) {
 		std::map<std::string, Channel>::iterator	it = irc.channels.find(this->_channelNames[i]);
-		std::cout << this->_channelNames[i] << std::endl;
-		for (std::map<std::string, Channel>::iterator it2 = irc.channels.begin(); it2 != irc.channels.end(); ++it2) {
-			std::cout << "irc: " << it2->second.name << std::endl;
-		}
 		if (it == irc.channels.end())
 			this->_createChannel(irc, client, this->_channelNames[i]);
 		else if (it->second.users.find(client.nickname) == it->second.users.end())
@@ -81,7 +75,6 @@ void	Join::_createChannel(t_irc& irc, Client& client, std::string channelName) {
 }
 
 void	Join::_joinChannel(t_irc& irc, Client& client, std::string channelName) {
-	std::cout << "Joined" << std::endl;
 	client.channels.push_back(channelName);	
 	Channel&	channel = irc.channels[channelName];
 	channel.users[client.nickname] = client;
