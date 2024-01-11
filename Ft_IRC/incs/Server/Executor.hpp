@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 13:31:46 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/11 14:00:17 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 #include "Commands/List.hpp"
 
 enum TOKEN {
-	UNKNOWN,
 	PASS,
 	NICK,
 	USER,
@@ -41,7 +40,8 @@ enum TOKEN {
 	QUIT,
 	PART,
 	LIST,
-	NOITCE
+	NOITCE,
+	UNKNOWN
 };
 
 class Executor {

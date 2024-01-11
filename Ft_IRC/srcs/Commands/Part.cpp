@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:13:48 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 17:58:23 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/11 14:19:44 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,14 @@ void	Part::_leaveChannel(t_irc& irc, Client& client, Channel& channel) {
 	this->_SendMsg.sendToAllUsersInChannel(irc, client, channel, message, true);
 
 	channel.users.erase(client.nickname);
-	std::remove(client.channels.begin(), client.channels.end(), channel.name);
+
+	for (size_t i = 0; i < client.channels.size(); i++) {
+		if (client.channels[i] != channel.name)
+			continue;
+		client.channels.erase(client.channels.begin() + i);
+		break;
+	}
+
 	if (channel.users.size() == 0)
 		irc.channels.erase(channel.name);
 }
