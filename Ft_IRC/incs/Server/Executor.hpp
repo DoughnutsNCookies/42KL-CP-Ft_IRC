@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:34:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 22:26:33 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/11 15:15:36 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,20 @@
 #include "Commands/Names.hpp"
 
 enum TOKEN {
-	UNKNOWN = -1,
-	PASS = 0,
-	NICK = 1,
-	USER = 2,
-	PRIVMSG = 3,
-	JOIN = 4,
-	KICK = 5,
-	TOPIC = 6,
-	PONG = 7,
-	QUIT = 8,
-	PART = 9,
-	LIST = 10,
-	NAMES = 11
+	PASS,
+	NICK,
+	USER,
+	PRIVMSG,
+	JOIN,
+	KICK,
+	TOPIC,
+	PONG,
+	QUIT,
+	PART,
+	LIST,
+	NOITCE,
+	NAMES,
+	UNKNOWN
 };
 
 class Executor {
