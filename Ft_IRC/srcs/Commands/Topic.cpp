@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Topic.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:53:57 by plau              #+#    #+#             */
-/*   Updated: 2024/01/11 22:04:41 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/12 18:03:26 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Topic::Topic() {}
 void	Topic::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	if (tokens.size() < 2 || tokens[1].size() == 0) {
 		this->_SendMsg.error461(irc, client, tokens[0]);
-		return ;
+		return;
 	}
 
 	this->_parseTokens(tokens);
@@ -26,17 +26,17 @@ void	Topic::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 		channel = this->_Utils.getChannelByName(irc, this->_channelName);
 	} catch (Utils::NoChannelFoundException& e) {
 		this->_SendMsg.error403(irc, client, this->_channelName);
-		return ;
+		return;
 	}
 
 	if (channel.users.find(client.nickname) == channel.users.end()) {
 		this->_SendMsg.error442(irc, client, this->_channelName);
-		return ;
+		return;
 	}
 
-	if (channel.opName != client.nickname) {
+	if (channel.opName != client.nickname && tokens.size() > 2) {
 		this->_SendMsg.error482(irc, client, this->_channelName);
-		return ;
+		return;
 	}
 
 	this->_executeCommand(irc, client);
