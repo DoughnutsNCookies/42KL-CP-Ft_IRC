@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 14:33:22 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 19:18:13 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ void	Join::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 }
 
 void	Join::_parseTokens(tokensVector& tokens) {
-	this->_channelNames = this->_Parser.parse(tokens[1], ",", false);
+	std::string	channelNames = this->_Utils.extractFromToken(tokens[1]);
+	this->_channelNames = this->_Parser.parse(channelNames, ",", false);
 	if (this->_channelNames.size() == 0)
 		return;
+	
 	this->_leaveAll = false;
 	for (size_t i = 0; i < this->_channelNames.size(); i++) {
 		if (i == 0 && this->_channelNames[i] == "0") {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Names.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 22:13:56 by plau              #+#    #+#             */
-/*   Updated: 2024/01/11 22:00:17 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/12 19:20:47 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	Names::_parseTokens(tokensVector& tokens) {
 		return;
 	}
 
-	this->_nameList = this->_Parser.parse(tokens[1], ",", false);
+	std::string	nameList = this->_Utils.extractFromToken(tokens[1]);
+	this->_nameList = this->_Parser.parse(nameList, ",", false);
 	for (size_t i = 0; i < this->_nameList.size(); i++) {
 		if (this->_nameList[i][0] != '#')
 			this->_nameList[i] = "#" + this->_nameList[i];

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Names.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 22:14:07 by plau              #+#    #+#             */
-/*   Updated: 2024/01/11 22:00:17 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/12 19:21:13 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ class Names : public ATokenParser {
 	private:
 		bool			_nameAll;
 		tokensVector	_nameList;
+
+		Utils			_Utils;
 		SendMsg			_SendMsg;
 		Parser			_Parser;
 
