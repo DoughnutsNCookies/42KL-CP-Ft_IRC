@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:43:08 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 14:04:57 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 20:43:35 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,9 @@ void	Server::run() {
 					if (recvResult > 0) {
 						tokensVector	tokens = this->_Parser.parse(clients[fds[i].fd].buffer, " \r\n", true);
 						this->_Executor.execute(this->_irc, clients[fds[i].fd], tokens);
-					} else if (recvResult < 0) {
+					} else if (recvResult < 0)
 						this->_Quit.disconnectClient(this->_irc, fds[i].fd);
-						continue;
-					}
+					continue;
 				}
 			}
 
