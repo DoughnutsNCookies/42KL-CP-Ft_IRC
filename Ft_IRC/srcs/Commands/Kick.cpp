@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:43:26 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/10 17:58:15 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 18:53:30 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,14 @@ void	Kick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 void	Kick::_parseTokens(tokensVector& tokens) {
 	this->_channelName = this->_Utils.extractFromToken(tokens[1]);
 	
-	this->_nicknames = this->_Parser.parse(tokens[2], ",", false);
+	std::string	nicknames = this->_Utils.extractFromToken(tokens[2]);
+	this->_nicknames = this->_Parser.parse(nicknames, ",", false);
 	if (this->_nicknames.size() == 0)
 		return;
+	for (size_t i = 0; i < this->_nicknames.size(); i++) {
+		if (this->_nicknames[i][0] != '#')
+			this->_nicknames[i] = "#" + this->_nicknames[i];
+	}
 
 	this->_comment = "No commment given";
 	if (tokens.size() > 3)
@@ -78,5 +83,8 @@ void	Kick::_executeCommand(t_irc& irc, Client& client) {
 		channel.users.erase(this->_nicknames[i]);
 		Client& user = this->_Utils.getClientByNickname(irc, this->_nicknames[i]);
 		user.channels.erase(std::find(user.channels.begin(), user.channels.end(), this->_channelName));
+		
+		std::string	message = ":" + client.nickname + " KICK " + this->_channelName + " " + this->_nicknames[i] + " :" + this->_comment + "\r\n";
+		this->_SendMsg.sendToAllUsersInChannel(irc, client, channel, message, true);
 	}
 }
