@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   List.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:24:13 by plau              #+#    #+#             */
-/*   Updated: 2024/01/12 19:20:41 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 13:34:20 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	List::_displaySpecifiedLists(t_irc& irc, Client& client) {
 		try {
 			Channel&	channel = this->_Utils.getChannelByName(irc, this->_channelList[i]);
 			this->_SendMsg.rpl322(irc, client, channel);
-		} catch (Utils::NoChannelFoundException e) {
+		} catch (Utils::NoChannelFoundException& e) {
 			continue;
 		}
 	}
