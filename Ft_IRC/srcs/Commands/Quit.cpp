@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:39:00 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 14:47:36 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 17:41:55 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	Quit::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 }
 
 void	Quit::disconnectClient(t_irc& irc, int fd) {
+	this->_Responder.respond(irc, irc.clients[fd]);
 	this->_sendAllClientQuitMessage(irc, irc.clients[fd]);
 	std::vector<struct pollfd>&	fds = irc.fds;
 	std::map<int, Client>&		clients = irc.clients;

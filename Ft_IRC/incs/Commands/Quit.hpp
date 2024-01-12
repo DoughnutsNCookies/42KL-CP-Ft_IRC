@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:38:05 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 14:43:11 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 17:41:33 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 #include "ATokenParser.hpp"
 #include "Part.hpp"
+#include "Server/Responder.hpp"
 #include "Utils/color.hpp"
 #include "Utils/Utils.hpp"
 #include "Utils/SendMsg.hpp"
@@ -31,6 +32,7 @@ class Quit : public ATokenParser {
 	private:
 		std::string	_quitMessage;
 
+		Responder	_Responder;
 		Utils		_Utils;
 		SendMsg		_SendMsg;
 		Part		_Part;
