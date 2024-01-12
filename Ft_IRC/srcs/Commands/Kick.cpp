@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:43:26 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/12 18:53:30 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 18:58:32 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	Kick::_parseTokens(tokensVector& tokens) {
 	if (this->_nicknames.size() == 0)
 		return;
 	for (size_t i = 0; i < this->_nicknames.size(); i++) {
-		if (this->_nicknames[i][0] != '#')
-			this->_nicknames[i] = "#" + this->_nicknames[i];
+		if (this->_nicknames[i][0] == '#')
+			this->_nicknames[i].erase(0, 1);
 	}
 
 	this->_comment = "No commment given";
