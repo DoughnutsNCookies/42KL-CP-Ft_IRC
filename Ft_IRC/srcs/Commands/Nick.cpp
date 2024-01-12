@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2024/01/11 14:20:08 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 17:00:49 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	Nick::_executeCommand(t_irc& irc, Client& client) {
 }
 
 bool	Nick::_checkValidNickName(std::string nickname) {
+	if (nickname.size() == 0)
+		return (false);
 	std::string	invalid = "#: ";
 
 	return (!(invalid.find(nickname[0]) != std::string::npos
