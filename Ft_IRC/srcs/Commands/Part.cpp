@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:13:48 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 14:50:16 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 19:20:21 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	Part::leaveChannel(t_irc& irc, Client& client, Channel& channel) {
 }
 
 void	Part::_parseTokens(tokensVector& tokens) {
-	this->_channelNames = this->_Parser.parse(tokens[1], ",", false);
+	std::string	channelNames = this->_Utils.extractFromToken(tokens[1]);
+	this->_channelNames = this->_Parser.parse(channelNames, ",", false);
 	if (this->_channelNames.size() == 0)
 		return;
 

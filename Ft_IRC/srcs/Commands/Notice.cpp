@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 13:29:40 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/11 19:56:11 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 19:20:05 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,8 @@ void	Notice::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 }
 
 void	Notice::_parseTokens(tokensVector& tokens) {
-	std::string nicknames = this->_Utils.extractFromToken(tokens[1]);
-	
-	this->_destinations = this->_Parser.parse(nicknames, ",", false);
+	std::string destinations = this->_Utils.extractFromToken(tokens[1]);
+	this->_destinations = this->_Parser.parse(destinations, ",", false);
 	if (this->_destinations.size() == 0)
 		return;
 

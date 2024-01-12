@@ -6,7 +6,7 @@
 /*   By: plau <plau@student.42.kl>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:43:26 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/12 19:16:00 by plau             ###   ########.fr       */
+/*   Updated: 2024/01/12 19:29:14 by plau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ void	Kick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 
 void	Kick::_parseTokens(tokensVector& tokens) {
 	this->_channelName = this->_Utils.extractFromToken(tokens[1]);
-
+	if (this->_channelName[0] != '#')
+		this->_channelName = "#" + this->_channelName;
+	
 	std::string	nicknames = this->_Utils.extractFromToken(tokens[2]);
 	this->_nicknames = this->_Parser.parse(nicknames, ",", false);
 	if (this->_nicknames.size() == 0)

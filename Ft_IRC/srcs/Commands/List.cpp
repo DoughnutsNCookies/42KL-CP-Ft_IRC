@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:24:13 by plau              #+#    #+#             */
-/*   Updated: 2024/01/12 16:28:43 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 19:20:41 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	List::_parseTokens(tokensVector& tokens) {
 		return;
 	}
 	
-	this->_channelList = this->_Parser.parse(tokens[1], ",", false);
+	std::string	channelList = this->_Utils.extractFromToken(tokens[1]);
+	this->_channelList = this->_Parser.parse(channelList, ",", false);
 	for (size_t i = 0; i < this->_channelList.size(); i++) {
 		if (this->_channelList[i][0] != '#')
 			this->_channelList[i] = "#" + this->_channelList[i];
