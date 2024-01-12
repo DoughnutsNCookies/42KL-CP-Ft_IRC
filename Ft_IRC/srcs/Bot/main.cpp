@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:27:44 by plau              #+#    #+#             */
-/*   Updated: 2024/01/09 16:18:58 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 08:55:04 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av) {
 	if (ac != 5) {
-		std::cout << "Usage: " << av[0] << "<ipAddress> <port> <password> <targetNickname>" << std::endl;
+		std::cout << "Usage: " << av[0] << " <ipAddress> <port> <password> <targetNickname>" << std::endl;
 		return (EXIT_FAILURE);
 	}
 

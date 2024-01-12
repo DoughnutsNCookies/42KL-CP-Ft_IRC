@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 20:27:10 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 15:02:21 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 08:52:29 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_HPP
 #define UTILS_HPP
+
+#include <stdlib.h>
 
 #include "Server/Client.hpp"
 #include "Utils/irc.hpp"
