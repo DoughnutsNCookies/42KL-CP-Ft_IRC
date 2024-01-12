@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 20:25:39 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/12 19:18:13 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 19:43:06 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	Join::_executeCommand(t_irc& irc, Client& client) {
 	if (this->_leaveAll) {
 		tokensVector	tokens(2, "PART");
 
-		for (size_t i = 0; i < client.channels.size(); i++) {
+		for (size_t i = 0; client.channels.size() > 0;) {
 			tokens[1] = client.channels[i];
 			this->_Part.verifyTokens(irc, client, tokens);
 		}
