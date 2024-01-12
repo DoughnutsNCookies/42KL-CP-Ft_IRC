@@ -45,7 +45,9 @@ void	SendMsg::rpl321(t_irc& irc, Client& client) {
 }
 
 void	SendMsg::rpl322(t_irc& irc, Client& client, Channel& channel) {
-	client.response += this->_header(irc, client, "322") + channel.name + " " + std::to_string(channel.users.size()) + " :" + channel.topic + " \r\n";
+	std::ostringstream  stream;
+	stream << channel.users.size();
+	client.response += this->_header(irc, client, "322") + channel.name + " " + stream.str() + " :" + channel.topic + " \r\n";
 	this->_Utils.setClientToPollOut(irc, client);
 }
 
@@ -208,7 +210,9 @@ std::string	SendMsg::_header(t_irc& irc, Client& client, std::string code) {
 std::string SendMsg::_getEpochTime() {
 	struct timeval	time;
 	gettimeofday(&time, NULL);
-	return (std::to_string(time.tv_sec));
+	std::stringstream	stream;
+	stream << time.tv_sec;
+	return (stream.str());
 }
 
 std::string	SendMsg::_getFormattedTime() {

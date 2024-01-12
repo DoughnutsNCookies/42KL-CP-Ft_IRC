@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bot.cpp                                            :+:      :+:    :+:   */
+/*   bot.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:37:32 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 16:53:05 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 08:53:22 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	Bot::_register() {
 }
 
 void	Bot::_sendPenguin(std::string filePath) {
-	std::ifstream	penguinFile(filePath);
+	std::ifstream	penguinFile(filePath.c_str());
 	if (!penguinFile.is_open()) {
 		this->_serverClient.response = "PRIVMSG " + this->_target + " :Cannot open Penguin file :c\r\n";
 		this->_responder.respond(this->_irc, this->_serverClient);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:46:47 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 17:06:45 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 08:48:17 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define CLIENT_HPP
 
 #include <poll.h>
+#include <sstream>
 #include <vector>
 #include <string>
 

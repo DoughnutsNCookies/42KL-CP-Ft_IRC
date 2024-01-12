@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ASocketServer.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:12:18 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 14:56:18 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 08:50:35 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <netdb.h>
+#include <cstdlib>
 
 #include "Utils/irc.hpp"
 
