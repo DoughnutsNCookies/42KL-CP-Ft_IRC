@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:13:48 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/12 19:20:21 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/12 20:54:58 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 Part::Part() {}
 
 void	Part::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
-	if (tokens.size() < 2)
+	if (tokens.size() < 2) {
 		this->_SendMsg.error461(irc, client, tokens[0]);
+		return;
+	}
 	
 	this->_parseTokens(tokens);
 	if (this->_channelNames.size() == 0) {
