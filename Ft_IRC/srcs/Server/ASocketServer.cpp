@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:52:20 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/09 14:57:48 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/16 17:52:48 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ASocketServer::_perrorExit(const char *error) {
 	std::cerr << error << std::endl;
-	exit(EXIT_FAILURE);
+	exit(1);
 }
 
 void	ASocketServer::_createSocket() {

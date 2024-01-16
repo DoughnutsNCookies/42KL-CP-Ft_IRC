@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:39:00 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/16 18:23:09 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/16 18:52:26 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ void	Quit::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 }
 
 void	Quit::disconnectClient(t_irc& irc, int fd) {
-	std::cout << "Died5" << std::endl;
-	this->_Responder.respond(irc, irc.clients[fd]);
-	std::cout << "Died6" << std::endl;
 	this->_sendAllClientQuitMessage(irc, irc.clients[fd]);
 	std::vector<struct pollfd>&	fds = irc.fds;
 	std::map<int, Client>&		clients = irc.clients;
@@ -53,6 +50,7 @@ void	Quit::_parseTokens(tokensVector& tokens) {
 
 void	Quit::_executeCommand(t_irc& irc, Client& client) {
 	this->_SendMsg.customMsg(irc, client, "ERROR :Disconnected using QUIT\r\n");
+	this->_Responder.respond(irc, client);
 	this->disconnectClient(irc, client.fd);
 }
 
