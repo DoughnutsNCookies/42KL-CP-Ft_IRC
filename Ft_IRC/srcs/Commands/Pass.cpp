@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:46:46 by plau              #+#    #+#             */
-/*   Updated: 2024/01/10 16:33:14 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/16 21:40:26 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 Pass::Pass() {}
 
 void	Pass::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
+	client.bypassCheck = true;
 	if (client.verified) {
 		this->_SendMsg.error462(irc, client);
 		return;
@@ -37,6 +38,7 @@ void	Pass::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	}
 	
 	this->_executeCommand(irc, client);
+	client.bypassCheck = false;
 }
 
 void	Pass::_parseTokens(tokensVector& tokens) {

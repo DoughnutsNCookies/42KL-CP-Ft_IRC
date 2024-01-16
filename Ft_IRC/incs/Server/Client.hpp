@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:46:47 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/12 08:48:17 by codespace        ###   ########.fr       */
+/*   Updated: 2024/01/16 21:33:12 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class Client {
 		bool			nickSet;
 		bool			userSet;
 		bool			joined;
+		bool			bypassCheck;
 		std::string		response;
 		std::string		buffer;
 		std::string		nickname;

@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:49:16 by plau              #+#    #+#             */
-/*   Updated: 2024/01/12 17:00:49 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/16 21:40:15 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 Nick::Nick() {}
 
 void	Nick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
+	client.bypassCheck = true;
 	if (tokens.size() == 1 || tokens[1].size() == 0) {
 		this->_SendMsg.error431(irc, client);
 		return;
@@ -39,6 +40,7 @@ void	Nick::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 	}
 
 	this->_executeCommand(irc, client);
+	client.bypassCheck = false;
 }
 
 void	Nick::_parseTokens(tokensVector& tokens) {
