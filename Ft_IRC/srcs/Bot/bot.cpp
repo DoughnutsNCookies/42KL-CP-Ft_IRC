@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:37:32 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/16 18:52:55 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/16 19:10:25 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ Bot::Bot(const char *hostname, const char *port, const char *password, const cha
 
 	this->_createSocket();
 	this->_serverClient = Client(this->_irc.serverFd, this->_irc.hostname);
+	this->_serverClient.joined = true;
 	
 	this->_connectToServer();
 }
