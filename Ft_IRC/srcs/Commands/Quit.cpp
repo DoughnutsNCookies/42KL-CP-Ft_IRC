@@ -6,7 +6,7 @@
 /*   By: schuah <schuah@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 18:39:00 by schuah            #+#    #+#             */
-/*   Updated: 2024/01/12 17:41:55 by schuah           ###   ########.fr       */
+/*   Updated: 2024/01/16 18:23:09 by schuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	Quit::verifyTokens(t_irc& irc, Client& client, tokensVector& tokens) {
 }
 
 void	Quit::disconnectClient(t_irc& irc, int fd) {
+	std::cout << "Died5" << std::endl;
 	this->_Responder.respond(irc, irc.clients[fd]);
+	std::cout << "Died6" << std::endl;
 	this->_sendAllClientQuitMessage(irc, irc.clients[fd]);
 	std::vector<struct pollfd>&	fds = irc.fds;
 	std::map<int, Client>&		clients = irc.clients;
@@ -42,7 +44,9 @@ void	Quit::disconnectClient(t_irc& irc, int fd) {
 }
 
 void	Quit::_parseTokens(tokensVector& tokens) {
-	this->_quitMessage = this->_Utils.extractFromToken(tokens[1]);
+	this->_quitMessage = "";
+	if (tokens.size() > 1)
+		this->_quitMessage = this->_Utils.extractFromToken(tokens[1]);
 	for (size_t i = 2; i < tokens.size(); i++)
 		this->_quitMessage += " " + tokens[i];
 }
